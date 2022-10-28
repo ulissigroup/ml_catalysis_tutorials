@@ -4,6 +4,7 @@ channels:
   - defaults
   - pytorch
   - nvidia
+  - pyg
 dependencies:
   - jupyter-book
   - scipy
