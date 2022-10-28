@@ -1,0 +1,33 @@
+name: buildenv
+channels:
+  - conda-forge
+  - defaults
+  - pytorch
+  - nvidia
+dependencies:
+  - jupyter-book
+  - scipy
+  - matplotlib
+  - jupyter-book
+  - plotly
+  - numba
+  - lmdb 
+  - ase 
+  - pyyaml 
+  - tqdm 
+  - tensorboard 
+  - pandoc 
+  - nbsphinx 
+  - sphinx 
+  - black 
+  - wandb
+  - lmdb 
+  - submitit 
+  - pytest 
+  - python-lmdb 
+  - pyg 
+  - torchvision 
+  - torchaudio 
+  - pymatgen 
+  - sympy
+  - pytorch=1.11
