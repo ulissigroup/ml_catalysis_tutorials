@@ -33,4 +33,4 @@ dependencies:
   - pymatgen 
   - sympy
   - pytorch=1.10
-  - cudatoolkit=11.1
+  - cpuonly
