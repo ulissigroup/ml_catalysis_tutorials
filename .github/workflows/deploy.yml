@@ -27,7 +27,7 @@ jobs:
         wget https://raw.githubusercontent.com/Open-Catalyst-Project/ocp/main/env.common.yml
         wget https://raw.githubusercontent.com/Open-Catalyst-Project/ocp/main/env.cpu.yml
         conda-merge env.common.yml env.cpu.yml > env.yml
-        mamba env update --file env.yml -n buildenv
+        mamba env update --file env.yml -n base
 
     # Install OCP repo
     - name: Install OCP codebase
