@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Converting ASE objects to PyG Data objects" href="../custom_datasets/data_preprocessing.html" />
+    <link rel="next" title="Additional Resources" href="extra_resources.html" />
     <link rel="prev" title="Background" href="background.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -127,6 +127,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Structural relaxations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="extra_resources.html">
+   Additional Resources
   </a>
  </li>
 </ul>
@@ -545,6 +550,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ase.io</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">ase</span> <span class="kn">import</span> <span class="n">Atoms</span>
 <span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">add_adsorbate</span><span class="p">,</span> <span class="n">fcc100</span><span class="p">,</span> <span class="n">molecule</span>
 <span class="kn">from</span> <span class="nn">ase.calculators.emt</span> <span class="kn">import</span> <span class="n">EMT</span>
@@ -599,14 +605,17 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">20</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">add_adsorbate</span><span class="p">(</span><span class="n">adslab</span><span class="p">,</span> <span class="n">adsorbate</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># adslab = adsorbate + slab</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1"># tag all slab atoms below surface as 0, surface as 1, adsorbate as 2</span>
-<span class="ne">---&gt; </span><span class="mi">20</span> <span class="n">tags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adslab</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">tags</span><span class="p">[</span><span class="mi">18</span><span class="p">:</span><span class="mi">27</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">tags</span><span class="p">[</span><span class="mi">27</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">35</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="n">adslab</span><span class="o">.</span><span class="n">set_pbc</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">adslab</span><span class="o">.</span><span class="n">set_calculator</span><span class="p">(</span><span class="n">EMT</span><span class="p">())</span>
+<span class="ne">---&gt; </span><span class="mi">35</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="c1"># Define structure optimizer - LBFGS. Run for 100 steps,</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="c1"># or if the max force on all atoms (fmax) is below 0 ev/A.</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="c1"># fmax is typically set to 0.01-0.05 eV/A,</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="c1"># for this demo however we run for the full 100 steps.</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span> <span class="n">dyn</span> <span class="o">=</span> <span class="n">LBFGS</span><span class="p">(</span><span class="n">adslab</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s2">&quot;data/toy_c3h8_relax.traj&quot;</span><span class="p">)</span>
 
-<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+<span class="ne">NameError</span>: name &#39;os&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -871,10 +880,10 @@ title="Print to PDF"
             <p class="prev-next-title">Background <a name="background"></a></p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../custom_datasets/data_preprocessing.html" title="next page">
+    <a class='right-next' id="next-link" href="extra_resources.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Converting ASE objects to PyG Data objects</p>
+        <p class="prev-next-title">Additional Resources</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

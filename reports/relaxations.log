@@ -1,23 +1,24 @@
 Traceback (most recent call last):
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
     return future.result()
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 import ase.io
+import numpy as np
 from ase import Atoms
 from ase.build import add_adsorbate, fcc100, molecule
 from ase.calculators.emt import EMT
@@ -70,13 +71,16 @@ with open("data/toy_c3h8_relax.extxyz", "w") as f:
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn [1], line 20[0m
-[1;32m     17[0m add_adsorbate(adslab, adsorbate, [38;5;241m3[39m, offset[38;5;241m=[39m([38;5;241m1[39m, [38;5;241m1[39m))  [38;5;66;03m# adslab = adsorbate + slab[39;00m
-[1;32m     19[0m [38;5;66;03m# tag all slab atoms below surface as 0, surface as 1, adsorbate as 2[39;00m
-[0;32m---> 20[0m tags [38;5;241m=[39m [43mnp[49m[38;5;241m.[39mzeros([38;5;28mlen[39m(adslab))
-[1;32m     21[0m tags[[38;5;241m18[39m:[38;5;241m27[39m] [38;5;241m=[39m [38;5;241m1[39m
-[1;32m     22[0m tags[[38;5;241m27[39m:] [38;5;241m=[39m [38;5;241m2[39m
+Cell [0;32mIn [1], line 35[0m
+[1;32m     32[0m adslab[38;5;241m.[39mset_pbc([38;5;28;01mTrue[39;00m)
+[1;32m     33[0m adslab[38;5;241m.[39mset_calculator(EMT())
+[0;32m---> 35[0m [43mos[49m[38;5;241m.[39mmakedirs([38;5;124m"[39m[38;5;124mdata[39m[38;5;124m"[39m, exist_ok[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[1;32m     37[0m [38;5;66;03m# Define structure optimizer - LBFGS. Run for 100 steps,[39;00m
+[1;32m     38[0m [38;5;66;03m# or if the max force on all atoms (fmax) is below 0 ev/A.[39;00m
+[1;32m     39[0m [38;5;66;03m# fmax is typically set to 0.01-0.05 eV/A,[39;00m
+[1;32m     40[0m [38;5;66;03m# for this demo however we run for the full 100 steps.[39;00m
+[1;32m     42[0m dyn [38;5;241m=[39m LBFGS(adslab, trajectory[38;5;241m=[39m[38;5;124m"[39m[38;5;124mdata/toy_c3h8_relax.traj[39m[38;5;124m"[39m)
 
-[0;31mNameError[0m: name 'np' is not defined
-NameError: name 'np' is not defined
+[0;31mNameError[0m: name 'os' is not defined
+NameError: name 'os' is not defined
 
