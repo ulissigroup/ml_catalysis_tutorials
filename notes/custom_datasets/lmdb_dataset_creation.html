@@ -560,22 +560,13 @@ title="Print to PDF"
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">.hetero_data</span> <span class="kn">import</span> <span class="n">HeteroData</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">.temporal</span> <span class="kn">import</span> <span class="n">TemporalData</span>
 
-<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_geometric</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">data</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">20</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">import</span> <span class="nn">torch</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
-<span class="ne">---&gt; </span><span class="mi">20</span> <span class="kn">from</span> <span class="nn">torch_sparse</span> <span class="kn">import</span> <span class="n">SparseTensor</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="kn">from</span> <span class="nn">torch_geometric.data.feature_store</span> <span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">FeatureStore</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="n">FeatureTensorType</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="n">TensorAttr</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="n">_field_status</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="kn">from</span> <span class="nn">torch_geometric.data.graph_store</span> <span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="n">EDGE_LAYOUT_TO_ATTR_NAME</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="n">EdgeAttr</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">edge_tensor_type_to_adj_type</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="p">)</span>
+<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_geometric</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">data</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">torch_sparse</span> <span class="kn">import</span> <span class="n">SparseTensor</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">torch_geometric.data.storage</span> <span class="kn">import</span> <span class="p">(</span><span class="n">BaseStorage</span><span class="p">,</span> <span class="n">EdgeStorage</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>                                           <span class="n">GlobalStorage</span><span class="p">,</span> <span class="n">NodeStorage</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">torch_geometric.deprecation</span> <span class="kn">import</span> <span class="n">deprecated</span>
 
 <span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_sparse</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">19</span>
 <span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">spec</span> <span class="o">=</span> <span class="n">cuda_spec</span> <span class="ow">or</span> <span class="n">cpu_spec</span>
@@ -585,14 +576,14 @@ title="Print to PDF"
 <span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find module &#39;</span><span class="si">{</span><span class="n">library</span><span class="si">}</span><span class="s2">_cpu&#39; in &quot;</span>
 <span class="g g-Whitespace">     </span><span class="mi">22</span>                       <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">osp</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/_ops.py:220,</span> in <span class="ni">_Ops.load_library</span><span class="nt">(self, path)</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span> <span class="n">path</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">_utils_internal</span><span class="o">.</span><span class="n">resolve_library_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">216</span> <span class="k">with</span> <span class="n">dl_open_guard</span><span class="p">():</span>
-<span class="g g-Whitespace">    </span><span class="mi">217</span>     <span class="c1"># Import the shared library into the process, thus running its</span>
-<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="c1"># static (global) initialization code in order to register custom</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span>     <span class="c1"># operators with the JIT.</span>
-<span class="ne">--&gt; </span><span class="mi">220</span>     <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaded_libraries</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/_ops.py:110,</span> in <span class="ni">_Ops.load_library</span><span class="nt">(self, path)</span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="n">path</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">_utils_internal</span><span class="o">.</span><span class="n">resolve_library_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span> <span class="k">with</span> <span class="n">dl_open_guard</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">107</span>     <span class="c1"># Import the shared library into the process, thus running its</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span>     <span class="c1"># static (global) initialization code in order to register custom</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span>     <span class="c1"># operators with the JIT.</span>
+<span class="ne">--&gt; </span><span class="mi">110</span>     <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaded_libraries</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
 <span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/ctypes/__init__.py:374,</span> in <span class="ni">CDLL.__init__</span><span class="nt">(self, name, mode, handle, use_errno, use_last_error, winmode)</span>
 <span class="g g-Whitespace">    </span><span class="mi">371</span> <span class="bp">self</span><span class="o">.</span><span class="n">_FuncPtr</span> <span class="o">=</span> <span class="n">_FuncPtr</span>
@@ -601,7 +592,7 @@ title="Print to PDF"
 <span class="g g-Whitespace">    </span><span class="mi">375</span> <span class="k">else</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">376</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">handle</span>
 
-<span class="ne">OSError</span>: /home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_sparse/_version_cuda.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
+<span class="ne">OSError</span>: /home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_sparse/_version_cpu.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
 </pre></div>
 </div>
 </div>
