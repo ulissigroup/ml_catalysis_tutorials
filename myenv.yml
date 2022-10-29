@@ -6,3 +6,4 @@ dependencies:
   - jupyter-book
   - python=3.9.*
   - plotly
+  - conda-merge
