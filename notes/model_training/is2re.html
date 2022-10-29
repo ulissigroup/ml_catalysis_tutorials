@@ -789,14 +789,14 @@ tar -xzvf tutorial_data.tar.gz
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: true
 cmd:
-  checkpoint_dir: ./checkpoints/2022-10-29-20-30-56-IS2RE-example
+  checkpoint_dir: ./checkpoints/2022-10-29-20-39-28-IS2RE-example
   commit: cba9fb6
   identifier: IS2RE-example
-  logs_dir: ./logs/tensorboard/2022-10-29-20-30-56-IS2RE-example
+  logs_dir: ./logs/tensorboard/2022-10-29-20-39-28-IS2RE-example
   print_every: 5
-  results_dir: ./results/2022-10-29-20-30-56-IS2RE-example
+  results_dir: ./results/2022-10-29-20-39-28-IS2RE-example
   seed: 0
-  timestamp_id: 2022-10-29-20-30-56-IS2RE-example
+  timestamp_id: 2022-10-29-20-39-28-IS2RE-example
 dataset:
   normalize_labels: true
   src: data/is2re/train_100/data.lmdb
@@ -882,17 +882,18 @@ task:
 trainer: energy
 val_dataset:
   src: data/is2re/val_20/data.lmdb
-
-2022-10-29 20:30:41 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 20:30:41 (INFO): Batch balancing is disabled for single GPU training.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 20:40:13 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 20:30:41 (INFO): Loading dataset: single_point_lmdb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 20:40:13 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 20:30:41 (INFO): Loading model: gemnet_t
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 20:40:13 (INFO): Loading dataset: single_point_lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 20:40:13 (INFO): Loading model: gemnet_t
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py:115: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.
