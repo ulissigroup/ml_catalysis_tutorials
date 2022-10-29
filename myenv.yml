@@ -8,3 +8,5 @@ dependencies:
   - plotly
   - conda-merge
   - mamba
+  - numpy
+  - scipy
