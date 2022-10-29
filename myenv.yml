@@ -32,4 +32,5 @@ dependencies:
   - torchaudio 
   - pymatgen 
   - sympy
-  - pytorch=1.11
+  - pytorch=1.10
+  - cudatoolkit=11.1
