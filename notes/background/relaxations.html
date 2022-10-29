@@ -51,6 +51,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Converting ASE objects to PyG Data objects" href="../custom_datasets/data_preprocessing.html" />
@@ -417,6 +419,31 @@ title="Print to PDF"
      Periodic boundary conditions (PBC)
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tags">
+     Tags
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fixed-atoms-constraint">
+     Fixed atoms constraint
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adsorption-energy">
+     Adsorption energy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-energy-profile-of-toy-trajectory">
+     Plot energy profile of toy trajectory
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#force">
+     Force
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -473,6 +500,31 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#periodic-boundary-conditions-pbc">
      Periodic boundary conditions (PBC)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tags">
+     Tags
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fixed-atoms-constraint">
+     Fixed atoms constraint
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adsorption-energy">
+     Adsorption energy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-energy-profile-of-toy-trajectory">
+     Plot energy profile of toy trajectory
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#force">
+     Force
     </a>
    </li>
   </ul>
@@ -663,6 +715,120 @@ title="Print to PDF"
 <span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span>
     <span class="n">traj</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">)</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tags">
+<h3>Tags<a class="headerlink" href="#tags" title="Permalink to this headline">#</a></h3>
+<p>The OC20 dataset consists of systems with several different types of atoms. To help with identifying the index of certain atoms, we tag each atom according to where it is found in the system. There are three categories of atoms:</p>
+<ul class="simple">
+<li><p><em>sub-surface slab atoms</em>: these are atoms in the bottom layers of the catalyst, furthest away from the adsorbate</p></li>
+<li><p><em>surface slab atoms</em>: these are atoms in the top layers of the catalyst, close to where the adsorbate will be placed</p></li>
+<li><p><em>adsorbate atoms</em>: atoms that make up the adsorbate molecule on top of the catalyst.</p></li>
+</ul>
+<p>Tag:</p>
+<p>0 - Sub-surface slab atoms</p>
+<p>1 - Surface slab atoms</p>
+<p>2 - Adsorbate atoms</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tags</span> <span class="o">=</span> <span class="n">i_structure</span><span class="o">.</span><span class="n">get_tags</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fixed-atoms-constraint">
+<h3>Fixed atoms constraint<a class="headerlink" href="#fixed-atoms-constraint" title="Permalink to this headline">#</a></h3>
+<p>In reality, surfaces contain many, many more atoms beneath what we’ve illustrated as the surface. At an infinite depth, these subsurface atoms would look just like the bulk structure. We approximate a true surface by fixing the subsurface atoms into their “bulk” locations. This ensures that they cannot move at the “bottom” of the surface. If they could, this would throw off our calculations. Consistent with the above, we fix all atoms with tags=0, and denote them as “fixed”. All other atoms are considered “free”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cons</span> <span class="o">=</span> <span class="n">i_structure</span><span class="o">.</span><span class="n">constraints</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cons</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># indices of fixed atoms</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">cons</span><span class="o">.</span><span class="n">index</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># fixed atoms correspond to tags = 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tags</span><span class="p">[</span><span class="n">indices</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="adsorption-energy">
+<h3>Adsorption energy<a class="headerlink" href="#adsorption-energy" title="Permalink to this headline">#</a></h3>
+<p>The energy of the system is one of the properties of interest in the OC20 dataset. It’s important to note that absolute energies provide little value to researchers and must be referenced properly to be useful. The OC20 dataset references all it’s energies to the bare slab + gas references to arrive at adsorption energies. Adsorption energies are important in studying catalysts and their corresponding reaction rates. In addition to the structure relaxations of the OC20 dataset, bare slab and gas (N2, H2, H2O, CO) relaxations were carried out with DFT in order to calculate adsorption energies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final_structure</span> <span class="o">=</span> <span class="n">traj</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">relaxed_energy</span> <span class="o">=</span> <span class="n">final_structure</span><span class="o">.</span><span class="n">get_potential_energy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relaxed absolute energy = </span><span class="si">{</span><span class="n">relaxed_energy</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+
+<span class="c1"># Corresponding raw slab used in original adslab (adsorbate+slab) system.</span>
+<span class="n">raw_slab</span> <span class="o">=</span> <span class="n">fcc100</span><span class="p">(</span><span class="s2">&quot;Cu&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">raw_slab</span><span class="o">.</span><span class="n">set_calculator</span><span class="p">(</span><span class="n">EMT</span><span class="p">())</span>
+<span class="n">raw_slab_energy</span> <span class="o">=</span> <span class="n">raw_slab</span><span class="o">.</span><span class="n">get_potential_energy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Raw slab energy = </span><span class="si">{</span><span class="n">raw_slab_energy</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+
+
+<span class="n">adsorbate</span> <span class="o">=</span> <span class="n">Atoms</span><span class="p">(</span><span class="s2">&quot;C3H8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_chemical_symbols</span><span class="p">()</span>
+<span class="c1"># For clarity, we define arbitrary gas reference energies here.</span>
+<span class="c1"># A more detailed discussion of these calculations can be found in the corresponding paper&#39;s SI.</span>
+<span class="n">gas_reference_energies</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="mf">0.45</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mf">0.35</span><span class="p">,</span> <span class="s2">&quot;N&quot;</span><span class="p">:</span> <span class="mf">0.50</span><span class="p">}</span>
+
+<span class="n">adsorbate_reference_energy</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">ads</span> <span class="ow">in</span> <span class="n">adsorbate</span><span class="p">:</span>
+    <span class="n">adsorbate_reference_energy</span> <span class="o">+=</span> <span class="n">gas_reference_energies</span><span class="p">[</span><span class="n">ads</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adsorbate reference energy = </span><span class="si">{</span><span class="n">adsorbate_reference_energy</span><span class="si">}</span><span class="s2"> eV</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">adsorption_energy</span> <span class="o">=</span> <span class="n">relaxed_energy</span> <span class="o">-</span> <span class="n">raw_slab_energy</span> <span class="o">-</span> <span class="n">adsorbate_reference_energy</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adsorption energy: </span><span class="si">{</span><span class="n">adsorption_energy</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-energy-profile-of-toy-trajectory">
+<h3>Plot energy profile of toy trajectory<a class="headerlink" href="#plot-energy-profile-of-toy-trajectory" title="Permalink to this headline">#</a></h3>
+<p>Plotting the energy profile of our trajectory is a good way to ensure nothing strange has occured. We expect to see a decreasing monotonic function. If the energy is consistently increasing or there’s multiple large spikes this could be a sign of some issues in the optimization. This is particularly useful for when analyzing ML-driven relaxations and whether they make general physical sense.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">energies</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">get_potential_energy</span><span class="p">()</span> <span class="o">-</span> <span class="n">raw_slab_energy</span> <span class="o">-</span> <span class="n">adsorbate_reference_energy</span>
+    <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">traj</span>
+<span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">energies</span><span class="p">)),</span> <span class="n">energies</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Step&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy, eV&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="force">
+<h3>Force<a class="headerlink" href="#force" title="Permalink to this headline">#</a></h3>
+<p>Forces are another important property of the OC20 dataset. Unlike datasets like QM9 which contain only ground state properties, the OC20 dataset contains per-atom forces necessary to carry out atomistic simulations. Physically, forces are the negative gradient of energy w.r.t atomic positions: <span class="math notranslate nohighlight">\(F = -\frac{dE}{dx}\)</span>. Although not mandatory (depending on the application), maintaining this energy-force consistency is important for models that seek to make predictions on both properties.</p>
+<p>The “apply_constraint” argument controls whether to apply system constraints to the forces. In the OC20 dataset, this controls whether to return forces for fixed atoms (apply_constraint=False) or return 0s (apply_constraint=True).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Returning forces for all atoms - regardless of whether &quot;fixed&quot; or &quot;free&quot;</span>
+<span class="n">i_structure</span><span class="o">.</span><span class="n">get_forces</span><span class="p">(</span><span class="n">apply_constraint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Applying the fixed atoms constraint to the forces</span>
+<span class="n">i_structure</span><span class="o">.</span><span class="n">get_forces</span><span class="p">(</span><span class="n">apply_constraint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
