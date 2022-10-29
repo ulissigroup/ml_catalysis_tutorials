@@ -564,11 +564,12 @@ title="Print to PDF"
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ocpmodels.trainers</span> <span class="kn">import</span> <span class="n">ForcesTrainer</span>
-<span class="kn">from</span> <span class="nn">ocpmodels.datasets</span> <span class="kn">import</span> <span class="n">TrajectoryLmdbDataset</span>
-<span class="kn">from</span> <span class="nn">ocpmodels</span> <span class="kn">import</span> <span class="n">models</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ocpmodels</span> <span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span> <span class="nn">ocpmodels.common</span> <span class="kn">import</span> <span class="n">logger</span>
 <span class="kn">from</span> <span class="nn">ocpmodels.common.utils</span> <span class="kn">import</span> <span class="n">setup_logging</span>
+<span class="kn">from</span> <span class="nn">ocpmodels.datasets</span> <span class="kn">import</span> <span class="n">TrajectoryLmdbDataset</span>
+<span class="kn">from</span> <span class="nn">ocpmodels.trainers</span> <span class="kn">import</span> <span class="n">ForcesTrainer</span>
+
 <span class="n">setup_logging</span><span class="p">()</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -579,7 +580,68 @@ title="Print to PDF"
 </section>
 <section id="dataset">
 <h3>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">#</a></h3>
-<p>The IS2RS task requires an additional realxation dataset to be defined - <code class="docutils literal notranslate"><span class="pre">relax_dataset</span></code>. This dataset is read in similar to the IS2RE dataset - requiring an LMDB file. The same datasets are used for the IS2RE and IS2RS tasks.</p>
+<p>The IS2RS task requires an additional relaxation dataset to be defined - <code class="docutils literal notranslate"><span class="pre">relax_dataset</span></code>. This dataset is read in similar to the IS2RE dataset - requiring an LMDB file. The same datasets are used for the IS2RE and IS2RS tasks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+mkdir data
+cd data
+wget -q -nc http://dl.fbaipublicfiles.com/opencatalystproject/data/tutorial_data.tar.gz -O tutorial_data.tar.gz
+tar -xzvf tutorial_data.tar.gz
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mkdir: cannot create directory ‘data’: File exists
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/train_100/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/train_100/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/train_100/data.lmdb-lock
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/val_20/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/val_20/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/val_20/data.lmdb-lock
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/train_100/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/train_100/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/train_100/data.lmdb-lock
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/val_20/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/val_20/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/val_20/data.lmdb-lock
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_src</span> <span class="o">=</span> <span class="s2">&quot;data/s2ef/train_100&quot;</span>
@@ -624,29 +686,29 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task</span>
 <span class="n">task</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="s1">&#39;dataset&#39;</span><span class="p">:</span> <span class="s1">&#39;trajectory_lmdb&#39;</span><span class="p">,</span> <span class="c1"># dataset used for the S2EF task</span>
-      <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Regressing to energies and forces for DFT trajectories from OCP&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;labels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;potential energy&#39;</span><span class="p">],</span>
-      <span class="s1">&#39;grad_input&#39;</span><span class="p">:</span> <span class="s1">&#39;atomic forces&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;train_on_free_atoms&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-      <span class="s1">&#39;eval_on_free_atoms&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-      <span class="s1">&#39;relax_dataset&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="n">relax_dataset</span><span class="p">},</span>
-      <span class="s1">&#39;write_pos&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-      <span class="s1">&#39;relaxation_steps&#39;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-      <span class="s1">&#39;num_relaxation_batches&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s1">&#39;relax_opt&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;maxstep&#39;</span><span class="p">:</span> <span class="mf">0.04</span><span class="p">,</span>
-        <span class="s1">&#39;memory&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-        <span class="s1">&#39;damping&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-        <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">70.0</span><span class="p">,</span>
-        <span class="s1">&#39;traj_dir&#39;</span><span class="p">:</span> <span class="s2">&quot;ml-relaxations/is2rs-test&quot;</span><span class="p">,</span> 
-    <span class="p">}</span>
+    <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="s2">&quot;trajectory_lmdb&quot;</span><span class="p">,</span>  <span class="c1"># dataset used for the S2EF task</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Regressing to energies and forces for DFT trajectories from OCP&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;regression&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="s2">&quot;mae&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;potential energy&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;grad_input&quot;</span><span class="p">:</span> <span class="s2">&quot;atomic forces&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;train_on_free_atoms&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;eval_on_free_atoms&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;relax_dataset&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="n">relax_dataset</span><span class="p">},</span>
+    <span class="s2">&quot;write_pos&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;relaxation_steps&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="s2">&quot;num_relaxation_batches&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;relax_opt&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;maxstep&quot;</span><span class="p">:</span> <span class="mf">0.04</span><span class="p">,</span>
+        <span class="s2">&quot;memory&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="s2">&quot;damping&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mf">70.0</span><span class="p">,</span>
+        <span class="s2">&quot;traj_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;ml-relaxations/is2rs-test&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">}</span>
 <span class="c1"># Model</span>
 <span class="n">model</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;gemnet_t&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;gemnet_t&quot;</span><span class="p">,</span>
     <span class="s2">&quot;num_spherical&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
     <span class="s2">&quot;num_radial&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
     <span class="s2">&quot;num_blocks&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
@@ -664,8 +726,8 @@ title="Print to PDF"
     <span class="s2">&quot;max_neighbors&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
     <span class="s2">&quot;rbf&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">},</span>
     <span class="s2">&quot;envelope&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;polynomial&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;exponent&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;polynomial&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;exponent&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="s2">&quot;cbf&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;spherical_harmonics&quot;</span><span class="p">},</span>
     <span class="s2">&quot;extensive&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -678,25 +740,25 @@ title="Print to PDF"
 <span class="p">}</span>
 <span class="c1"># Optimizer</span>
 <span class="n">optimizer</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>         <span class="c1"># originally 32</span>
-    <span class="s1">&#39;eval_batch_size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>    <span class="c1"># originally 32</span>
-    <span class="s1">&#39;num_workers&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s1">&#39;lr_initial&#39;</span><span class="p">:</span> <span class="mf">5.e-4</span><span class="p">,</span>
-    <span class="s1">&#39;optimizer&#39;</span><span class="p">:</span> <span class="s1">&#39;AdamW&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;optimizer_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;amsgrad&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-    <span class="s1">&#39;scheduler&#39;</span><span class="p">:</span> <span class="s2">&quot;ReduceLROnPlateau&quot;</span><span class="p">,</span>
-    <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s2">&quot;min&quot;</span><span class="p">,</span>
-    <span class="s1">&#39;factor&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-    <span class="s1">&#39;ema_decay&#39;</span><span class="p">:</span> <span class="mf">0.999</span><span class="p">,</span>
-    <span class="s1">&#39;clip_grad_norm&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s1">&#39;patience&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="s1">&#39;max_epochs&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>         <span class="c1"># used for demonstration purposes</span>
-    <span class="s1">&#39;force_coefficient&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># originally 32</span>
+    <span class="s2">&quot;eval_batch_size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># originally 32</span>
+    <span class="s2">&quot;num_workers&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;lr_initial&quot;</span><span class="p">:</span> <span class="mf">5.0e-4</span><span class="p">,</span>
+    <span class="s2">&quot;optimizer&quot;</span><span class="p">:</span> <span class="s2">&quot;AdamW&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;optimizer_params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;amsgrad&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="s2">&quot;scheduler&quot;</span><span class="p">:</span> <span class="s2">&quot;ReduceLROnPlateau&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;min&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;factor&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="s2">&quot;ema_decay&quot;</span><span class="p">:</span> <span class="mf">0.999</span><span class="p">,</span>
+    <span class="s2">&quot;clip_grad_norm&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;patience&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;max_epochs&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1"># used for demonstration purposes</span>
+    <span class="s2">&quot;force_coefficient&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="c1"># Dataset</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="n">train_src</span><span class="p">,</span> <span class="s1">&#39;normalize_labels&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="c1"># train set </span>
-  <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="n">val_src</span><span class="p">},</span> <span class="c1"># val set (optional)</span>
+    <span class="p">{</span><span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="n">train_src</span><span class="p">,</span> <span class="s2">&quot;normalize_labels&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>  <span class="c1"># train set</span>
+    <span class="p">{</span><span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="n">val_src</span><span class="p">},</span>  <span class="c1"># val set (optional)</span>
 <span class="p">]</span>
 </pre></div>
 </div>
@@ -713,13 +775,13 @@ title="Print to PDF"
     <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
     <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
     <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;is2rs-example&quot;</span><span class="p">,</span>
-    <span class="n">run_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span> <span class="c1"># directory to save results if is_debug=False. Prediction files are saved here so be careful not to override!</span>
-    <span class="n">is_debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># if True, do not save checkpoint, logs, or results</span>
+    <span class="n">run_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span>  <span class="c1"># directory to save results if is_debug=False. Prediction files are saved here so be careful not to override!</span>
+    <span class="n">is_debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># if True, do not save checkpoint, logs, or results</span>
     <span class="n">print_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-    <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># random seed to use</span>
-    <span class="n">logger</span><span class="o">=</span><span class="s2">&quot;tensorboard&quot;</span><span class="p">,</span> <span class="c1"># logger of choice (tensorboard and wandb supported)</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># random seed to use</span>
+    <span class="n">logger</span><span class="o">=</span><span class="s2">&quot;tensorboard&quot;</span><span class="p">,</span>  <span class="c1"># logger of choice (tensorboard and wandb supported)</span>
     <span class="n">local_rank</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">amp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># use PyTorch Automatic Mixed Precision (faster training and less memory usage)</span>
+    <span class="n">amp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># use PyTorch Automatic Mixed Precision (faster training and less memory usage)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -727,14 +789,14 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: true
 cmd:
-  checkpoint_dir: ./checkpoints/2022-10-29-19-03-28-is2rs-example
+  checkpoint_dir: ./checkpoints/2022-10-29-19-37-36-is2rs-example
   commit: cba9fb6
   identifier: is2rs-example
-  logs_dir: ./logs/tensorboard/2022-10-29-19-03-28-is2rs-example
+  logs_dir: ./logs/tensorboard/2022-10-29-19-37-36-is2rs-example
   print_every: 5
-  results_dir: ./results/2022-10-29-19-03-28-is2rs-example
+  results_dir: ./results/2022-10-29-19-37-36-is2rs-example
   seed: 0
-  timestamp_id: 2022-10-29-19-03-28-is2rs-example
+  timestamp_id: 2022-10-29-19-37-36-is2rs-example
 dataset:
   normalize_labels: false
   src: data/s2ef/train_100
@@ -813,6 +875,20 @@ task:
 trainer: forces
 val_dataset:
   src: data/s2ef/val_20
+
+2022-10-29 19:37:15 (INFO): Batch balancing is disabled for single GPU training.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 19:37:15 (INFO): Batch balancing is disabled for single GPU training.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 19:37:15 (INFO): Loading dataset: trajectory_lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 19:37:15 (INFO): Batch balancing is disabled for single GPU training.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 19:37:15 (INFO): Loading model: gemnet_t
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py:115: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.
@@ -820,21 +896,21 @@ val_dataset:
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">trainer</span> <span class="o">=</span> <span class="n">ForcesTrainer</span><span class="p">(</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;is2rs-example&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">run_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span> <span class="c1"># directory to save results if is_debug=False. Prediction files are saved here so be careful not to override!</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">is_debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># if True, do not save checkpoint, logs, or results</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">run_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span>  <span class="c1"># directory to save results if is_debug=False. Prediction files are saved here so be careful not to override!</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">is_debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># if True, do not save checkpoint, logs, or results</span>
 <span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">print_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># random seed to use</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">logger</span><span class="o">=</span><span class="s2">&quot;tensorboard&quot;</span><span class="p">,</span> <span class="c1"># logger of choice (tensorboard and wandb supported)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>  <span class="c1"># random seed to use</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">logger</span><span class="o">=</span><span class="s2">&quot;tensorboard&quot;</span><span class="p">,</span>  <span class="c1"># logger of choice (tensorboard and wandb supported)</span>
 <span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">local_rank</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">amp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># use PyTorch Automatic Mixed Precision (faster training and less memory usage)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">amp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># use PyTorch Automatic Mixed Precision (faster training and less memory usage)</span>
 <span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="p">)</span>
 
 <span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/forces_trainer.py:88,</span> in <span class="ni">ForcesTrainer.__init__</span><span class="nt">(self, task, model, dataset, optimizer, identifier, normalizer, timestamp_id, run_dir, is_debug, is_hpo, print_every, seed, logger, local_rank, amp, cpu, slurm, noddp)</span>
@@ -872,37 +948,60 @@ val_dataset:
 <span class="ne">--&gt; </span><span class="mi">205</span> <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">Evaluator</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
 
-<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:212,</span> in <span class="ni">BaseTrainer.load</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_seed_from_config</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">211</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_logger</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">212</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_datasets</span><span class="p">()</span>
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:214,</span> in <span class="ni">BaseTrainer.load</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_datasets</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">213</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_task</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_model</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">214</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_model</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_loss</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">216</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_optimizer</span><span class="p">()</span>
 
-<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:290,</span> in <span class="ni">BaseTrainer.load_datasets</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">287</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">val_loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_loader</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dataset&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">290</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">get_dataset_class</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">291</span>         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;task&quot;</span><span class="p">][</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">292</span>     <span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">])</span>
-<span class="g g-Whitespace">    </span><span class="mi">293</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_sampler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sampler</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span>         <span class="bp">self</span><span class="o">.</span><span class="n">train_dataset</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span>         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;optim&quot;</span><span class="p">][</span><span class="s2">&quot;batch_size&quot;</span><span class="p">],</span>
-<span class="g g-Whitespace">    </span><span class="mi">296</span>         <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dataloader</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">299</span>         <span class="bp">self</span><span class="o">.</span><span class="n">train_dataset</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">300</span>         <span class="bp">self</span><span class="o">.</span><span class="n">train_sampler</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">301</span>     <span class="p">)</span>
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:369,</span> in <span class="ni">BaseTrainer.load_model</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="n">bond_feat_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;model_attributes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">365</span>     <span class="s2">&quot;num_gaussians&quot;</span><span class="p">,</span> <span class="mi">50</span>
+<span class="g g-Whitespace">    </span><span class="mi">366</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">368</span> <span class="n">loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">val_loader</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_loader</span>
+<span class="ne">--&gt; </span><span class="mi">369</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">get_model_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">])(</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>     <span class="n">loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span>     <span class="k">if</span> <span class="n">loader</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span>     <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span>     <span class="ow">and</span> <span class="n">loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span>     <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span>     <span class="n">bond_feat_dim</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">376</span>     <span class="bp">self</span><span class="o">.</span><span class="n">num_targets</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">377</span>     <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;model_attributes&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span> <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">380</span> <span class="k">if</span> <span class="n">distutils</span><span class="o">.</span><span class="n">is_master</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">381</span>     <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">382</span>         <span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> with &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">383</span>         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">num_params</span><span class="si">}</span><span class="s2"> parameters.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">384</span>     <span class="p">)</span>
 
-<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/datasets/lmdb_dataset.py:50,</span> in <span class="ni">LmdbDataset.__init__</span><span class="nt">(self, config, transform)</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span>     <span class="n">db_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.lmdb&quot;</span><span class="p">))</span>
-<span class="ne">---&gt; </span><span class="mi">50</span>     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">db_paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;No LMDBs found in &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span>     <span class="bp">self</span><span class="o">.</span><span class="n">metadata_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;metadata.npz&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">envs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/models/gemnet/gemnet.py:261,</span> in <span class="ni">GemNetT.__init__</span><span class="nt">(self, num_atoms, bond_feat_dim, num_targets, num_spherical, num_radial, num_blocks, emb_size_atom, emb_size_edge, emb_size_trip, emb_size_rbf, emb_size_cbf, emb_size_bil_trip, num_before_skip, num_after_skip, num_concat, num_atom, regress_forces, direct_forces, cutoff, max_neighbors, rbf, envelope, cbf, extensive, otf_graph, use_pbc, output_init, activation, num_elements, scale_file)</span>
+<span class="g g-Whitespace">    </span><span class="mi">252</span> <span class="bp">self</span><span class="o">.</span><span class="n">int_blocks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="n">int_blocks</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">254</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_parameters</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span>     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mlp_rbf3</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_blocks</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">256</span>     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mlp_cbf3</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_blocks</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">257</span>     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mlp_rbf_h</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_blocks</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span>     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mlp_rbf_out</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_blocks</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span> <span class="p">]</span>
+<span class="ne">--&gt; </span><span class="mi">261</span> <span class="n">load_scales_compat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_file</span><span class="p">)</span>
 
-<span class="ne">AssertionError</span>: No LMDBs found in &#39;data/s2ef/train_100&#39;
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/modules/scaling/compat.py:55,</span> in <span class="ni">load_scales_compat</span><span class="nt">(module, scale_file)</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span> <span class="k">def</span> <span class="nf">load_scales_compat</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span>     <span class="n">module</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">scale_file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ScaleDict</span><span class="p">]]</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">55</span>     <span class="n">scale_dict</span> <span class="o">=</span> <span class="n">_load_scale_dict</span><span class="p">(</span><span class="n">scale_file</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">scale_dict</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span>         <span class="k">return</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/modules/scaling/compat.py:31,</span> in <span class="ni">_load_scale_dict</span><span class="nt">(scale_file)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">scale_file</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+<span class="ne">---&gt; </span><span class="mi">31</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scale file </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">scale_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ScaleDict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.pt&quot;</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: Scale file configs/s2ef/all/gemnet/scaling_factors/gemnet-dT.json does not exist.
 </pre></div>
 </div>
 </div>
@@ -944,23 +1043,24 @@ val_dataset:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">import</span> <span class="nn">ase.io</span>
-<span class="kn">from</span> <span class="nn">ase.visualize.plot</span> <span class="kn">import</span> <span class="n">plot_atoms</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">ase.io</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">ase.visualize.plot</span> <span class="kn">import</span> <span class="n">plot_atoms</span>
 
 <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="s1">&#39;axes.labelsize&#39;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
-   <span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
-   <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39; DejaVu Sans&#39;</span><span class="p">,</span>
-   <span class="s1">&#39;legend.fontsize&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-   <span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-   <span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-   <span class="s1">&#39;axes.labelsize&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-   <span class="s1">&#39;axes.titlesize&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-   <span class="s1">&#39;text.usetex&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-   <span class="s1">&#39;figure.figsize&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+    <span class="s2">&quot;axes.labelsize&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="s2">&quot;font.family&quot;</span><span class="p">:</span> <span class="s2">&quot; DejaVu Sans&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;legend.fontsize&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&quot;xtick.labelsize&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&quot;ytick.labelsize&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&quot;axes.labelsize&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;axes.titlesize&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;text.usetex&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;figure.figsize&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
 <span class="p">}</span>
 <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 </pre></div>
@@ -986,33 +1086,33 @@ val_dataset:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;ml-relaxations/is2rs-test/1700380.traj&#39;
 </pre></div>
 </div>
-<img alt="../../_images/is2rs_18_1.png" src="../../_images/is2rs_18_1.png" />
+<img alt="../../_images/is2rs_19_1.png" src="../../_images/is2rs_19_1.png" />
 </div>
 </div>
 <p>Qualitatively, the ML relaxation is behaving as expected - decreasing energies over the course of the relaxation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ml-initial&#39;</span><span class="p">,</span> <span class="s1">&#39;ml-middle&#39;</span><span class="p">,</span> <span class="s1">&#39;ml-final&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ml-initial&quot;</span><span class="p">,</span> <span class="s2">&quot;ml-middle&quot;</span><span class="p">,</span> <span class="s2">&quot;ml-final&quot;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
 <span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span>
-    <span class="n">ml_trajectory</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
+    <span class="n">ml_trajectory</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
     <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
     <span class="c1"># rotation=(&quot;-75x, 45y, 10z&quot;)) # uncomment to visualize at different angles</span>
 <span class="p">)</span>
 <span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span>
-    <span class="n">ml_trajectory</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span> 
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
-    <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> 
+    <span class="n">ml_trajectory</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
     <span class="c1"># rotation=(&quot;-75x, 45y, 10z&quot;) # uncomment to visualize at different angles</span>
 <span class="p">)</span>
 <span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span>
-    <span class="n">ml_trajectory</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
-    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> 
+    <span class="n">ml_trajectory</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
     <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
     <span class="c1"># rotation=(&quot;-75x, 45y, 10z&quot;), # uncomment to visualize at different angles</span>
 <span class="p">)</span>
@@ -1023,7 +1123,7 @@ val_dataset:
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot: title={&#39;center&#39;: &#39;ml-final&#39;}&gt;
 </pre></div>
 </div>
-<img alt="../../_images/is2rs_20_1.png" src="../../_images/is2rs_20_1.png" />
+<img alt="../../_images/is2rs_21_1.png" src="../../_images/is2rs_21_1.png" />
 </div>
 </div>
 <p>Qualitatively, the generated structures seem reasonable with no obvious issues we had previously mentioned to look out for.</p>

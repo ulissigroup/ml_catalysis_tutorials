@@ -584,6 +584,64 @@ title="Print to PDF"
 <h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+mkdir data
+cd data
+wget -q -nc http://dl.fbaipublicfiles.com/opencatalystproject/data/tutorial_data.tar.gz -O tutorial_data.tar.gz
+tar -xzvf tutorial_data.tar.gz
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/train_100/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/train_100/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/train_100/data.lmdb-lock
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/val_20/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/val_20/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/val_20/data.lmdb-lock
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/train_100/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/train_100/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/train_100/data.lmdb-lock
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/val_20/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/val_20/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/val_20/data.lmdb-lock
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_src</span> <span class="o">=</span> <span class="s2">&quot;data/is2re/train_100/data.lmdb&quot;</span>
 <span class="n">val_src</span> <span class="o">=</span> <span class="s2">&quot;data/is2re/val_20/data.lmdb&quot;</span>
 </pre></div>
@@ -608,30 +666,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">SinglePointLmdbDataset</span><span class="p">({</span><span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="n">train_src</span><span class="p">})</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">train_dataset</span><span class="p">:</span>
-
-<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/datasets/lmdb_dataset.py:128,</span> in <span class="ni">SinglePointLmdbDataset.__init__</span><span class="nt">(self, config, transform)</span>
-<span class="g g-Whitespace">    </span><span class="mi">127</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">128</span>     <span class="nb">super</span><span class="p">(</span><span class="n">SinglePointLmdbDataset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">transform</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">129</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">130</span>         <span class="s2">&quot;SinglePointLmdbDataset is deprecated and will be removed in the future.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">131</span>         <span class="s2">&quot;Please use &#39;LmdbDataset&#39; instead.&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span>         <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="p">)</span>
-
-<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/datasets/lmdb_dataset.py:50,</span> in <span class="ni">LmdbDataset.__init__</span><span class="nt">(self, config, transform)</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span>     <span class="n">db_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.lmdb&quot;</span><span class="p">))</span>
-<span class="ne">---&gt; </span><span class="mi">50</span>     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">db_paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;No LMDBs found in &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span>     <span class="bp">self</span><span class="o">.</span><span class="n">metadata_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;metadata.npz&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">envs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-
-<span class="ne">AssertionError</span>: No LMDBs found in &#39;data/is2re/train_100/data.lmdb&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/IPython/core/interactiveshell.py:3378: UserWarning: SinglePointLmdbDataset is deprecated and will be removed in the future.Please use &#39;LmdbDataset&#39; instead.
+  exec(code_obj, self.user_global_ns, self.user_ns)
 </pre></div>
 </div>
 </div>
@@ -736,14 +772,14 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: true
 cmd:
-  checkpoint_dir: ./checkpoints/2022-10-28-20-09-36-IS2RE-example
-  commit: 6e750b2
+  checkpoint_dir: ./checkpoints/2022-10-29-19-37-36-IS2RE-example
+  commit: cba9fb6
   identifier: IS2RE-example
-  logs_dir: ./logs/tensorboard/2022-10-28-20-09-36-IS2RE-example
+  logs_dir: ./logs/tensorboard/2022-10-29-19-37-36-IS2RE-example
   print_every: 5
-  results_dir: ./results/2022-10-28-20-09-36-IS2RE-example
+  results_dir: ./results/2022-10-29-19-37-36-IS2RE-example
   seed: 0
-  timestamp_id: 2022-10-28-20-09-36-IS2RE-example
+  timestamp_id: 2022-10-29-19-37-36-IS2RE-example
 dataset:
   normalize_labels: true
   src: data/is2re/train_100/data.lmdb
@@ -768,7 +804,7 @@ dataset:
   - *id001
   - !!binary |
     PnyyzMtk/T8=
-gpus: 1
+gpus: 0
 logger: tensorboard
 model: gemnet_t
 model_attributes:
@@ -829,1714 +865,137 @@ task:
 trainer: energy
 val_dataset:
   src: data/is2re/val_20/data.lmdb
+
+2022-10-29 19:37:03 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:root:Scale factor OutBlock_0_had not found in model
-WARNING:root:Scale factor OutBlock_1_had not found in model
-WARNING:root:Scale factor OutBlock_2_had not found in model
-WARNING:root:Scale factor OutBlock_3_had not found in model
-WARNING:root:Model gradient logging to tensorboard not yet supported.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 19:37:03 (INFO): Batch balancing is disabled for single GPU training.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 19:37:03 (INFO): Loading dataset: single_point_lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 19:37:03 (INFO): Loading model: gemnet_t
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py:115: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.
+  warnings.warn(&quot;torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.&quot;)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">energy_trainer</span> <span class="o">=</span> <span class="n">EnergyTrainer</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">model</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="c1"># copied for later use, not necessary in practice.</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;IS2RE-example&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">run_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span> <span class="c1"># directory to save results if is_debug=False. Prediction files are saved here so be careful not to override!</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">is_debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># if True, do not save checkpoint, logs, or results</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">print_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># random seed to use</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">logger</span><span class="o">=</span><span class="s2">&quot;tensorboard&quot;</span><span class="p">,</span> <span class="c1"># logger of choice (tensorboard and wandb supported)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">local_rank</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">amp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># use PyTorch Automatic Mixed Precision (faster training and less memory usage)    </span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/energy_trainer.py:78,</span> in <span class="ni">EnergyTrainer.__init__</span><span class="nt">(self, task, model, dataset, optimizer, identifier, normalizer, timestamp_id, run_dir, is_debug, is_hpo, print_every, seed, logger, local_rank, amp, cpu, slurm, noddp)</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>     <span class="n">task</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span>     <span class="n">noddp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span> <span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">78</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">79</span>         <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">80</span>         <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">81</span>         <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">82</span>         <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span>         <span class="n">identifier</span><span class="o">=</span><span class="n">identifier</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">84</span>         <span class="n">normalizer</span><span class="o">=</span><span class="n">normalizer</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">85</span>         <span class="n">timestamp_id</span><span class="o">=</span><span class="n">timestamp_id</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span>         <span class="n">run_dir</span><span class="o">=</span><span class="n">run_dir</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span>         <span class="n">is_debug</span><span class="o">=</span><span class="n">is_debug</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span>         <span class="n">is_hpo</span><span class="o">=</span><span class="n">is_hpo</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span>         <span class="n">print_every</span><span class="o">=</span><span class="n">print_every</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span>         <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span>         <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span>         <span class="n">local_rank</span><span class="o">=</span><span class="n">local_rank</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span>         <span class="n">amp</span><span class="o">=</span><span class="n">amp</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span>         <span class="n">cpu</span><span class="o">=</span><span class="n">cpu</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;is2re&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span>         <span class="n">slurm</span><span class="o">=</span><span class="n">slurm</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>         <span class="n">noddp</span><span class="o">=</span><span class="n">noddp</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:205,</span> in <span class="ni">BaseTrainer.__init__</span><span class="nt">(self, task, model, dataset, optimizer, identifier, normalizer, timestamp_id, run_dir, is_debug, is_hpo, print_every, seed, logger, local_rank, amp, cpu, name, slurm, noddp)</span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span> <span class="k">if</span> <span class="n">distutils</span><span class="o">.</span><span class="n">is_master</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">204</span>     <span class="nb">print</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="ne">--&gt; </span><span class="mi">205</span> <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">Evaluator</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:214,</span> in <span class="ni">BaseTrainer.load</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_datasets</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_task</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">214</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_model</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_loss</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">216</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_optimizer</span><span class="p">()</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:369,</span> in <span class="ni">BaseTrainer.load_model</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">364</span> <span class="n">bond_feat_dim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;model_attributes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">365</span>     <span class="s2">&quot;num_gaussians&quot;</span><span class="p">,</span> <span class="mi">50</span>
+<span class="g g-Whitespace">    </span><span class="mi">366</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">368</span> <span class="n">loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">val_loader</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_loader</span>
+<span class="ne">--&gt; </span><span class="mi">369</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">get_model_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">])(</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>     <span class="n">loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span>     <span class="k">if</span> <span class="n">loader</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span>     <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span>     <span class="ow">and</span> <span class="n">loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span>     <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span>     <span class="n">bond_feat_dim</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">376</span>     <span class="bp">self</span><span class="o">.</span><span class="n">num_targets</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">377</span>     <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;model_attributes&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span> <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">380</span> <span class="k">if</span> <span class="n">distutils</span><span class="o">.</span><span class="n">is_master</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">381</span>     <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">382</span>         <span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> with &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">383</span>         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">num_params</span><span class="si">}</span><span class="s2"> parameters.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">384</span>     <span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/models/gemnet/gemnet.py:261,</span> in <span class="ni">GemNetT.__init__</span><span class="nt">(self, num_atoms, bond_feat_dim, num_targets, num_spherical, num_radial, num_blocks, emb_size_atom, emb_size_edge, emb_size_trip, emb_size_rbf, emb_size_cbf, emb_size_bil_trip, num_before_skip, num_after_skip, num_concat, num_atom, regress_forces, direct_forces, cutoff, max_neighbors, rbf, envelope, cbf, extensive, otf_graph, use_pbc, output_init, activation, num_elements, scale_file)</span>
+<span class="g g-Whitespace">    </span><span class="mi">252</span> <span class="bp">self</span><span class="o">.</span><span class="n">int_blocks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">(</span><span class="n">int_blocks</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">254</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_parameters</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span>     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mlp_rbf3</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_blocks</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">256</span>     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mlp_cbf3</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_blocks</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">257</span>     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mlp_rbf_h</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_blocks</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span>     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mlp_rbf_out</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_blocks</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span> <span class="p">]</span>
+<span class="ne">--&gt; </span><span class="mi">261</span> <span class="n">load_scales_compat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_file</span><span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/modules/scaling/compat.py:55,</span> in <span class="ni">load_scales_compat</span><span class="nt">(module, scale_file)</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span> <span class="k">def</span> <span class="nf">load_scales_compat</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span>     <span class="n">module</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">scale_file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ScaleDict</span><span class="p">]]</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">55</span>     <span class="n">scale_dict</span> <span class="o">=</span> <span class="n">_load_scale_dict</span><span class="p">(</span><span class="n">scale_file</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">scale_dict</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span>         <span class="k">return</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/modules/scaling/compat.py:31,</span> in <span class="ni">_load_scale_dict</span><span class="nt">(scale_file)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">scale_file</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+<span class="ne">---&gt; </span><span class="mi">31</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scale file </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">scale_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ScaleDict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.pt&quot;</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: Scale file configs/s2ef/all/gemnet/scaling_factors/gemnet-dT.json does not exist.
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">energy_trainer</span><span class="o">.</span><span class="n">model</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OCPDataParallel(
-  (module): GemNetT(
-    (radial_basis): RadialBasis(
-      (envelope): PolynomialEnvelope()
-      (rbf): GaussianSmearing()
-    )
-    (cbf_basis3): CircularBasisLayer(
-      (radial_basis): RadialBasis(
-        (envelope): PolynomialEnvelope()
-        (rbf): GaussianSmearing()
-      )
-    )
-    (mlp_rbf3): Dense(
-      (linear): Linear(in_features=64, out_features=16, bias=False)
-      (_activation): Identity()
-    )
-    (mlp_cbf3): EfficientInteractionDownProjection()
-    (mlp_rbf_h): Dense(
-      (linear): Linear(in_features=64, out_features=16, bias=False)
-      (_activation): Identity()
-    )
-    (mlp_rbf_out): Dense(
-      (linear): Linear(in_features=64, out_features=16, bias=False)
-      (_activation): Identity()
-    )
-    (atom_emb): AtomEmbedding(
-      (embeddings): Embedding(83, 256)
-    )
-    (edge_emb): EdgeEmbedding(
-      (dense): Dense(
-        (linear): Linear(in_features=576, out_features=512, bias=False)
-        (_activation): ScaledSiLU(
-          (_activation): SiLU()
-        )
-      )
-    )
-    (out_blocks): ModuleList(
-      (0): OutputBlock(
-        (dense_rbf): Dense(
-          (linear): Linear(in_features=16, out_features=512, bias=False)
-          (_activation): Identity()
-        )
-        (scale_sum): ScaleFactor()
-        (layers): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (seq_energy): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (out_energy): Dense(
-          (linear): Linear(in_features=256, out_features=1, bias=False)
-          (_activation): Identity()
-        )
-      )
-      (1): OutputBlock(
-        (dense_rbf): Dense(
-          (linear): Linear(in_features=16, out_features=512, bias=False)
-          (_activation): Identity()
-        )
-        (scale_sum): ScaleFactor()
-        (layers): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (seq_energy): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (out_energy): Dense(
-          (linear): Linear(in_features=256, out_features=1, bias=False)
-          (_activation): Identity()
-        )
-      )
-      (2): OutputBlock(
-        (dense_rbf): Dense(
-          (linear): Linear(in_features=16, out_features=512, bias=False)
-          (_activation): Identity()
-        )
-        (scale_sum): ScaleFactor()
-        (layers): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (seq_energy): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (out_energy): Dense(
-          (linear): Linear(in_features=256, out_features=1, bias=False)
-          (_activation): Identity()
-        )
-      )
-      (3): OutputBlock(
-        (dense_rbf): Dense(
-          (linear): Linear(in_features=16, out_features=512, bias=False)
-          (_activation): Identity()
-        )
-        (scale_sum): ScaleFactor()
-        (layers): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (seq_energy): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (out_energy): Dense(
-          (linear): Linear(in_features=256, out_features=1, bias=False)
-          (_activation): Identity()
-        )
-      )
-      (4): OutputBlock(
-        (dense_rbf): Dense(
-          (linear): Linear(in_features=16, out_features=512, bias=False)
-          (_activation): Identity()
-        )
-        (scale_sum): ScaleFactor()
-        (layers): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (seq_energy): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (out_energy): Dense(
-          (linear): Linear(in_features=256, out_features=1, bias=False)
-          (_activation): Identity()
-        )
-      )
-      (5): OutputBlock(
-        (dense_rbf): Dense(
-          (linear): Linear(in_features=16, out_features=512, bias=False)
-          (_activation): Identity()
-        )
-        (scale_sum): ScaleFactor()
-        (layers): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (seq_energy): ModuleList(
-          (0): Dense(
-            (linear): Linear(in_features=512, out_features=256, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (2): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (3): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=256, out_features=256, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (out_energy): Dense(
-          (linear): Linear(in_features=256, out_features=1, bias=False)
-          (_activation): Identity()
-        )
-      )
-    )
-    (int_blocks): ModuleList(
-      (0): InteractionBlockTripletsOnly(
-        (dense_ca): Dense(
-          (linear): Linear(in_features=512, out_features=512, bias=False)
-          (_activation): ScaledSiLU(
-            (_activation): SiLU()
-          )
-        )
-        (trip_interaction): TripletInteraction(
-          (dense_ba): Dense(
-            (linear): Linear(in_features=512, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (mlp_rbf): Dense(
-            (linear): Linear(in_features=16, out_features=512, bias=False)
-            (_activation): Identity()
-          )
-          (scale_rbf): ScaleFactor()
-          (mlp_cbf): EfficientInteractionBilinear()
-          (scale_cbf_sum): ScaleFactor()
-          (down_projection): Dense(
-            (linear): Linear(in_features=512, out_features=64, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (up_projection_ca): Dense(
-            (linear): Linear(in_features=64, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (up_projection_ac): Dense(
-            (linear): Linear(in_features=64, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-        )
-        (layers_before_skip): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (layers_after_skip): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (atom_update): AtomUpdateBlock(
-          (dense_rbf): Dense(
-            (linear): Linear(in_features=16, out_features=512, bias=False)
-            (_activation): Identity()
-          )
-          (scale_sum): ScaleFactor()
-          (layers): ModuleList(
-            (0): Dense(
-              (linear): Linear(in_features=512, out_features=256, bias=False)
-              (_activation): ScaledSiLU(
-                (_activation): SiLU()
-              )
-            )
-            (1): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-            (2): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-            (3): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-          )
-        )
-        (concat_layer): EdgeEmbedding(
-          (dense): Dense(
-            (linear): Linear(in_features=1024, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-        )
-        (residual_m): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-      )
-      (1): InteractionBlockTripletsOnly(
-        (dense_ca): Dense(
-          (linear): Linear(in_features=512, out_features=512, bias=False)
-          (_activation): ScaledSiLU(
-            (_activation): SiLU()
-          )
-        )
-        (trip_interaction): TripletInteraction(
-          (dense_ba): Dense(
-            (linear): Linear(in_features=512, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (mlp_rbf): Dense(
-            (linear): Linear(in_features=16, out_features=512, bias=False)
-            (_activation): Identity()
-          )
-          (scale_rbf): ScaleFactor()
-          (mlp_cbf): EfficientInteractionBilinear()
-          (scale_cbf_sum): ScaleFactor()
-          (down_projection): Dense(
-            (linear): Linear(in_features=512, out_features=64, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (up_projection_ca): Dense(
-            (linear): Linear(in_features=64, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (up_projection_ac): Dense(
-            (linear): Linear(in_features=64, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-        )
-        (layers_before_skip): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (layers_after_skip): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (atom_update): AtomUpdateBlock(
-          (dense_rbf): Dense(
-            (linear): Linear(in_features=16, out_features=512, bias=False)
-            (_activation): Identity()
-          )
-          (scale_sum): ScaleFactor()
-          (layers): ModuleList(
-            (0): Dense(
-              (linear): Linear(in_features=512, out_features=256, bias=False)
-              (_activation): ScaledSiLU(
-                (_activation): SiLU()
-              )
-            )
-            (1): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-            (2): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-            (3): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-          )
-        )
-        (concat_layer): EdgeEmbedding(
-          (dense): Dense(
-            (linear): Linear(in_features=1024, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-        )
-        (residual_m): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-      )
-      (2): InteractionBlockTripletsOnly(
-        (dense_ca): Dense(
-          (linear): Linear(in_features=512, out_features=512, bias=False)
-          (_activation): ScaledSiLU(
-            (_activation): SiLU()
-          )
-        )
-        (trip_interaction): TripletInteraction(
-          (dense_ba): Dense(
-            (linear): Linear(in_features=512, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (mlp_rbf): Dense(
-            (linear): Linear(in_features=16, out_features=512, bias=False)
-            (_activation): Identity()
-          )
-          (scale_rbf): ScaleFactor()
-          (mlp_cbf): EfficientInteractionBilinear()
-          (scale_cbf_sum): ScaleFactor()
-          (down_projection): Dense(
-            (linear): Linear(in_features=512, out_features=64, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (up_projection_ca): Dense(
-            (linear): Linear(in_features=64, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (up_projection_ac): Dense(
-            (linear): Linear(in_features=64, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-        )
-        (layers_before_skip): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (layers_after_skip): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (atom_update): AtomUpdateBlock(
-          (dense_rbf): Dense(
-            (linear): Linear(in_features=16, out_features=512, bias=False)
-            (_activation): Identity()
-          )
-          (scale_sum): ScaleFactor()
-          (layers): ModuleList(
-            (0): Dense(
-              (linear): Linear(in_features=512, out_features=256, bias=False)
-              (_activation): ScaledSiLU(
-                (_activation): SiLU()
-              )
-            )
-            (1): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-            (2): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-            (3): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-          )
-        )
-        (concat_layer): EdgeEmbedding(
-          (dense): Dense(
-            (linear): Linear(in_features=1024, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-        )
-        (residual_m): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-      )
-      (3): InteractionBlockTripletsOnly(
-        (dense_ca): Dense(
-          (linear): Linear(in_features=512, out_features=512, bias=False)
-          (_activation): ScaledSiLU(
-            (_activation): SiLU()
-          )
-        )
-        (trip_interaction): TripletInteraction(
-          (dense_ba): Dense(
-            (linear): Linear(in_features=512, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (mlp_rbf): Dense(
-            (linear): Linear(in_features=16, out_features=512, bias=False)
-            (_activation): Identity()
-          )
-          (scale_rbf): ScaleFactor()
-          (mlp_cbf): EfficientInteractionBilinear()
-          (scale_cbf_sum): ScaleFactor()
-          (down_projection): Dense(
-            (linear): Linear(in_features=512, out_features=64, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (up_projection_ca): Dense(
-            (linear): Linear(in_features=64, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (up_projection_ac): Dense(
-            (linear): Linear(in_features=64, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-        )
-        (layers_before_skip): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (layers_after_skip): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (atom_update): AtomUpdateBlock(
-          (dense_rbf): Dense(
-            (linear): Linear(in_features=16, out_features=512, bias=False)
-            (_activation): Identity()
-          )
-          (scale_sum): ScaleFactor()
-          (layers): ModuleList(
-            (0): Dense(
-              (linear): Linear(in_features=512, out_features=256, bias=False)
-              (_activation): ScaledSiLU(
-                (_activation): SiLU()
-              )
-            )
-            (1): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-            (2): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-            (3): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-          )
-        )
-        (concat_layer): EdgeEmbedding(
-          (dense): Dense(
-            (linear): Linear(in_features=1024, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-        )
-        (residual_m): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-      )
-      (4): InteractionBlockTripletsOnly(
-        (dense_ca): Dense(
-          (linear): Linear(in_features=512, out_features=512, bias=False)
-          (_activation): ScaledSiLU(
-            (_activation): SiLU()
-          )
-        )
-        (trip_interaction): TripletInteraction(
-          (dense_ba): Dense(
-            (linear): Linear(in_features=512, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (mlp_rbf): Dense(
-            (linear): Linear(in_features=16, out_features=512, bias=False)
-            (_activation): Identity()
-          )
-          (scale_rbf): ScaleFactor()
-          (mlp_cbf): EfficientInteractionBilinear()
-          (scale_cbf_sum): ScaleFactor()
-          (down_projection): Dense(
-            (linear): Linear(in_features=512, out_features=64, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (up_projection_ca): Dense(
-            (linear): Linear(in_features=64, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-          (up_projection_ac): Dense(
-            (linear): Linear(in_features=64, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-        )
-        (layers_before_skip): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (layers_after_skip): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-          (1): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-        (atom_update): AtomUpdateBlock(
-          (dense_rbf): Dense(
-            (linear): Linear(in_features=16, out_features=512, bias=False)
-            (_activation): Identity()
-          )
-          (scale_sum): ScaleFactor()
-          (layers): ModuleList(
-            (0): Dense(
-              (linear): Linear(in_features=512, out_features=256, bias=False)
-              (_activation): ScaledSiLU(
-                (_activation): SiLU()
-              )
-            )
-            (1): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-            (2): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-            (3): ResidualLayer(
-              (dense_mlp): Sequential(
-                (0): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-                (1): Dense(
-                  (linear): Linear(in_features=256, out_features=256, bias=False)
-                  (_activation): ScaledSiLU(
-                    (_activation): SiLU()
-                  )
-                )
-              )
-            )
-          )
-        )
-        (concat_layer): EdgeEmbedding(
-          (dense): Dense(
-            (linear): Linear(in_features=1024, out_features=512, bias=False)
-            (_activation): ScaledSiLU(
-              (_activation): SiLU()
-            )
-          )
-        )
-        (residual_m): ModuleList(
-          (0): ResidualLayer(
-            (dense_mlp): Sequential(
-              (0): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-              (1): Dense(
-                (linear): Linear(in_features=512, out_features=512, bias=False)
-                (_activation): ScaledSiLU(
-                  (_activation): SiLU()
-                )
-              )
-            )
-          )
-        )
-      )
-    )
-  )
-)
 </pre></div>
 </div>
 </div>
@@ -2547,78 +1006,6 @@ WARNING:root:Model gradient logging to tensorboard not yet supported.
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">energy_trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:root:Scale factor OutBlock_4_sum (out_blocks.4.scale_sum) is not fitted. Please make sure that you either (1) load a checkpoint with fitted scale factors, (2) explicitly load scale factors using the `model.scale_file` attribute, or (3) fit the scale factors using the `fit.py` script.
-WARNING:root:Scale factor OutBlock_5_sum (out_blocks.5.scale_sum) is not fitted. Please make sure that you either (1) load a checkpoint with fitted scale factors, (2) explicitly load scale factors using the `model.scale_file` attribute, or (3) fit the scale factors using the `fit.py` script.
-WARNING:root:Scale factor TripInteraction_4_had_rbf (int_blocks.3.trip_interaction.scale_rbf) is not fitted. Please make sure that you either (1) load a checkpoint with fitted scale factors, (2) explicitly load scale factors using the `model.scale_file` attribute, or (3) fit the scale factors using the `fit.py` script.
-WARNING:root:Scale factor TripInteraction_4_sum_cbf (int_blocks.3.trip_interaction.scale_cbf_sum) is not fitted. Please make sure that you either (1) load a checkpoint with fitted scale factors, (2) explicitly load scale factors using the `model.scale_file` attribute, or (3) fit the scale factors using the `fit.py` script.
-WARNING:root:Scale factor AtomUpdate_4_sum (int_blocks.3.atom_update.scale_sum) is not fitted. Please make sure that you either (1) load a checkpoint with fitted scale factors, (2) explicitly load scale factors using the `model.scale_file` attribute, or (3) fit the scale factors using the `fit.py` script.
-WARNING:root:Scale factor TripInteraction_5_had_rbf (int_blocks.4.trip_interaction.scale_rbf) is not fitted. Please make sure that you either (1) load a checkpoint with fitted scale factors, (2) explicitly load scale factors using the `model.scale_file` attribute, or (3) fit the scale factors using the `fit.py` script.
-WARNING:root:Scale factor TripInteraction_5_sum_cbf (int_blocks.4.trip_interaction.scale_cbf_sum) is not fitted. Please make sure that you either (1) load a checkpoint with fitted scale factors, (2) explicitly load scale factors using the `model.scale_file` attribute, or (3) fit the scale factors using the `fit.py` script.
-WARNING:root:Scale factor AtomUpdate_5_sum (int_blocks.4.atom_update.scale_sum) is not fitted. Please make sure that you either (1) load a checkpoint with fitted scale factors, (2) explicitly load scale factors using the `model.scale_file` attribute, or (3) fit the scale factors using the `fit.py` script.
-/content/ocp/ocpmodels/models/gemnet/gemnet.py:373: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the &#39;trunc&#39; function NOT &#39;floor&#39;). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode=&#39;trunc&#39;), or for actual floor division, use torch.div(a, b, rounding_mode=&#39;floor&#39;).
-  neighbors_new // 2,
-/content/ocp/ocpmodels/models/gemnet/gemnet.py:467: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the &#39;trunc&#39; function NOT &#39;floor&#39;). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode=&#39;trunc&#39;), or for actual floor division, use torch.div(a, b, rounding_mode=&#39;floor&#39;).
-  block_sizes = neighbors // 2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>energy_mae: 6.19e+01, energy_mse: 3.84e+03, energy_within_threshold: 0.00e+00, loss: 6.75e+01, lr: 1.00e-04, epoch: 5.00e-02, step: 5.00e+00
-energy_mae: 1.86e+02, energy_mse: 3.46e+04, energy_within_threshold: 0.00e+00, loss: 2.03e+02, lr: 1.00e-04, epoch: 1.00e-01, step: 1.00e+01
-energy_mae: 2.88e+03, energy_mse: 8.30e+06, energy_within_threshold: 0.00e+00, loss: 3.14e+03, lr: 1.00e-04, epoch: 1.50e-01, step: 1.50e+01
-energy_mae: 5.87e+02, energy_mse: 3.45e+05, energy_within_threshold: 0.00e+00, loss: 3.20e+02, lr: 1.00e-04, epoch: 2.00e-01, step: 2.00e+01
-energy_mae: 4.46e+03, energy_mse: 1.99e+07, energy_within_threshold: 0.00e+00, loss: 2.43e+03, lr: 1.00e-04, epoch: 2.50e-01, step: 2.50e+01
-energy_mae: 4.09e+01, energy_mse: 1.67e+03, energy_within_threshold: 0.00e+00, loss: 2.22e+01, lr: 1.00e-04, epoch: 3.00e-01, step: 3.00e+01
-energy_mae: 1.22e+02, energy_mse: 1.49e+04, energy_within_threshold: 0.00e+00, loss: 6.64e+01, lr: 1.00e-04, epoch: 3.50e-01, step: 3.50e+01
-energy_mae: 3.78e+01, energy_mse: 1.43e+03, energy_within_threshold: 0.00e+00, loss: 2.06e+01, lr: 1.00e-04, epoch: 4.00e-01, step: 4.00e+01
-energy_mae: 3.33e+02, energy_mse: 1.11e+05, energy_within_threshold: 0.00e+00, loss: 1.81e+02, lr: 1.00e-04, epoch: 4.50e-01, step: 4.50e+01
-energy_mae: 8.00e+00, energy_mse: 6.39e+01, energy_within_threshold: 0.00e+00, loss: 4.35e+00, lr: 1.00e-04, epoch: 5.00e-01, step: 5.00e+01
-energy_mae: 5.08e+01, energy_mse: 2.58e+03, energy_within_threshold: 0.00e+00, loss: 2.77e+01, lr: 1.00e-04, epoch: 5.50e-01, step: 5.50e+01
-energy_mae: 4.98e+01, energy_mse: 2.48e+03, energy_within_threshold: 0.00e+00, loss: 2.71e+01, lr: 1.00e-04, epoch: 6.00e-01, step: 6.00e+01
-energy_mae: 1.04e+03, energy_mse: 1.08e+06, energy_within_threshold: 0.00e+00, loss: 5.65e+02, lr: 1.00e-04, epoch: 6.50e-01, step: 6.50e+01
-energy_mae: 6.43e+03, energy_mse: 4.13e+07, energy_within_threshold: 0.00e+00, loss: 3.50e+03, lr: 1.00e-04, epoch: 7.00e-01, step: 7.00e+01
-energy_mae: 2.61e+01, energy_mse: 6.83e+02, energy_within_threshold: 0.00e+00, loss: 1.42e+01, lr: 1.00e-04, epoch: 7.50e-01, step: 7.50e+01
-energy_mae: 1.48e+02, energy_mse: 2.20e+04, energy_within_threshold: 0.00e+00, loss: 8.07e+01, lr: 1.00e-04, epoch: 8.00e-01, step: 8.00e+01
-energy_mae: 5.82e+00, energy_mse: 3.39e+01, energy_within_threshold: 0.00e+00, loss: 3.17e+00, lr: 1.00e-04, epoch: 8.50e-01, step: 8.50e+01
-energy_mae: 2.13e+02, energy_mse: 4.54e+04, energy_within_threshold: 0.00e+00, loss: 1.16e+02, lr: 1.00e-04, epoch: 9.00e-01, step: 9.00e+01
-energy_mae: 2.87e+02, energy_mse: 8.23e+04, energy_within_threshold: 0.00e+00, loss: 1.56e+02, lr: 1.00e-04, epoch: 9.50e-01, step: 9.50e+01
-energy_mae: 3.70e+02, energy_mse: 1.37e+05, energy_within_threshold: 0.00e+00, loss: 2.02e+02, lr: 1.00e-04, epoch: 1.00e+00, step: 1.00e+02
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">44</span><span class="o">-</span><span class="mf">1376e0</span><span class="n">c2c410</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">energy_trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-
-<span class="nn">/content/ocp/ocpmodels/trainers/energy_trainer.py</span> in <span class="ni">train</span><span class="nt">(self, disable_eval_tqdm)</span>
-<span class="g g-Whitespace">    </span><span class="mi">245</span> 
-<span class="g g-Whitespace">    </span><span class="mi">246</span>                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">val_loader</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">247</span>                         <span class="n">val_metrics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">248</span>                             <span class="n">split</span><span class="o">=</span><span class="s2">&quot;val&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">249</span>                             <span class="n">disable_tqdm</span><span class="o">=</span><span class="n">disable_eval_tqdm</span><span class="p">,</span>
-
-<span class="nn">/opt/conda/lib/python3.10/site-packages/torch/autograd/grad_mode.py</span> in <span class="ni">decorate_context</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>         <span class="k">def</span> <span class="nf">decorate_context</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">():</span>
-<span class="ne">---&gt; </span><span class="mi">27</span>                 <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>         <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">decorate_context</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> 
-
-<span class="nn">/content/ocp/ocpmodels/trainers/base_trainer.py</span> in <span class="ni">validate</span><span class="nt">(self, split, disable_tqdm)</span>
-<span class="g g-Whitespace">    </span><span class="mi">634</span>     <span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">635</span>     <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;val&quot;</span><span class="p">,</span> <span class="n">disable_tqdm</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">636</span>         <span class="n">ensure_fitted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unwrapped_model</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">637</span> 
-<span class="g g-Whitespace">    </span><span class="mi">638</span>         <span class="k">if</span> <span class="n">distutils</span><span class="o">.</span><span class="n">is_master</span><span class="p">():</span>
-
-<span class="nn">/content/ocp/ocpmodels/modules/scaling/util.py</span> in <span class="ni">ensure_fitted</span><span class="nt">(module, warn)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>             <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">23</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
-<span class="ne">ValueError</span>: Scale factor OutBlock_4_sum (out_blocks.4.scale_sum) is not fitted. Please make sure that you either (1) load a checkpoint with fitted scale factors, (2) explicitly load scale factors using the `model.scale_file` attribute, or (3) fit the scale factors using the `fit.py` script.
 </pre></div>
 </div>
 </div>
@@ -2636,11 +1023,6 @@ energy_mae: 3.70e+02, energy_mse: 1.37e+05, energy_within_threshold: 0.00e+00, l
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;./checkpoints/2022-10-28-20-09-36-IS2RE-example/best_checkpoint.pt&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2651,16 +1033,6 @@ energy_mae: 3.70e+02, energy_mse: 1.37e+05, energy_within_threshold: 0.00e+00, l
   <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="n">val_src</span><span class="p">},</span> <span class="c1"># test set (optional)</span>
 <span class="p">)</span>
 <span class="n">dataset</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;src&#39;: &#39;data/is2re/train_100/data.lmdb&#39;,
-  &#39;normalize_labels&#39;: True,
-  &#39;target_mean&#39;: -1.4570415561499996,
-  &#39;target_std&#39;: 1.8371084209427546},
- {&#39;src&#39;: &#39;data/is2re/val_20/data.lmdb&#39;},
- {&#39;src&#39;: &#39;data/is2re/val_20/data.lmdb&#39;}]
 </pre></div>
 </div>
 </div>
@@ -2686,131 +1058,6 @@ energy_mae: 3.70e+02, energy_mse: 1.37e+05, energy_within_threshold: 0.00e+00, l
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: true
-cmd:
-  checkpoint_dir: ./checkpoints/2022-10-28-20-09-36-IS2RE-val-example
-  commit: 6e750b2
-  identifier: IS2RE-val-example
-  logs_dir: ./logs/tensorboard/2022-10-28-20-09-36-IS2RE-val-example
-  print_every: 10
-  results_dir: ./results/2022-10-28-20-09-36-IS2RE-val-example
-  seed: 0
-  timestamp_id: 2022-10-28-20-09-36-IS2RE-val-example
-dataset:
-  normalize_labels: true
-  src: data/is2re/train_100/data.lmdb
-  target_mean: !!python/object/apply:numpy.core.multiarray.scalar
-  - &amp;id001 !!python/object/apply:numpy.dtype
-    args:
-    - f8
-    - false
-    - true
-    state: !!python/tuple
-    - 3
-    - &lt;
-    - null
-    - null
-    - null
-    - -1
-    - -1
-    - 0
-  - !!binary |
-    MjyJzgpQ978=
-  target_std: !!python/object/apply:numpy.core.multiarray.scalar
-  - *id001
-  - !!binary |
-    PnyyzMtk/T8=
-gpus: 1
-logger: tensorboard
-model: gemnet_t
-model_attributes:
-  activation: silu
-  cbf:
-    name: spherical_harmonics
-  cutoff: 6.0
-  direct_forces: false
-  emb_size_atom: 256
-  emb_size_bil_trip: 64
-  emb_size_cbf: 16
-  emb_size_edge: 512
-  emb_size_rbf: 16
-  emb_size_trip: 64
-  envelope:
-    exponent: 5
-    name: polynomial
-  extensive: true
-  max_neighbors: 50
-  num_after_skip: 2
-  num_atom: 3
-  num_before_skip: 1
-  num_blocks: 5
-  num_concat: 1
-  num_radial: 64
-  num_spherical: 7
-  otf_graph: false
-  output_init: HeOrthogonal
-  rbf:
-    name: gaussian
-  regress_forces: false
-  scale_file: configs/s2ef/all/gemnet/scaling_factors/gemnet-dT.json
-noddp: false
-optim:
-  batch_size: 1
-  clip_grad_norm: 10
-  ema_decay: 0.999
-  eval_batch_size: 1
-  factor: 0.8
-  loss_energy: mae
-  lr_initial: 0.0001
-  max_epochs: 1
-  mode: min
-  num_workers: 2
-  optimizer: AdamW
-  optimizer_params:
-    amsgrad: true
-  patience: 3
-  scheduler: ReduceLROnPlateau
-slurm: {}
-task:
-  dataset: single_point_lmdb
-  description: Relaxed state energy prediction from initial structure.
-  labels:
-  - relaxed energy
-  metric: mae
-  type: regression
-test_dataset:
-  src: data/is2re/val_20/data.lmdb
-trainer: energy
-val_dataset:
-  src: data/is2re/val_20/data.lmdb
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:root:Scale factor OutBlock_0_had not found in model
-WARNING:root:Scale factor OutBlock_1_had not found in model
-WARNING:root:Scale factor OutBlock_2_had not found in model
-WARNING:root:Scale factor OutBlock_3_had not found in model
-WARNING:root:Model gradient logging to tensorboard not yet supported.
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">47</span><span class="o">-</span><span class="mi">288</span><span class="n">ecbf0723c</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> 
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="n">pretrained_energy_trainer</span><span class="o">.</span><span class="n">load_checkpoint</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="o">=</span><span class="n">checkpoint_path</span><span class="p">)</span>
-
-<span class="nn">/content/ocp/ocpmodels/trainers/base_trainer.py</span> in <span class="ni">load_checkpoint</span><span class="nt">(self, checkpoint_path)</span>
-<span class="g g-Whitespace">    </span><span class="mi">399</span>     <span class="k">def</span> <span class="nf">load_checkpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checkpoint_path</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">400</span>         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">401</span>             <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">402</span>                 <span class="n">errno</span><span class="o">.</span><span class="n">ENOENT</span><span class="p">,</span> <span class="s2">&quot;Checkpoint file not found&quot;</span><span class="p">,</span> <span class="n">checkpoint_path</span>
-<span class="g g-Whitespace">    </span><span class="mi">403</span>             <span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] Checkpoint file not found: &#39;./checkpoints/2022-10-28-20-09-36-IS2RE-example/best_checkpoint.pt&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="test-the-model">
@@ -2819,36 +1066,6 @@ WARNING:root:Model gradient logging to tensorboard not yet supported.
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make predictions on the existing test_loader</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="n">pretrained_energy_trainer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pretrained_trainer</span><span class="o">.</span><span class="n">test_loader</span><span class="p">,</span> <span class="n">results_file</span><span class="o">=</span><span class="s2">&quot;is2re_results&quot;</span><span class="p">,</span> <span class="n">disable_tqdm</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">48</span><span class="o">-</span><span class="mi">705</span><span class="n">daa89b864</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># make predictions on the existing test_loader</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">predictions</span> <span class="o">=</span> <span class="n">pretrained_energy_trainer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pretrained_trainer</span><span class="o">.</span><span class="n">test_loader</span><span class="p">,</span> <span class="n">results_file</span><span class="o">=</span><span class="s2">&quot;is2re_results&quot;</span><span class="p">,</span> <span class="n">disable_tqdm</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="nn">/opt/conda/lib/python3.10/site-packages/torch/autograd/grad_mode.py</span> in <span class="ni">decorate_context</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span>         <span class="k">def</span> <span class="nf">decorate_context</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">():</span>
-<span class="ne">---&gt; </span><span class="mi">27</span>                 <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>         <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">decorate_context</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> 
-
-<span class="nn">/content/ocp/ocpmodels/trainers/energy_trainer.py</span> in <span class="ni">predict</span><span class="nt">(self, loader, per_image, results_file, disable_tqdm)</span>
-<span class="g g-Whitespace">    </span><span class="mi">106</span>         <span class="bp">self</span><span class="p">,</span> <span class="n">loader</span><span class="p">,</span> <span class="n">per_image</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">results_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">disable_tqdm</span><span class="o">=</span><span class="kc">False</span>
-<span class="g g-Whitespace">    </span><span class="mi">107</span>     <span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">108</span>         <span class="n">ensure_fitted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unwrapped_model</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span> 
-<span class="g g-Whitespace">    </span><span class="mi">110</span>         <span class="k">if</span> <span class="n">distutils</span><span class="o">.</span><span class="n">is_master</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">disable_tqdm</span><span class="p">:</span>
-
-<span class="nn">/content/ocp/ocpmodels/modules/scaling/util.py</span> in <span class="ni">ensure_fitted</span><span class="nt">(module, warn)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>             <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">23</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
-<span class="ne">ValueError</span>: Scale factor OutBlock_4_sum (out_blocks.4.scale_sum) is not fitted. Please make sure that you either (1) load a checkpoint with fitted scale factors, (2) explicitly load scale factors using the `model.scale_file` attribute, or (3) fit the scale factors using the `fit.py` script.
 </pre></div>
 </div>
 </div>
