@@ -2,35 +2,7 @@ name: buildenv
 channels:
   - conda-forge
   - defaults
-  - pytorch
-  - nvidia
-  - pyg
 dependencies:
-  - python=3.9
-  - pytorch=1.10
-  - cudatoolkit=11.3
   - jupyter-book
-  - scipy
-  - matplotlib
-  - jupyter-book
+  - python=3.9.*
   - plotly
-  - numba
-  - lmdb 
-  - ase 
-  - pyyaml 
-  - tqdm 
-  - tensorboard 
-  - pandoc 
-  - nbsphinx 
-  - sphinx 
-  - black 
-  - wandb
-  - lmdb 
-  - submitit 
-  - pytest 
-  - python-lmdb 
-  - pyg 
-  - torchvision 
-  - torchaudio 
-  - pymatgen 
-  - sympy

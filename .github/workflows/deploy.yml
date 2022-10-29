@@ -19,11 +19,20 @@ jobs:
       with:
         environment-file: myenv.yml
 
+    - name: Install OCP cpu codebase
+      shell: bash -l {0}
+      run: |
+        wget https://raw.githubusercontent.com/Open-Catalyst-Project/ocp/main/env.common.yml
+        wget https://raw.githubusercontent.com/Open-Catalyst-Project/ocp/main/env.cpu.yml
+        conda-merge env.common.yml env.cpu.yml > env.yml
+        mamba env update --file env.yml
+
     # Install OCP repo
     - name: Install OCP codebase
       shell: bash -l {0}
       run: |
-        pip install --no-deps git+https://github.com/Open-Catalyst-Project/ocp.git
+        git clone git+https://github.com/Open-Catalyst-Project/ocp.git
+        (cd ocp && python setup.py develop)
 
     # Build the book
     - name: Build the book
