@@ -33,7 +33,7 @@ jobs:
     - name: Install OCP codebase
       shell: bash -l {0}
       run: |
-        git clone git+https://github.com/Open-Catalyst-Project/ocp.git
+        git clone https://github.com/Open-Catalyst-Project/ocp.git
         (cd ocp && python setup.py develop)
 
     # Build the book
