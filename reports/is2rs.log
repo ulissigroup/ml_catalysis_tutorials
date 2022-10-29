@@ -1,0 +1,135 @@
+Traceback (most recent call last):
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from ocpmodels.trainers import ForcesTrainer
+from ocpmodels.datasets import TrajectoryLmdbDataset
+from ocpmodels import models
+from ocpmodels.common import logger
+from ocpmodels.common.utils import setup_logging
+setup_logging()
+
+import numpy as np
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mOSError[0m                                   Traceback (most recent call last)
+Cell [0;32mIn [1], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtrainers[39;00m [38;5;28;01mimport[39;00m ForcesTrainer
+[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdatasets[39;00m [38;5;28;01mimport[39;00m TrajectoryLmdbDataset
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m [38;5;28;01mimport[39;00m models
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ocpmodels/trainers/__init__.py:12[0m
+[1;32m      1[0m [38;5;66;03m# Copyright (c) Facebook, Inc. and its affiliates.[39;00m
+[1;32m      2[0m [38;5;66;03m#[39;00m
+[1;32m      3[0m [38;5;66;03m# This source code is licensed under the MIT license found in the[39;00m
+[1;32m      4[0m [38;5;66;03m# LICENSE file in the root directory of this source tree.[39;00m
+[1;32m      6[0m __all__ [38;5;241m=[39m [
+[1;32m      7[0m     [38;5;124m"[39m[38;5;124mBaseTrainer[39m[38;5;124m"[39m,
+[1;32m      8[0m     [38;5;124m"[39m[38;5;124mForcesTrainer[39m[38;5;124m"[39m,
+[1;32m      9[0m     [38;5;124m"[39m[38;5;124mEnergyTrainer[39m[38;5;124m"[39m,
+[1;32m     10[0m ]
+[0;32m---> 12[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mbase_trainer[39;00m [38;5;28;01mimport[39;00m BaseTrainer
+[1;32m     13[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01menergy_trainer[39;00m [38;5;28;01mimport[39;00m EnergyTrainer
+[1;32m     14[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mforces_trainer[39;00m [38;5;28;01mimport[39;00m ForcesTrainer
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ocpmodels/trainers/base_trainer.py:27[0m
+[1;32m     25[0m [38;5;28;01mimport[39;00m [38;5;21;01mocpmodels[39;00m
+[1;32m     26[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcommon[39;00m [38;5;28;01mimport[39;00m distutils, gp_utils
+[0;32m---> 27[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcommon[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdata_parallel[39;00m [38;5;28;01mimport[39;00m (
+[1;32m     28[0m     BalancedBatchSampler,
+[1;32m     29[0m     OCPDataParallel,
+[1;32m     30[0m     ParallelCollater,
+[1;32m     31[0m )
+[1;32m     32[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcommon[39;00m[38;5;21;01m.[39;00m[38;5;21;01mregistry[39;00m [38;5;28;01mimport[39;00m registry
+[1;32m     33[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcommon[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m [38;5;28;01mimport[39;00m load_state_dict, save_checkpoint
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ocpmodels/common/data_parallel.py:20[0m
+[1;32m     17[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdata[39;00m [38;5;28;01mimport[39;00m BatchSampler, DistributedSampler, Sampler
+[1;32m     19[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcommon[39;00m [38;5;28;01mimport[39;00m distutils, gp_utils
+[0;32m---> 20[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdatasets[39;00m [38;5;28;01mimport[39;00m data_list_collater
+[1;32m     23[0m [38;5;28;01mclass[39;00m [38;5;21;01mOCPDataParallel[39;00m(torch[38;5;241m.[39mnn[38;5;241m.[39mDataParallel):
+[1;32m     24[0m     [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m, module, output_device, num_gpus):
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ocpmodels/datasets/__init__.py:6[0m
+[1;32m      1[0m [38;5;66;03m# Copyright (c) Facebook, Inc. and its affiliates.[39;00m
+[1;32m      2[0m [38;5;66;03m#[39;00m
+[1;32m      3[0m [38;5;66;03m# This source code is licensed under the MIT license found in the[39;00m
+[1;32m      4[0m [38;5;66;03m# LICENSE file in the root directory of this source tree.[39;00m
+[0;32m----> 6[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mlmdb_dataset[39;00m [38;5;28;01mimport[39;00m (
+[1;32m      7[0m     LmdbDataset,
+[1;32m      8[0m     SinglePointLmdbDataset,
+[1;32m      9[0m     TrajectoryLmdbDataset,
+[1;32m     10[0m     data_list_collater,
+[1;32m     11[0m )
+[1;32m     12[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01moc22_lmdb_dataset[39;00m [38;5;28;01mimport[39;00m OC22LmdbDataset
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ocpmodels/datasets/lmdb_dataset.py:20[0m
+[1;32m     18[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
+[1;32m     19[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdata[39;00m [38;5;28;01mimport[39;00m Dataset
+[0;32m---> 20[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdata[39;00m [38;5;28;01mimport[39;00m Batch
+[1;32m     22[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcommon[39;00m [38;5;28;01mimport[39;00m distutils
+[1;32m     23[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcommon[39;00m[38;5;21;01m.[39;00m[38;5;21;01mregistry[39;00m [38;5;28;01mimport[39;00m registry
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_geometric/__init__.py:4[0m
+[1;32m      1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtypes[39;00m [38;5;28;01mimport[39;00m ModuleType
+[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mimportlib[39;00m [38;5;28;01mimport[39;00m import_module
+[0;32m----> 4[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdata[39;00m
+[1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mloader[39;00m
+[1;32m      6[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtransforms[39;00m
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_geometric/data/__init__.py:1[0m
+[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mdata[39;00m [38;5;28;01mimport[39;00m Data
+[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mhetero_data[39;00m [38;5;28;01mimport[39;00m HeteroData
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mtemporal[39;00m [38;5;28;01mimport[39;00m TemporalData
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_geometric/data/data.py:9[0m
+[1;32m      7[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
+[1;32m      8[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch[39;00m [38;5;28;01mimport[39;00m Tensor
+[0;32m----> 9[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch_sparse[39;00m [38;5;28;01mimport[39;00m SparseTensor
+[1;32m     11[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdata[39;00m[38;5;21;01m.[39;00m[38;5;21;01mstorage[39;00m [38;5;28;01mimport[39;00m (BaseStorage, EdgeStorage,
+[1;32m     12[0m                                           GlobalStorage, NodeStorage)
+[1;32m     13[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdeprecation[39;00m [38;5;28;01mimport[39;00m deprecated
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_sparse/__init__.py:19[0m
+[1;32m     17[0m spec [38;5;241m=[39m cuda_spec [38;5;129;01mor[39;00m cpu_spec
+[1;32m     18[0m [38;5;28;01mif[39;00m spec [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[0;32m---> 19[0m     [43mtorch[49m[38;5;241;43m.[39;49m[43mops[49m[38;5;241;43m.[39;49m[43mload_library[49m[43m([49m[43mspec[49m[38;5;241;43m.[39;49m[43morigin[49m[43m)[49m
+[1;32m     20[0m [38;5;28;01melse[39;00m:  [38;5;66;03m# pragma: no cover[39;00m
+[1;32m     21[0m     [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mCould not find module [39m[38;5;124m'[39m[38;5;132;01m{[39;00mlibrary[38;5;132;01m}[39;00m[38;5;124m_cpu[39m[38;5;124m'[39m[38;5;124m in [39m[38;5;124m"[39m
+[1;32m     22[0m                       [38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00mosp[38;5;241m.[39mdirname([38;5;18m__file__[39m)[38;5;132;01m}[39;00m[38;5;124m"[39m)
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/_ops.py:110[0m, in [0;36m_Ops.load_library[0;34m(self, path)[0m
+[1;32m    105[0m path [38;5;241m=[39m torch[38;5;241m.[39m_utils_internal[38;5;241m.[39mresolve_library_path(path)
+[1;32m    106[0m [38;5;28;01mwith[39;00m dl_open_guard():
+[1;32m    107[0m     [38;5;66;03m# Import the shared library into the process, thus running its[39;00m
+[1;32m    108[0m     [38;5;66;03m# static (global) initialization code in order to register custom[39;00m
+[1;32m    109[0m     [38;5;66;03m# operators with the JIT.[39;00m
+[0;32m--> 110[0m     [43mctypes[49m[38;5;241;43m.[39;49m[43mCDLL[49m[43m([49m[43mpath[49m[43m)[49m
+[1;32m    111[0m [38;5;28mself[39m[38;5;241m.[39mloaded_libraries[38;5;241m.[39madd(path)
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/ctypes/__init__.py:374[0m, in [0;36mCDLL.__init__[0;34m(self, name, mode, handle, use_errno, use_last_error, winmode)[0m
+[1;32m    371[0m [38;5;28mself[39m[38;5;241m.[39m_FuncPtr [38;5;241m=[39m _FuncPtr
+[1;32m    373[0m [38;5;28;01mif[39;00m handle [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[0;32m--> 374[0m     [38;5;28mself[39m[38;5;241m.[39m_handle [38;5;241m=[39m [43m_dlopen[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_name[49m[43m,[49m[43m [49m[43mmode[49m[43m)[49m
+[1;32m    375[0m [38;5;28;01melse[39;00m:
+[1;32m    376[0m     [38;5;28mself[39m[38;5;241m.[39m_handle [38;5;241m=[39m handle
+
+[0;31mOSError[0m: /home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_sparse/_version_cuda.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
+OSError: /home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_sparse/_version_cuda.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
+

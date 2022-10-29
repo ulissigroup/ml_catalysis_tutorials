@@ -1,0 +1,2610 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Structure to Energy and Forces (S2EF) &#8212; ML for Catalysis Tutorials</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Initial Structure to Relaxed Structure (IS2RS)" href="is2rs.html" />
+    <link rel="prev" title="Tasks" href="ocp_tasks.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ML for Catalysis Tutorials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    ML for catalysis tutorials
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Background
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/background.html">
+   Background
+   <a name="background">
+   </a>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/relaxations.html">
+   Structural relaxations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/extra_resources.html">
+   Additional Resources
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Training ML models for OCP tasks
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ocp_tasks.html">
+   Tasks
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Structure to Energy and Forces (S2EF)
+   <a name="s2ef">
+   </a>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="is2rs.html">
+   Initial Structure to Relaxed Structure (IS2RS)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="is2re.html">
+   Initial Structure to Relaxed Energy (IS2RE)
+   <a name="is2re">
+   </a>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Using OCP with your own datasets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../custom_datasets/data_preprocessing.html">
+   Converting ASE objects to PyG Data objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../custom_datasets/lmdb_dataset_creation.html">
+   Making LMDBs from ASE traj files
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Using pretrained models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained_models.html">
+   Using pre-trained OCP models as ASE calculators
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ulissigroup/ml_catalysis_tutorials/main?urlpath=lab/tree/ml-catalysis-tutorials/notes/model_training/s2ef.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ulissigroup/ml_catalysis_tutorials/blob/main/ml-catalysis-tutorials/notes/model_training/s2ef.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ulissigroup/ml_catalysis_tutorials"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ulissigroup/ml_catalysis_tutorials/issues/new?title=Issue%20on%20page%20%2Fnotes/model_training/s2ef.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notes/model_training/s2ef.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#steps-for-training-an-s2ef-model">
+   Steps for training an S2EF model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset">
+   Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#normalize-data">
+   Normalize data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-config">
+   Define the Config
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-trainer">
+   Create the trainer
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-the-model">
+   Train the model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#validate-the-model">
+   Validate the model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-the-best-checkpoint">
+     Load the best checkpoint
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-on-the-test-set">
+     Run on the test set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Structure to Energy and Forces (S2EF) <a name="s2ef"></a></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#steps-for-training-an-s2ef-model">
+   Steps for training an S2EF model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset">
+   Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#normalize-data">
+   Normalize data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-config">
+   Define the Config
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-trainer">
+   Create the trainer
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-the-model">
+   Train the model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#validate-the-model">
+   Validate the model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-the-best-checkpoint">
+     Load the best checkpoint
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-on-the-test-set">
+     Run on the test set
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="structure-to-energy-and-forces-s2ef-a-name-s2ef-a">
+<h1>Structure to Energy and Forces (S2EF) <a name="s2ef"></a><a class="headerlink" href="#structure-to-energy-and-forces-s2ef-a-name-s2ef-a" title="Permalink to this headline">#</a></h1>
+<p>The S2EF task takes an atomic system as input and predicts the energy of the entire system and forces on each atom. This is our most general task, ultimately serving as a surrogate to DFT. A model that can perform well on this task can accelerate other applications like molecular dynamics and transitions tate calculations.</p>
+<section id="steps-for-training-an-s2ef-model">
+<h2>Steps for training an S2EF model<a class="headerlink" href="#steps-for-training-an-s2ef-model" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>Define or load a configuration (config), which includes the following</p></li>
+</ol>
+<ul class="simple">
+<li><p>task</p></li>
+<li><p>model</p></li>
+<li><p>optimizer</p></li>
+<li><p>dataset</p></li>
+<li><p>trainer</p></li>
+</ul>
+<ol class="simple">
+<li><p>Create a ForcesTrainer object</p></li>
+<li><p>Train the model</p></li>
+<li><p>Validate the model</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For storage and compute reasons we use a very small subset of the OC20 S2EF dataset for this tutorial. Results will be considerably worse than presented in our paper.</p>
+</div>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ocpmodels.trainers</span> <span class="kn">import</span> <span class="n">ForcesTrainer</span>
+<span class="kn">from</span> <span class="nn">ocpmodels.datasets</span> <span class="kn">import</span> <span class="n">TrajectoryLmdbDataset</span>
+<span class="kn">import</span> <span class="nn">ocpmodels.models</span>
+<span class="kn">from</span> <span class="nn">ocpmodels.common</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">ocpmodels.common.utils</span> <span class="kn">import</span> <span class="n">setup_logging</span>
+<span class="n">setup_logging</span><span class="p">()</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">ocpmodels.trainers</span> <span class="kn">import</span> <span class="n">ForcesTrainer</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">ocpmodels.datasets</span> <span class="kn">import</span> <span class="n">TrajectoryLmdbDataset</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">ocpmodels.models</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">ocpmodels</span><span class="o">/</span><span class="n">trainers</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">12</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Copyright (c) Facebook, Inc. and its affiliates.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># This source code is licensed under the MIT license found in the</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># LICENSE file in the root directory of this source tree.</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="s2">&quot;BaseTrainer&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="s2">&quot;ForcesTrainer&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="s2">&quot;EnergyTrainer&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">.base_trainer</span> <span class="kn">import</span> <span class="n">BaseTrainer</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">.energy_trainer</span> <span class="kn">import</span> <span class="n">EnergyTrainer</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span> <span class="nn">.forces_trainer</span> <span class="kn">import</span> <span class="n">ForcesTrainer</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">ocpmodels</span><span class="o">/</span><span class="n">trainers</span><span class="o">/</span><span class="n">base_trainer</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">27</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="kn">import</span> <span class="nn">ocpmodels</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="kn">from</span> <span class="nn">ocpmodels.common</span> <span class="kn">import</span> <span class="n">distutils</span><span class="p">,</span> <span class="n">gp_utils</span>
+<span class="ne">---&gt; </span><span class="mi">27</span> <span class="kn">from</span> <span class="nn">ocpmodels.common.data_parallel</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">BalancedBatchSampler</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="n">OCPDataParallel</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="n">ParallelCollater</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="kn">from</span> <span class="nn">ocpmodels.common.registry</span> <span class="kn">import</span> <span class="n">registry</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="kn">from</span> <span class="nn">ocpmodels.common.utils</span> <span class="kn">import</span> <span class="n">load_state_dict</span><span class="p">,</span> <span class="n">save_checkpoint</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">ocpmodels</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">data_parallel</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">20</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">BatchSampler</span><span class="p">,</span> <span class="n">DistributedSampler</span><span class="p">,</span> <span class="n">Sampler</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span> <span class="nn">ocpmodels.common</span> <span class="kn">import</span> <span class="n">distutils</span><span class="p">,</span> <span class="n">gp_utils</span>
+<span class="ne">---&gt; </span><span class="mi">20</span> <span class="kn">from</span> <span class="nn">ocpmodels.datasets</span> <span class="kn">import</span> <span class="n">data_list_collater</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="k">class</span> <span class="nc">OCPDataParallel</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">DataParallel</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">output_device</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">):</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">ocpmodels</span><span class="o">/</span><span class="n">datasets</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Copyright (c) Facebook, Inc. and its affiliates.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># This source code is licensed under the MIT license found in the</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># LICENSE file in the root directory of this source tree.</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">.lmdb_dataset</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">LmdbDataset</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">SinglePointLmdbDataset</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">TrajectoryLmdbDataset</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">data_list_collater</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">.oc22_lmdb_dataset</span> <span class="kn">import</span> <span class="n">OC22LmdbDataset</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">ocpmodels</span><span class="o">/</span><span class="n">datasets</span><span class="o">/</span><span class="n">lmdb_dataset</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">20</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">import</span> <span class="nn">torch</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="ne">---&gt; </span><span class="mi">20</span> <span class="kn">from</span> <span class="nn">torch_geometric.data</span> <span class="kn">import</span> <span class="n">Batch</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="kn">from</span> <span class="nn">ocpmodels.common</span> <span class="kn">import</span> <span class="n">distutils</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="kn">from</span> <span class="nn">ocpmodels.common.registry</span> <span class="kn">import</span> <span class="n">registry</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_geometric</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">ModuleType</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">torch_geometric.data</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">torch_geometric.loader</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">torch_geometric.transforms</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_geometric</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">Data</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">.hetero_data</span> <span class="kn">import</span> <span class="n">HeteroData</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">.temporal</span> <span class="kn">import</span> <span class="n">TemporalData</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_geometric</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">data</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span> <span class="nn">torch_sparse</span> <span class="kn">import</span> <span class="n">SparseTensor</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">torch_geometric.data.storage</span> <span class="kn">import</span> <span class="p">(</span><span class="n">BaseStorage</span><span class="p">,</span> <span class="n">EdgeStorage</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>                                           <span class="n">GlobalStorage</span><span class="p">,</span> <span class="n">NodeStorage</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">torch_geometric.deprecation</span> <span class="kn">import</span> <span class="n">deprecated</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">micromamba</span><span class="o">-</span><span class="n">root</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">buildenv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch_sparse</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">19</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">spec</span> <span class="o">=</span> <span class="n">cuda_spec</span> <span class="ow">or</span> <span class="n">cpu_spec</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">if</span> <span class="n">spec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">19</span>     <span class="n">torch</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">load_library</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">origin</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find module &#39;</span><span class="si">{</span><span class="n">library</span><span class="si">}</span><span class="s2">_cpu&#39; in &quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>                       <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">osp</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/_ops.py:110,</span> in <span class="ni">_Ops.load_library</span><span class="nt">(self, path)</span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="n">path</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">_utils_internal</span><span class="o">.</span><span class="n">resolve_library_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span> <span class="k">with</span> <span class="n">dl_open_guard</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">107</span>     <span class="c1"># Import the shared library into the process, thus running its</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span>     <span class="c1"># static (global) initialization code in order to register custom</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span>     <span class="c1"># operators with the JIT.</span>
+<span class="ne">--&gt; </span><span class="mi">110</span>     <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaded_libraries</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/ctypes/__init__.py:374,</span> in <span class="ni">CDLL.__init__</span><span class="nt">(self, name, mode, handle, use_errno, use_last_error, winmode)</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span> <span class="bp">self</span><span class="o">.</span><span class="n">_FuncPtr</span> <span class="o">=</span> <span class="n">_FuncPtr</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span> <span class="k">if</span> <span class="n">handle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">374</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">_dlopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">376</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_handle</span> <span class="o">=</span> <span class="n">handle</span>
+
+<span class="ne">OSError</span>: /home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_sparse/_version_cuda.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dataset">
+<h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_src</span> <span class="o">=</span> <span class="s2">&quot;data/s2ef/train_100&quot;</span>
+<span class="n">val_src</span> <span class="o">=</span> <span class="s2">&quot;data/s2ef/val_20&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="normalize-data">
+<h2>Normalize data<a class="headerlink" href="#normalize-data" title="Permalink to this headline">#</a></h2>
+<p>If you wish to normalize the targets we must compute the mean and standard deviation for our energy values. Because forces are physically related by the negative gradient of energy, we use the same multiplicative energy factor for forces.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">TrajectoryLmdbDataset</span><span class="p">({</span><span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="n">train_src</span><span class="p">})</span>
+
+<span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">train_dataset</span><span class="p">:</span>
+  <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
+<span class="n">stdev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/conda/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3326: UserWarning: TrajectoryLmdbDataset is deprecated and will be removed in the future.Please use &#39;LmdbDataset&#39; instead.
+  exec(code_obj, self.user_global_ns, self.user_ns)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-the-config">
+<h2>Define the Config<a class="headerlink" href="#define-the-config" title="Permalink to this headline">#</a></h2>
+<p>For this example, we will explicitly define the config; however, a set of default configs can be found <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp/tree/master/configs">here</a>. Default config yaml files can easily be loaded with the following <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp/blob/aa8e44d50229fce887b3a94a5661c4f85cd73eed/ocpmodels/common/utils.py#L361-L400">utility</a>. Loading a yaml config is preferrable when launching jobs from the command line. We have included our best models’ config files here for reference.</p>
+<p><strong>Note</strong> - we only train for a single epoch with a reduced batch size (GPU memory constraints) for demonstration purposes, modify accordingly for full convergence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Task</span>
+<span class="n">task</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;dataset&#39;</span><span class="p">:</span> <span class="s1">&#39;trajectory_lmdb&#39;</span><span class="p">,</span> <span class="c1"># dataset used for the S2EF task</span>
+    <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Regressing to energies and forces for DFT trajectories from OCP&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;labels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;potential energy&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;grad_input&#39;</span><span class="p">:</span> <span class="s1">&#39;atomic forces&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;train_on_free_atoms&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;eval_on_free_atoms&#39;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
+<span class="c1"># Model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;gemnet_t&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;num_spherical&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">&quot;num_radial&quot;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+    <span class="s2">&quot;num_blocks&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;emb_size_atom&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+    <span class="s2">&quot;emb_size_edge&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+    <span class="s2">&quot;emb_size_trip&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+    <span class="s2">&quot;emb_size_rbf&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="s2">&quot;emb_size_cbf&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="s2">&quot;emb_size_bil_trip&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+    <span class="s2">&quot;num_before_skip&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;num_after_skip&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;num_concat&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;num_atom&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;cutoff&quot;</span><span class="p">:</span> <span class="mf">6.0</span><span class="p">,</span>
+    <span class="s2">&quot;max_neighbors&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="s2">&quot;rbf&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;envelope&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;polynomial&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;exponent&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;cbf&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;spherical_harmonics&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;extensive&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;otf_graph&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;output_init&quot;</span><span class="p">:</span> <span class="s2">&quot;HeOrthogonal&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;activation&quot;</span><span class="p">:</span> <span class="s2">&quot;silu&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scale_file&quot;</span><span class="p">:</span> <span class="s2">&quot;configs/s2ef/all/gemnet/scaling_factors/gemnet-dT.json&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;regress_forces&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;direct_forces&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="c1"># Optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>         <span class="c1"># originally 32</span>
+    <span class="s1">&#39;eval_batch_size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>    <span class="c1"># originally 32</span>
+    <span class="s1">&#39;num_workers&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;lr_initial&#39;</span><span class="p">:</span> <span class="mf">5.e-4</span><span class="p">,</span>
+    <span class="s1">&#39;optimizer&#39;</span><span class="p">:</span> <span class="s1">&#39;AdamW&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;optimizer_params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;amsgrad&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+    <span class="s1">&#39;scheduler&#39;</span><span class="p">:</span> <span class="s2">&quot;ReduceLROnPlateau&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;mode&#39;</span><span class="p">:</span> <span class="s2">&quot;min&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;factor&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+    <span class="s1">&#39;patience&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;max_epochs&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>         <span class="c1"># used for demonstration purposes</span>
+    <span class="s1">&#39;force_coefficient&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s1">&#39;ema_decay&#39;</span><span class="p">:</span> <span class="mf">0.999</span><span class="p">,</span>
+    <span class="s1">&#39;clip_grad_norm&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s1">&#39;loss_energy&#39;</span><span class="p">:</span> <span class="s1">&#39;mae&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;loss_force&#39;</span><span class="p">:</span> <span class="s1">&#39;l2mae&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="c1"># Dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="n">train_src</span><span class="p">,</span>
+   <span class="s1">&#39;normalize_labels&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+   <span class="s2">&quot;target_mean&quot;</span><span class="p">:</span> <span class="n">mean</span><span class="p">,</span>
+   <span class="s2">&quot;target_std&quot;</span><span class="p">:</span> <span class="n">stdev</span><span class="p">,</span>
+   <span class="s2">&quot;grad_target_mean&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+   <span class="s2">&quot;grad_target_std&quot;</span><span class="p">:</span> <span class="n">stdev</span>
+   <span class="p">},</span> <span class="c1"># train set </span>
+  <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="n">val_src</span><span class="p">},</span> <span class="c1"># val set (optional)</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-the-trainer">
+<h2>Create the trainer<a class="headerlink" href="#create-the-trainer" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span> <span class="o">=</span> <span class="n">ForcesTrainer</span><span class="p">(</span>
+    <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="c1"># copied for later use, not necessary in practice.</span>
+    <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;S2EF-example&quot;</span><span class="p">,</span>
+    <span class="n">run_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span> <span class="c1"># directory to save results if is_debug=False. Prediction files are saved here so be careful not to override!</span>
+    <span class="n">is_debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># if True, do not save checkpoint, logs, or results</span>
+    <span class="n">print_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># random seed to use</span>
+    <span class="n">logger</span><span class="o">=</span><span class="s2">&quot;tensorboard&quot;</span><span class="p">,</span> <span class="c1"># logger of choice (tensorboard and wandb supported)</span>
+    <span class="n">local_rank</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">amp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># use PyTorch Automatic Mixed Precision (faster training and less memory usage),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: true
+cmd:
+  checkpoint_dir: ./checkpoints/2022-10-28-20-09-36-S2EF-example
+  commit: 6e750b2
+  identifier: S2EF-example
+  logs_dir: ./logs/tensorboard/2022-10-28-20-09-36-S2EF-example
+  print_every: 5
+  results_dir: ./results/2022-10-28-20-09-36-S2EF-example
+  seed: 0
+  timestamp_id: 2022-10-28-20-09-36-S2EF-example
+dataset:
+  grad_target_mean: 0.0
+  grad_target_std: !!python/object/apply:numpy.core.multiarray.scalar
+  - &amp;id001 !!python/object/apply:numpy.dtype
+    args:
+    - f8
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - &lt;
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    dPVlWhRA+D8=
+  normalize_labels: true
+  src: data/s2ef/train_100
+  target_mean: !!python/object/apply:numpy.core.multiarray.scalar
+  - *id001
+  - !!binary |
+    zSXlDMrm3D8=
+  target_std: !!python/object/apply:numpy.core.multiarray.scalar
+  - *id001
+  - !!binary |
+    dPVlWhRA+D8=
+gpus: 1
+logger: tensorboard
+model: gemnet_t
+model_attributes:
+  activation: silu
+  cbf:
+    name: spherical_harmonics
+  cutoff: 6.0
+  direct_forces: true
+  emb_size_atom: 512
+  emb_size_bil_trip: 64
+  emb_size_cbf: 16
+  emb_size_edge: 512
+  emb_size_rbf: 16
+  emb_size_trip: 64
+  envelope:
+    exponent: 5
+    name: polynomial
+  extensive: true
+  max_neighbors: 50
+  num_after_skip: 2
+  num_atom: 3
+  num_before_skip: 1
+  num_blocks: 3
+  num_concat: 1
+  num_radial: 128
+  num_spherical: 7
+  otf_graph: false
+  output_init: HeOrthogonal
+  rbf:
+    name: gaussian
+  regress_forces: true
+  scale_file: configs/s2ef/all/gemnet/scaling_factors/gemnet-dT.json
+noddp: false
+optim:
+  batch_size: 1
+  clip_grad_norm: 10
+  ema_decay: 0.999
+  eval_batch_size: 1
+  factor: 0.8
+  force_coefficient: 100
+  loss_energy: mae
+  loss_force: l2mae
+  lr_initial: 0.0005
+  max_epochs: 1
+  mode: min
+  num_workers: 2
+  optimizer: AdamW
+  optimizer_params:
+    amsgrad: true
+  patience: 3
+  scheduler: ReduceLROnPlateau
+slurm: {}
+task:
+  dataset: trajectory_lmdb
+  description: Regressing to energies and forces for DFT trajectories from OCP
+  eval_on_free_atoms: true
+  grad_input: atomic forces
+  labels:
+  - potential energy
+  metric: mae
+  train_on_free_atoms: true
+  type: regression
+trainer: forces
+val_dataset:
+  src: data/s2ef/val_20
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:root:Model gradient logging to tensorboard not yet supported.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OCPDataParallel(
+  (module): GemNetT(
+    (radial_basis): RadialBasis(
+      (envelope): PolynomialEnvelope()
+      (rbf): GaussianSmearing()
+    )
+    (cbf_basis3): CircularBasisLayer(
+      (radial_basis): RadialBasis(
+        (envelope): PolynomialEnvelope()
+        (rbf): GaussianSmearing()
+      )
+    )
+    (mlp_rbf3): Dense(
+      (linear): Linear(in_features=128, out_features=16, bias=False)
+      (_activation): Identity()
+    )
+    (mlp_cbf3): EfficientInteractionDownProjection()
+    (mlp_rbf_h): Dense(
+      (linear): Linear(in_features=128, out_features=16, bias=False)
+      (_activation): Identity()
+    )
+    (mlp_rbf_out): Dense(
+      (linear): Linear(in_features=128, out_features=16, bias=False)
+      (_activation): Identity()
+    )
+    (atom_emb): AtomEmbedding(
+      (embeddings): Embedding(83, 512)
+    )
+    (edge_emb): EdgeEmbedding(
+      (dense): Dense(
+        (linear): Linear(in_features=1152, out_features=512, bias=False)
+        (_activation): ScaledSiLU(
+          (_activation): SiLU()
+        )
+      )
+    )
+    (out_blocks): ModuleList(
+      (0): OutputBlock(
+        (dense_rbf): Dense(
+          (linear): Linear(in_features=16, out_features=512, bias=False)
+          (_activation): Identity()
+        )
+        (scale_sum): ScaleFactor()
+        (layers): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (seq_energy): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (out_energy): Dense(
+          (linear): Linear(in_features=512, out_features=1, bias=False)
+          (_activation): Identity()
+        )
+        (scale_rbf_F): ScaleFactor()
+        (seq_forces): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (out_forces): Dense(
+          (linear): Linear(in_features=512, out_features=1, bias=False)
+          (_activation): Identity()
+        )
+        (dense_rbf_F): Dense(
+          (linear): Linear(in_features=16, out_features=512, bias=False)
+          (_activation): Identity()
+        )
+      )
+      (1): OutputBlock(
+        (dense_rbf): Dense(
+          (linear): Linear(in_features=16, out_features=512, bias=False)
+          (_activation): Identity()
+        )
+        (scale_sum): ScaleFactor()
+        (layers): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (seq_energy): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (out_energy): Dense(
+          (linear): Linear(in_features=512, out_features=1, bias=False)
+          (_activation): Identity()
+        )
+        (scale_rbf_F): ScaleFactor()
+        (seq_forces): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (out_forces): Dense(
+          (linear): Linear(in_features=512, out_features=1, bias=False)
+          (_activation): Identity()
+        )
+        (dense_rbf_F): Dense(
+          (linear): Linear(in_features=16, out_features=512, bias=False)
+          (_activation): Identity()
+        )
+      )
+      (2): OutputBlock(
+        (dense_rbf): Dense(
+          (linear): Linear(in_features=16, out_features=512, bias=False)
+          (_activation): Identity()
+        )
+        (scale_sum): ScaleFactor()
+        (layers): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (seq_energy): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (out_energy): Dense(
+          (linear): Linear(in_features=512, out_features=1, bias=False)
+          (_activation): Identity()
+        )
+        (scale_rbf_F): ScaleFactor()
+        (seq_forces): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (out_forces): Dense(
+          (linear): Linear(in_features=512, out_features=1, bias=False)
+          (_activation): Identity()
+        )
+        (dense_rbf_F): Dense(
+          (linear): Linear(in_features=16, out_features=512, bias=False)
+          (_activation): Identity()
+        )
+      )
+      (3): OutputBlock(
+        (dense_rbf): Dense(
+          (linear): Linear(in_features=16, out_features=512, bias=False)
+          (_activation): Identity()
+        )
+        (scale_sum): ScaleFactor()
+        (layers): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (seq_energy): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (out_energy): Dense(
+          (linear): Linear(in_features=512, out_features=1, bias=False)
+          (_activation): Identity()
+        )
+        (scale_rbf_F): ScaleFactor()
+        (seq_forces): ModuleList(
+          (0): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (2): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (3): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (out_forces): Dense(
+          (linear): Linear(in_features=512, out_features=1, bias=False)
+          (_activation): Identity()
+        )
+        (dense_rbf_F): Dense(
+          (linear): Linear(in_features=16, out_features=512, bias=False)
+          (_activation): Identity()
+        )
+      )
+    )
+    (int_blocks): ModuleList(
+      (0): InteractionBlockTripletsOnly(
+        (dense_ca): Dense(
+          (linear): Linear(in_features=512, out_features=512, bias=False)
+          (_activation): ScaledSiLU(
+            (_activation): SiLU()
+          )
+        )
+        (trip_interaction): TripletInteraction(
+          (dense_ba): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (mlp_rbf): Dense(
+            (linear): Linear(in_features=16, out_features=512, bias=False)
+            (_activation): Identity()
+          )
+          (scale_rbf): ScaleFactor()
+          (mlp_cbf): EfficientInteractionBilinear()
+          (scale_cbf_sum): ScaleFactor()
+          (down_projection): Dense(
+            (linear): Linear(in_features=512, out_features=64, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (up_projection_ca): Dense(
+            (linear): Linear(in_features=64, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (up_projection_ac): Dense(
+            (linear): Linear(in_features=64, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+        )
+        (layers_before_skip): ModuleList(
+          (0): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (layers_after_skip): ModuleList(
+          (0): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (atom_update): AtomUpdateBlock(
+          (dense_rbf): Dense(
+            (linear): Linear(in_features=16, out_features=512, bias=False)
+            (_activation): Identity()
+          )
+          (scale_sum): ScaleFactor()
+          (layers): ModuleList(
+            (0): Dense(
+              (linear): Linear(in_features=512, out_features=512, bias=False)
+              (_activation): ScaledSiLU(
+                (_activation): SiLU()
+              )
+            )
+            (1): ResidualLayer(
+              (dense_mlp): Sequential(
+                (0): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+                (1): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+              )
+            )
+            (2): ResidualLayer(
+              (dense_mlp): Sequential(
+                (0): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+                (1): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+              )
+            )
+            (3): ResidualLayer(
+              (dense_mlp): Sequential(
+                (0): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+                (1): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+              )
+            )
+          )
+        )
+        (concat_layer): EdgeEmbedding(
+          (dense): Dense(
+            (linear): Linear(in_features=1536, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+        )
+        (residual_m): ModuleList(
+          (0): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+      )
+      (1): InteractionBlockTripletsOnly(
+        (dense_ca): Dense(
+          (linear): Linear(in_features=512, out_features=512, bias=False)
+          (_activation): ScaledSiLU(
+            (_activation): SiLU()
+          )
+        )
+        (trip_interaction): TripletInteraction(
+          (dense_ba): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (mlp_rbf): Dense(
+            (linear): Linear(in_features=16, out_features=512, bias=False)
+            (_activation): Identity()
+          )
+          (scale_rbf): ScaleFactor()
+          (mlp_cbf): EfficientInteractionBilinear()
+          (scale_cbf_sum): ScaleFactor()
+          (down_projection): Dense(
+            (linear): Linear(in_features=512, out_features=64, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (up_projection_ca): Dense(
+            (linear): Linear(in_features=64, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (up_projection_ac): Dense(
+            (linear): Linear(in_features=64, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+        )
+        (layers_before_skip): ModuleList(
+          (0): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (layers_after_skip): ModuleList(
+          (0): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (atom_update): AtomUpdateBlock(
+          (dense_rbf): Dense(
+            (linear): Linear(in_features=16, out_features=512, bias=False)
+            (_activation): Identity()
+          )
+          (scale_sum): ScaleFactor()
+          (layers): ModuleList(
+            (0): Dense(
+              (linear): Linear(in_features=512, out_features=512, bias=False)
+              (_activation): ScaledSiLU(
+                (_activation): SiLU()
+              )
+            )
+            (1): ResidualLayer(
+              (dense_mlp): Sequential(
+                (0): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+                (1): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+              )
+            )
+            (2): ResidualLayer(
+              (dense_mlp): Sequential(
+                (0): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+                (1): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+              )
+            )
+            (3): ResidualLayer(
+              (dense_mlp): Sequential(
+                (0): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+                (1): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+              )
+            )
+          )
+        )
+        (concat_layer): EdgeEmbedding(
+          (dense): Dense(
+            (linear): Linear(in_features=1536, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+        )
+        (residual_m): ModuleList(
+          (0): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+      )
+      (2): InteractionBlockTripletsOnly(
+        (dense_ca): Dense(
+          (linear): Linear(in_features=512, out_features=512, bias=False)
+          (_activation): ScaledSiLU(
+            (_activation): SiLU()
+          )
+        )
+        (trip_interaction): TripletInteraction(
+          (dense_ba): Dense(
+            (linear): Linear(in_features=512, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (mlp_rbf): Dense(
+            (linear): Linear(in_features=16, out_features=512, bias=False)
+            (_activation): Identity()
+          )
+          (scale_rbf): ScaleFactor()
+          (mlp_cbf): EfficientInteractionBilinear()
+          (scale_cbf_sum): ScaleFactor()
+          (down_projection): Dense(
+            (linear): Linear(in_features=512, out_features=64, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (up_projection_ca): Dense(
+            (linear): Linear(in_features=64, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+          (up_projection_ac): Dense(
+            (linear): Linear(in_features=64, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+        )
+        (layers_before_skip): ModuleList(
+          (0): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (layers_after_skip): ModuleList(
+          (0): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+          (1): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+        (atom_update): AtomUpdateBlock(
+          (dense_rbf): Dense(
+            (linear): Linear(in_features=16, out_features=512, bias=False)
+            (_activation): Identity()
+          )
+          (scale_sum): ScaleFactor()
+          (layers): ModuleList(
+            (0): Dense(
+              (linear): Linear(in_features=512, out_features=512, bias=False)
+              (_activation): ScaledSiLU(
+                (_activation): SiLU()
+              )
+            )
+            (1): ResidualLayer(
+              (dense_mlp): Sequential(
+                (0): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+                (1): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+              )
+            )
+            (2): ResidualLayer(
+              (dense_mlp): Sequential(
+                (0): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+                (1): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+              )
+            )
+            (3): ResidualLayer(
+              (dense_mlp): Sequential(
+                (0): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+                (1): Dense(
+                  (linear): Linear(in_features=512, out_features=512, bias=False)
+                  (_activation): ScaledSiLU(
+                    (_activation): SiLU()
+                  )
+                )
+              )
+            )
+          )
+        )
+        (concat_layer): EdgeEmbedding(
+          (dense): Dense(
+            (linear): Linear(in_features=1536, out_features=512, bias=False)
+            (_activation): ScaledSiLU(
+              (_activation): SiLU()
+            )
+          )
+        )
+        (residual_m): ModuleList(
+          (0): ResidualLayer(
+            (dense_mlp): Sequential(
+              (0): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+              (1): Dense(
+                (linear): Linear(in_features=512, out_features=512, bias=False)
+                (_activation): ScaledSiLU(
+                  (_activation): SiLU()
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-the-model">
+<h2>Train the model<a class="headerlink" href="#train-the-model" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/content/ocp/ocpmodels/models/gemnet/gemnet.py:373: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the &#39;trunc&#39; function NOT &#39;floor&#39;). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode=&#39;trunc&#39;), or for actual floor division, use torch.div(a, b, rounding_mode=&#39;floor&#39;).
+  neighbors_new // 2,
+/content/ocp/ocpmodels/models/gemnet/gemnet.py:467: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the &#39;trunc&#39; function NOT &#39;floor&#39;). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode=&#39;trunc&#39;), or for actual floor division, use torch.div(a, b, rounding_mode=&#39;floor&#39;).
+  block_sizes = neighbors // 2
+device 0: 100%|██████████| 20/20 [00:01&lt;00:00, 14.34it/s]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="validate-the-model">
+<h2>Validate the model<a class="headerlink" href="#validate-the-model" title="Permalink to this headline">#</a></h2>
+<section id="load-the-best-checkpoint">
+<h3>Load the best checkpoint<a class="headerlink" href="#load-the-best-checkpoint" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">checkpoints</span></code> directory contains two checkpoint files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">best_checkpoint.pt</span></code> - Model parameters corresponding to the best val performance during training. Used for predictions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">checkpoint.pt</span></code> - Model parameters and optimizer settings for the latest checkpoint. Used to continue training.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The `best_checpoint.pt` file contains the checkpoint with the best val performance</span>
+<span class="n">checkpoint_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">trainer</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;cmd&quot;</span><span class="p">][</span><span class="s2">&quot;checkpoint_dir&quot;</span><span class="p">],</span> <span class="s2">&quot;best_checkpoint.pt&quot;</span><span class="p">)</span>
+<span class="n">checkpoint_path</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;./checkpoints/2022-10-28-20-09-36-S2EF-example/best_checkpoint.pt&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Append the dataset with the test set. We use the same val set for demonstration.</span>
+
+<span class="c1"># Dataset</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+  <span class="p">{</span><span class="s1">&#39;src&#39;</span><span class="p">:</span> <span class="n">val_src</span><span class="p">},</span> <span class="c1"># test set (optional)</span>
+<span class="p">)</span>
+<span class="n">dataset</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;src&#39;: &#39;data/s2ef/train_100&#39;,
+  &#39;normalize_labels&#39;: True,
+  &#39;target_mean&#39;: 0.45158625849998374,
+  &#39;target_std&#39;: 1.5156444102461508,
+  &#39;grad_target_mean&#39;: 0.0,
+  &#39;grad_target_std&#39;: 1.5156444102461508},
+ {&#39;src&#39;: &#39;data/s2ef/val_20&#39;},
+ {&#39;src&#39;: &#39;data/s2ef/val_20&#39;}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pretrained_trainer</span> <span class="o">=</span> <span class="n">ForcesTrainer</span><span class="p">(</span>
+    <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;S2EF-val-example&quot;</span><span class="p">,</span>
+    <span class="n">run_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span> <span class="c1"># directory to save results if is_debug=False. Prediction files are saved here so be careful not to override!</span>
+    <span class="n">is_debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># if True, do not save checkpoint, logs, or results</span>
+    <span class="n">print_every</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># random seed to use</span>
+    <span class="n">logger</span><span class="o">=</span><span class="s2">&quot;tensorboard&quot;</span><span class="p">,</span> <span class="c1"># logger of choice (tensorboard and wandb supported)</span>
+    <span class="n">local_rank</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">amp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># use PyTorch Automatic Mixed Precision (faster training and less memory usage)</span>
+<span class="p">)</span>
+
+<span class="n">pretrained_trainer</span><span class="o">.</span><span class="n">load_checkpoint</span><span class="p">(</span><span class="n">checkpoint_path</span><span class="o">=</span><span class="n">checkpoint_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: true
+cmd:
+  checkpoint_dir: ./checkpoints/2022-10-28-20-09-36-S2EF-val-example
+  commit: 6e750b2
+  identifier: S2EF-val-example
+  logs_dir: ./logs/tensorboard/2022-10-28-20-09-36-S2EF-val-example
+  print_every: 10
+  results_dir: ./results/2022-10-28-20-09-36-S2EF-val-example
+  seed: 0
+  timestamp_id: 2022-10-28-20-09-36-S2EF-val-example
+dataset:
+  grad_target_mean: 0.0
+  grad_target_std: !!python/object/apply:numpy.core.multiarray.scalar
+  - &amp;id001 !!python/object/apply:numpy.dtype
+    args:
+    - f8
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - &lt;
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    dPVlWhRA+D8=
+  normalize_labels: true
+  src: data/s2ef/train_100
+  target_mean: !!python/object/apply:numpy.core.multiarray.scalar
+  - *id001
+  - !!binary |
+    zSXlDMrm3D8=
+  target_std: !!python/object/apply:numpy.core.multiarray.scalar
+  - *id001
+  - !!binary |
+    dPVlWhRA+D8=
+gpus: 1
+logger: tensorboard
+model: gemnet_t
+model_attributes:
+  activation: silu
+  cbf:
+    name: spherical_harmonics
+  cutoff: 6.0
+  direct_forces: true
+  emb_size_atom: 512
+  emb_size_bil_trip: 64
+  emb_size_cbf: 16
+  emb_size_edge: 512
+  emb_size_rbf: 16
+  emb_size_trip: 64
+  envelope:
+    exponent: 5
+    name: polynomial
+  extensive: true
+  max_neighbors: 50
+  num_after_skip: 2
+  num_atom: 3
+  num_before_skip: 1
+  num_blocks: 3
+  num_concat: 1
+  num_radial: 128
+  num_spherical: 7
+  otf_graph: false
+  output_init: HeOrthogonal
+  rbf:
+    name: gaussian
+  regress_forces: true
+  scale_file: configs/s2ef/all/gemnet/scaling_factors/gemnet-dT.json
+noddp: false
+optim:
+  batch_size: 1
+  clip_grad_norm: 10
+  ema_decay: 0.999
+  eval_batch_size: 1
+  factor: 0.8
+  force_coefficient: 100
+  loss_energy: mae
+  loss_force: l2mae
+  lr_initial: 0.0005
+  max_epochs: 1
+  mode: min
+  num_workers: 2
+  optimizer: AdamW
+  optimizer_params:
+    amsgrad: true
+  patience: 3
+  scheduler: ReduceLROnPlateau
+slurm: {}
+task:
+  dataset: trajectory_lmdb
+  description: Regressing to energies and forces for DFT trajectories from OCP
+  eval_on_free_atoms: true
+  grad_input: atomic forces
+  labels:
+  - potential energy
+  metric: mae
+  train_on_free_atoms: true
+  type: regression
+test_dataset:
+  src: data/s2ef/val_20
+trainer: forces
+val_dataset:
+  src: data/s2ef/val_20
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:root:Model gradient logging to tensorboard not yet supported.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-on-the-test-set">
+<h3>Run on the test set<a class="headerlink" href="#run-on-the-test-set" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make predictions on the existing test_loader</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">pretrained_trainer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pretrained_trainer</span><span class="o">.</span><span class="n">test_loader</span><span class="p">,</span> <span class="n">results_file</span><span class="o">=</span><span class="s2">&quot;s2ef_results&quot;</span><span class="p">,</span> <span class="n">disable_tqdm</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>device 0:   0%|          | 0/20 [00:00&lt;?, ?it/s]/content/ocp/ocpmodels/models/gemnet/gemnet.py:373: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the &#39;trunc&#39; function NOT &#39;floor&#39;). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode=&#39;trunc&#39;), or for actual floor division, use torch.div(a, b, rounding_mode=&#39;floor&#39;).
+  neighbors_new // 2,
+/content/ocp/ocpmodels/models/gemnet/gemnet.py:467: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the &#39;trunc&#39; function NOT &#39;floor&#39;). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode=&#39;trunc&#39;), or for actual floor division, use torch.div(a, b, rounding_mode=&#39;floor&#39;).
+  block_sizes = neighbors // 2
+device 0: 100%|██████████| 20/20 [00:01&lt;00:00, 14.23it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">energies</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span>
+<span class="n">forces</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;forces&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notes/model_training"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="ocp_tasks.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Tasks</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="is2rs.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Initial Structure to Relaxed Structure (IS2RS)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Zachary Ulissi<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
