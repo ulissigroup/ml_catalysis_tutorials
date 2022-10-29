@@ -2,6 +2,13 @@
 
 This website contains some educational materials to demonstrate how to use Open Catalyst Project open source ML models for catalysis.
 
+# Target Audience
+
+This tutorial is designed for those interested in application of ML towards climate change. More specifically, those interested in material/catalyst discovery and Graph Nueral Networks (GNNs) will find lots of benefit here. Little to no domain chemistry knowledge is necessary as it will be covered in the tutorial. Experience with GNNs is a plus but not required. 
+
+We have designed this notebook in a manner to get the ML communnity up to speed as far as background knowledge is concerned, and the catalysis community to better understand how to use the OCP's state-of-the-art models in their everyday workflows.
+
+
 ## Other authors / credits
 
 Many of the examples were adapted from the very helpful tutorials in the main OCP repository, which was released under the MIT license:

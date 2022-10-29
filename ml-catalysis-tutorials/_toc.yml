@@ -6,7 +6,12 @@ root: intro
 parts:
 - caption: Background
   chapters:
-  - file: notes/background
-- caption: Pretrained-Models
+  - file: notes/background/background
+  - file: notes/background/relaxations
+- caption: Using OCP with your own datasets
+  chapters:
+  - file: notes/custom_datasets/data_preprocessing
+  - file: notes/custom_datasets/lmdb_dataset_creation
+- caption: Using Pretrained Models
   chapters:
   - file: notes/pretrained_models
