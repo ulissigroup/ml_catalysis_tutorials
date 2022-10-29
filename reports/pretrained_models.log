@@ -1,19 +1,19 @@
 Traceback (most recent call last):
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
     return future.result()
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -56,7 +56,7 @@ Cell [0;32mIn [2], line 1[0m
 [1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mase[39;00m[38;5;21;01m.[39;00m[38;5;21;01mio[39;00m
 [1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mase[39;00m[38;5;21;01m.[39;00m[38;5;21;01moptimize[39;00m [38;5;28;01mimport[39;00m BFGS
 
-File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/ocpmodels/common/relaxation/ase_utils.py:24[0m
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ocpmodels/common/relaxation/ase_utils.py:24[0m
 [1;32m     21[0m [38;5;28;01mfrom[39;00m [38;5;21;01mase[39;00m[38;5;21;01m.[39;00m[38;5;21;01mconstraints[39;00m [38;5;28;01mimport[39;00m FixAtoms
 [1;32m     23[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcommon[39;00m[38;5;21;01m.[39;00m[38;5;21;01mregistry[39;00m [38;5;28;01mimport[39;00m registry
 [0;32m---> 24[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcommon[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutils[39;00m [38;5;28;01mimport[39;00m (
@@ -67,26 +67,26 @@ File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/ocpmode
 [1;32m     29[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdatasets[39;00m [38;5;28;01mimport[39;00m data_list_collater
 [1;32m     30[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpreprocessing[39;00m [38;5;28;01mimport[39;00m AtomsToGraphs
 
-File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/ocpmodels/common/utils.py:30[0m
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ocpmodels/common/utils.py:30[0m
 [1;32m     28[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
 [1;32m     29[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnn[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnn[39;00m
 [0;32m---> 30[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch_geometric[39;00m
 [1;32m     31[0m [38;5;28;01mimport[39;00m [38;5;21;01myaml[39;00m
 [1;32m     32[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackends[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbackend_agg[39;00m [38;5;28;01mimport[39;00m FigureCanvasAgg [38;5;28;01mas[39;00m FigureCanvas
 
-File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/torch_geometric/__init__.py:4[0m
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_geometric/__init__.py:4[0m
 [1;32m      1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtypes[39;00m [38;5;28;01mimport[39;00m ModuleType
 [1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mimportlib[39;00m [38;5;28;01mimport[39;00m import_module
 [0;32m----> 4[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdata[39;00m
 [1;32m      5[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mloader[39;00m
 [1;32m      6[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch_geometric[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtransforms[39;00m
 
-File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/torch_geometric/data/__init__.py:1[0m
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_geometric/data/__init__.py:1[0m
 [0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mdata[39;00m [38;5;28;01mimport[39;00m Data
 [1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mhetero_data[39;00m [38;5;28;01mimport[39;00m HeteroData
 [1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mtemporal[39;00m [38;5;28;01mimport[39;00m TemporalData
 
-File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/torch_geometric/data/data.py:20[0m
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_geometric/data/data.py:20[0m
 [1;32m     18[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
 [1;32m     19[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch[39;00m [38;5;28;01mimport[39;00m Tensor
 [0;32m---> 20[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtorch_sparse[39;00m [38;5;28;01mimport[39;00m SparseTensor
@@ -103,7 +103,7 @@ File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/torch_g
 [1;32m     34[0m     edge_tensor_type_to_adj_type,
 [1;32m     35[0m )
 
-File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/torch_sparse/__init__.py:19[0m
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_sparse/__init__.py:19[0m
 [1;32m     17[0m spec [38;5;241m=[39m cuda_spec [38;5;129;01mor[39;00m cpu_spec
 [1;32m     18[0m [38;5;28;01mif[39;00m spec [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
 [0;32m---> 19[0m     [43mtorch[49m[38;5;241;43m.[39;49m[43mops[49m[38;5;241;43m.[39;49m[43mload_library[49m[43m([49m[43mspec[49m[38;5;241;43m.[39;49m[43morigin[49m[43m)[49m
@@ -111,7 +111,7 @@ File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/torch_s
 [1;32m     21[0m     [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mCould not find module [39m[38;5;124m'[39m[38;5;132;01m{[39;00mlibrary[38;5;132;01m}[39;00m[38;5;124m_cpu[39m[38;5;124m'[39m[38;5;124m in [39m[38;5;124m"[39m
 [1;32m     22[0m                       [38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00mosp[38;5;241m.[39mdirname([38;5;18m__file__[39m)[38;5;132;01m}[39;00m[38;5;124m"[39m)
 
-File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/torch/_ops.py:220[0m, in [0;36m_Ops.load_library[0;34m(self, path)[0m
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/_ops.py:220[0m, in [0;36m_Ops.load_library[0;34m(self, path)[0m
 [1;32m    215[0m path [38;5;241m=[39m torch[38;5;241m.[39m_utils_internal[38;5;241m.[39mresolve_library_path(path)
 [1;32m    216[0m [38;5;28;01mwith[39;00m dl_open_guard():
 [1;32m    217[0m     [38;5;66;03m# Import the shared library into the process, thus running its[39;00m
@@ -120,13 +120,13 @@ File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/site-packages/torch/_
 [0;32m--> 220[0m     [43mctypes[49m[38;5;241;43m.[39;49m[43mCDLL[49m[43m([49m[43mpath[49m[43m)[49m
 [1;32m    221[0m [38;5;28mself[39m[38;5;241m.[39mloaded_libraries[38;5;241m.[39madd(path)
 
-File [0;32m~/micromamba-root/envs/buildenv/lib/python3.10/ctypes/__init__.py:374[0m, in [0;36mCDLL.__init__[0;34m(self, name, mode, handle, use_errno, use_last_error, winmode)[0m
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/ctypes/__init__.py:374[0m, in [0;36mCDLL.__init__[0;34m(self, name, mode, handle, use_errno, use_last_error, winmode)[0m
 [1;32m    371[0m [38;5;28mself[39m[38;5;241m.[39m_FuncPtr [38;5;241m=[39m _FuncPtr
 [1;32m    373[0m [38;5;28;01mif[39;00m handle [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
 [0;32m--> 374[0m     [38;5;28mself[39m[38;5;241m.[39m_handle [38;5;241m=[39m [43m_dlopen[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_name[49m[43m,[49m[43m [49m[43mmode[49m[43m)[49m
 [1;32m    375[0m [38;5;28;01melse[39;00m:
 [1;32m    376[0m     [38;5;28mself[39m[38;5;241m.[39m_handle [38;5;241m=[39m handle
 
-[0;31mOSError[0m: /home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/torch_sparse/_version_cuda.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
-OSError: /home/runner/micromamba-root/envs/buildenv/lib/python3.10/site-packages/torch_sparse/_version_cuda.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
+[0;31mOSError[0m: /home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_sparse/_version_cuda.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
+OSError: /home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_sparse/_version_cuda.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSs
 
