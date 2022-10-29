@@ -492,12 +492,23 @@ title="Print to PDF"
 <p>A structural relaxation or structure optimization is the process of iteratively updating atom positions to find the atom positions that minimize the energy of the structure. Standard optimization methods are used in structural relaxations — below we use the Limited-Memory Broyden–Fletcher–Goldfarb–Shanno (LBFGS) algorithm. The step number, time, energy, and force max are printed at each optimization step. Each step is considered one example because it provides all the information we need to train models for the S2EF task and the entire set of steps is referred to as a trajectory. Visualizing intermediate structures or viewing the entire trajectory can be illuminating to understand what is physically happening and to look for problems in the simulation, especially when we run ML-driven relaxations. Common problems one may look out for - atoms excessively overlapping/colliding with each other and atoms flying off into random directions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell sets up and runs a structural relaxation </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ase.io</span>
+<span class="kn">from</span> <span class="nn">ase</span> <span class="kn">import</span> <span class="n">Atoms</span>
+<span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">add_adsorbate</span><span class="p">,</span> <span class="n">fcc100</span><span class="p">,</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">ase.calculators.emt</span> <span class="kn">import</span> <span class="n">EMT</span>
+<span class="kn">from</span> <span class="nn">ase.constraints</span> <span class="kn">import</span> <span class="n">FixAtoms</span>
+<span class="kn">from</span> <span class="nn">ase.io</span> <span class="kn">import</span> <span class="n">extxyz</span>
+<span class="kn">from</span> <span class="nn">ase.io.trajectory</span> <span class="kn">import</span> <span class="n">Trajectory</span>
+<span class="kn">from</span> <span class="nn">ase.optimize</span> <span class="kn">import</span> <span class="n">LBFGS</span>
+<span class="kn">from</span> <span class="nn">ase.visualize.plot</span> <span class="kn">import</span> <span class="n">plot_atoms</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1"># This cell sets up and runs a structural relaxation</span>
 <span class="c1"># of a propane (C3H8) adsorbate on a copper (Cu) surface</span>
 
 <span class="n">adslab</span> <span class="o">=</span> <span class="n">fcc100</span><span class="p">(</span><span class="s2">&quot;Cu&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">adsorbate</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">(</span><span class="s2">&quot;C3H8&quot;</span><span class="p">)</span>
-<span class="n">add_adsorbate</span><span class="p">(</span><span class="n">adslab</span><span class="p">,</span> <span class="n">adsorbate</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1"># adslab = adsorbate + slab</span>
+<span class="n">add_adsorbate</span><span class="p">(</span><span class="n">adslab</span><span class="p">,</span> <span class="n">adsorbate</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># adslab = adsorbate + slab</span>
 
 <span class="c1"># tag all slab atoms below surface as 0, surface as 1, adsorbate as 2</span>
 <span class="n">tags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adslab</span><span class="p">))</span>
@@ -506,19 +517,19 @@ title="Print to PDF"
 
 <span class="n">adslab</span><span class="o">.</span><span class="n">set_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
 
-<span class="c1"># Fixed atoms are prevented from moving during a structure relaxation. </span>
-<span class="c1"># We fix all slab atoms beneath the surface. </span>
-<span class="n">cons</span><span class="o">=</span> <span class="n">FixAtoms</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">adslab</span> <span class="k">if</span> <span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)])</span>
+<span class="c1"># Fixed atoms are prevented from moving during a structure relaxation.</span>
+<span class="c1"># We fix all slab atoms beneath the surface.</span>
+<span class="n">cons</span> <span class="o">=</span> <span class="n">FixAtoms</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">adslab</span> <span class="k">if</span> <span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)])</span>
 <span class="n">adslab</span><span class="o">.</span><span class="n">set_constraint</span><span class="p">(</span><span class="n">cons</span><span class="p">)</span>
 <span class="n">adslab</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">vacuum</span><span class="o">=</span><span class="mf">13.0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">adslab</span><span class="o">.</span><span class="n">set_pbc</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">adslab</span><span class="o">.</span><span class="n">set_calculator</span><span class="p">(</span><span class="n">EMT</span><span class="p">())</span>
 
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># Define structure optimizer - LBFGS. Run for 100 steps, </span>
+<span class="c1"># Define structure optimizer - LBFGS. Run for 100 steps,</span>
 <span class="c1"># or if the max force on all atoms (fmax) is below 0 ev/A.</span>
-<span class="c1"># fmax is typically set to 0.01-0.05 eV/A, </span>
+<span class="c1"># fmax is typically set to 0.01-0.05 eV/A,</span>
 <span class="c1"># for this demo however we run for the full 100 steps.</span>
 
 <span class="n">dyn</span> <span class="o">=</span> <span class="n">LBFGS</span><span class="p">(</span><span class="n">adslab</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s2">&quot;data/toy_c3h8_relax.traj&quot;</span><span class="p">)</span>
@@ -527,8 +538,8 @@ title="Print to PDF"
 <span class="n">traj</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;data/toy_c3h8_relax.traj&quot;</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
 
 <span class="c1"># convert traj format to extxyz format (used by OC20 dataset)</span>
-<span class="n">columns</span> <span class="o">=</span> <span class="p">([</span><span class="s1">&#39;symbols&#39;</span><span class="p">,</span><span class="s1">&#39;positions&#39;</span><span class="p">,</span> <span class="s1">&#39;move_mask&#39;</span><span class="p">,</span> <span class="s1">&#39;tags&#39;</span><span class="p">])</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data/toy_c3h8_relax.extxyz&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;symbols&quot;</span><span class="p">,</span> <span class="s2">&quot;positions&quot;</span><span class="p">,</span> <span class="s2">&quot;move_mask&quot;</span><span class="p">,</span> <span class="s2">&quot;tags&quot;</span><span class="p">]</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/toy_c3h8_relax.extxyz&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">extxyz</span><span class="o">.</span><span class="n">write_xyz</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">traj</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -536,14 +547,14 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># This cell sets up and runs a structural relaxation </span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># of a propane (C3H8) adsorbate on a copper (Cu) surface</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">adslab</span> <span class="o">=</span> <span class="n">fcc100</span><span class="p">(</span><span class="s2">&quot;Cu&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">adsorbate</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">(</span><span class="s2">&quot;C3H8&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">add_adsorbate</span><span class="p">(</span><span class="n">adslab</span><span class="p">,</span> <span class="n">adsorbate</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1"># adslab = adsorbate + slab</span>
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">20</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">add_adsorbate</span><span class="p">(</span><span class="n">adslab</span><span class="p">,</span> <span class="n">adsorbate</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># adslab = adsorbate + slab</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1"># tag all slab atoms below surface as 0, surface as 1, adsorbate as 2</span>
+<span class="ne">---&gt; </span><span class="mi">20</span> <span class="n">tags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adslab</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">tags</span><span class="p">[</span><span class="mi">18</span><span class="p">:</span><span class="mi">27</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">tags</span><span class="p">[</span><span class="mi">27</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="ne">NameError</span>: name &#39;fcc100&#39; is not defined
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -567,22 +578,13 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;initial&#39;</span><span class="p">,</span> <span class="s1">&#39;middle&#39;</span><span class="p">,</span> <span class="s1">&#39;final&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">,</span> <span class="s2">&quot;middle&quot;</span><span class="p">,</span> <span class="s2">&quot;final&quot;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
-                              <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
-                              <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> 
-                              <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">))</span>
-<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="mi">50</span><span class="p">],</span> 
-                              <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
-                              <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> 
-                              <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">))</span>
-<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> 
-                              <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> 
-                              <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> 
-                              <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">))</span>
+<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">))</span>
+<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="mi">50</span><span class="p">],</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">))</span>
+<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -647,23 +649,20 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;initial&#39;</span><span class="p">,</span> <span class="s1">&#39;middle&#39;</span><span class="p">,</span> <span class="s1">&#39;final&#39;</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;initial&quot;</span><span class="p">,</span> <span class="s2">&quot;middle&quot;</span><span class="p">,</span> <span class="s2">&quot;final&quot;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
-<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> 
-                              <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
-                              <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> 
-                              <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">))</span>
-<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> 
-                              <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
-                              <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> 
-                              <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">))</span>
-<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span><span class="n">traj</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> 
-                              <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> 
-                              <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> 
-                              <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">))</span>
+<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span>
+    <span class="n">traj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span>
+    <span class="n">traj</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">ase</span><span class="o">.</span><span class="n">visualize</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">plot_atoms</span><span class="p">(</span>
+    <span class="n">traj</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>

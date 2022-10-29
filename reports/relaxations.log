@@ -17,12 +17,23 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# This cell sets up and runs a structural relaxation 
+import ase.io
+from ase import Atoms
+from ase.build import add_adsorbate, fcc100, molecule
+from ase.calculators.emt import EMT
+from ase.constraints import FixAtoms
+from ase.io import extxyz
+from ase.io.trajectory import Trajectory
+from ase.optimize import LBFGS
+from ase.visualize.plot import plot_atoms
+from IPython.display import Image
+
+# This cell sets up and runs a structural relaxation
 # of a propane (C3H8) adsorbate on a copper (Cu) surface
 
 adslab = fcc100("Cu", size=(3, 3, 3))
 adsorbate = molecule("C3H8")
-add_adsorbate(adslab, adsorbate, 3, offset=(1, 1)) # adslab = adsorbate + slab
+add_adsorbate(adslab, adsorbate, 3, offset=(1, 1))  # adslab = adsorbate + slab
 
 # tag all slab atoms below surface as 0, surface as 1, adsorbate as 2
 tags = np.zeros(len(adslab))
@@ -31,19 +42,19 @@ tags[27:] = 2
 
 adslab.set_tags(tags)
 
-# Fixed atoms are prevented from moving during a structure relaxation. 
-# We fix all slab atoms beneath the surface. 
-cons= FixAtoms(indices=[atom.index for atom in adslab if (atom.tag == 0)])
+# Fixed atoms are prevented from moving during a structure relaxation.
+# We fix all slab atoms beneath the surface.
+cons = FixAtoms(indices=[atom.index for atom in adslab if (atom.tag == 0)])
 adslab.set_constraint(cons)
 adslab.center(vacuum=13.0, axis=2)
 adslab.set_pbc(True)
 adslab.set_calculator(EMT())
 
-os.makedirs('data', exist_ok=True)
+os.makedirs("data", exist_ok=True)
 
-# Define structure optimizer - LBFGS. Run for 100 steps, 
+# Define structure optimizer - LBFGS. Run for 100 steps,
 # or if the max force on all atoms (fmax) is below 0 ev/A.
-# fmax is typically set to 0.01-0.05 eV/A, 
+# fmax is typically set to 0.01-0.05 eV/A,
 # for this demo however we run for the full 100 steps.
 
 dyn = LBFGS(adslab, trajectory="data/toy_c3h8_relax.traj")
@@ -52,20 +63,20 @@ dyn.run(fmax=0, steps=100)
 traj = ase.io.read("data/toy_c3h8_relax.traj", ":")
 
 # convert traj format to extxyz format (used by OC20 dataset)
-columns = (['symbols','positions', 'move_mask', 'tags'])
-with open('data/toy_c3h8_relax.extxyz','w') as f:
+columns = ["symbols", "positions", "move_mask", "tags"]
+with open("data/toy_c3h8_relax.extxyz", "w") as f:
     extxyz.write_xyz(f, traj, columns=columns)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn [1], line 4[0m
-[1;32m      1[0m [38;5;66;03m# This cell sets up and runs a structural relaxation [39;00m
-[1;32m      2[0m [38;5;66;03m# of a propane (C3H8) adsorbate on a copper (Cu) surface[39;00m
-[0;32m----> 4[0m adslab [38;5;241m=[39m [43mfcc100[49m([38;5;124m"[39m[38;5;124mCu[39m[38;5;124m"[39m, size[38;5;241m=[39m([38;5;241m3[39m, [38;5;241m3[39m, [38;5;241m3[39m))
-[1;32m      5[0m adsorbate [38;5;241m=[39m molecule([38;5;124m"[39m[38;5;124mC3H8[39m[38;5;124m"[39m)
-[1;32m      6[0m add_adsorbate(adslab, adsorbate, [38;5;241m3[39m, offset[38;5;241m=[39m([38;5;241m1[39m, [38;5;241m1[39m)) [38;5;66;03m# adslab = adsorbate + slab[39;00m
+Cell [0;32mIn [1], line 20[0m
+[1;32m     17[0m add_adsorbate(adslab, adsorbate, [38;5;241m3[39m, offset[38;5;241m=[39m([38;5;241m1[39m, [38;5;241m1[39m))  [38;5;66;03m# adslab = adsorbate + slab[39;00m
+[1;32m     19[0m [38;5;66;03m# tag all slab atoms below surface as 0, surface as 1, adsorbate as 2[39;00m
+[0;32m---> 20[0m tags [38;5;241m=[39m [43mnp[49m[38;5;241m.[39mzeros([38;5;28mlen[39m(adslab))
+[1;32m     21[0m tags[[38;5;241m18[39m:[38;5;241m27[39m] [38;5;241m=[39m [38;5;241m1[39m
+[1;32m     22[0m tags[[38;5;241m27[39m:] [38;5;241m=[39m [38;5;241m2[39m
 
-[0;31mNameError[0m: name 'fcc100' is not defined
-NameError: name 'fcc100' is not defined
+[0;31mNameError[0m: name 'np' is not defined
+NameError: name 'np' is not defined
 
