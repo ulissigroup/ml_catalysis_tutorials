@@ -8,6 +8,7 @@ parts:
   chapters:
   - file: notes/background/background
   - file: notes/background/relaxations
+  - file: notes/background/extra_resources
 - caption: Using OCP with your own datasets
   chapters:
   - file: notes/custom_datasets/data_preprocessing
