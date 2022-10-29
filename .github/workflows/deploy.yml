@@ -18,6 +18,8 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         environment-file: myenv.yml
+        channel-priority: flexible
+        channels: conda-forge,defaults,pytorch,nvidia
 
     - name: Install OCP cpu codebase
       shell: bash -l {0}
