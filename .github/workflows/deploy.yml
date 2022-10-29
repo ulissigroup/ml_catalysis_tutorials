@@ -19,6 +19,12 @@ jobs:
       with:
         environment-file: myenv.yml
 
+    # Install OCP repo
+    - name: Install OCP codebase
+      shell: bash -l {0}
+      run: |
+        pip install --no-deps git+https://github.com/Open-Catalyst-Project/ocp.git
+
     # Build the book
     - name: Build the book
       shell: bash -l {0}

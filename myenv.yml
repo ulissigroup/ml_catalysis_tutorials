@@ -33,5 +33,3 @@ dependencies:
   - pymatgen 
   - sympy
   - pytorch=1.11
-  - pip:
-    - git+https://github.com/Open-Catalyst-Project/ocp.git --install-option="--no-deps"
