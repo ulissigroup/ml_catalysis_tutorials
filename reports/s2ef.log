@@ -17,46 +17,39 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from ocpmodels.trainers import ForcesTrainer
-from ocpmodels.datasets import TrajectoryLmdbDataset
-import ocpmodels.models
-from ocpmodels.common import logger
-from ocpmodels.common.utils import setup_logging
-setup_logging()
+train_dataset = TrajectoryLmdbDataset({"src": train_src})
 
-import numpy as np
-import copy
-import os
+energies = []
+for data in train_dataset:
+  energies.append(data.y)
+
+mean = np.mean(energies)
+stdev = np.std(energies)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn [1], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtrainers[39;00m [38;5;28;01mimport[39;00m ForcesTrainer
-[1;32m      2[0m [38;5;28;01mfrom[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdatasets[39;00m [38;5;28;01mimport[39;00m TrajectoryLmdbDataset
-[1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mocpmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmodels[39;00m
+[0;31mAssertionError[0m                            Traceback (most recent call last)
+Cell [0;32mIn [3], line 1[0m
+[0;32m----> 1[0m train_dataset [38;5;241m=[39m [43mTrajectoryLmdbDataset[49m[43m([49m[43m{[49m[38;5;124;43m"[39;49m[38;5;124;43msrc[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mtrain_src[49m[43m}[49m[43m)[49m
+[1;32m      3[0m energies [38;5;241m=[39m []
+[1;32m      4[0m [38;5;28;01mfor[39;00m data [38;5;129;01min[39;00m train_dataset:
 
-File [0;32m~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/__init__.py:12[0m
-[1;32m      1[0m [38;5;66;03m# Copyright (c) Facebook, Inc. and its affiliates.[39;00m
-[1;32m      2[0m [38;5;66;03m#[39;00m
-[1;32m      3[0m [38;5;66;03m# This source code is licensed under the MIT license found in the[39;00m
-[1;32m      4[0m [38;5;66;03m# LICENSE file in the root directory of this source tree.[39;00m
-[1;32m      6[0m __all__ [38;5;241m=[39m [
-[1;32m      7[0m     [38;5;124m"[39m[38;5;124mBaseTrainer[39m[38;5;124m"[39m,
-[1;32m      8[0m     [38;5;124m"[39m[38;5;124mForcesTrainer[39m[38;5;124m"[39m,
-[1;32m      9[0m     [38;5;124m"[39m[38;5;124mEnergyTrainer[39m[38;5;124m"[39m,
-[1;32m     10[0m ]
-[0;32m---> 12[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mbase_trainer[39;00m [38;5;28;01mimport[39;00m BaseTrainer
-[1;32m     13[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01menergy_trainer[39;00m [38;5;28;01mimport[39;00m EnergyTrainer
-[1;32m     14[0m [38;5;28;01mfrom[39;00m [38;5;21;01m.[39;00m[38;5;21;01mforces_trainer[39;00m [38;5;28;01mimport[39;00m ForcesTrainer
+File [0;32m~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/datasets/lmdb_dataset.py:138[0m, in [0;36mTrajectoryLmdbDataset.__init__[0;34m(self, config, transform)[0m
+[1;32m    137[0m [38;5;28;01mdef[39;00m [38;5;21m__init__[39m([38;5;28mself[39m, config, transform[38;5;241m=[39m[38;5;28;01mNone[39;00m):
+[0;32m--> 138[0m     [38;5;28;43msuper[39;49m[43m([49m[43mTrajectoryLmdbDataset[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[43m)[49m[38;5;241;43m.[39;49m[38;5;21;43m__init__[39;49m[43m([49m[43mconfig[49m[43m,[49m[43m [49m[43mtransform[49m[43m)[49m
+[1;32m    139[0m     warnings[38;5;241m.[39mwarn(
+[1;32m    140[0m         [38;5;124m"[39m[38;5;124mTrajectoryLmdbDataset is deprecated and will be removed in the future.[39m[38;5;124m"[39m
+[1;32m    141[0m         [38;5;124m"[39m[38;5;124mPlease use [39m[38;5;124m'[39m[38;5;124mLmdbDataset[39m[38;5;124m'[39m[38;5;124m instead.[39m[38;5;124m"[39m,
+[1;32m    142[0m         stacklevel[38;5;241m=[39m[38;5;241m3[39m,
+[1;32m    143[0m     )
 
-File [0;32m~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:16[0m
-[1;32m     13[0m [38;5;28;01mfrom[39;00m [38;5;21;01mabc[39;00m [38;5;28;01mimport[39;00m ABC, abstractmethod
-[1;32m     14[0m [38;5;28;01mfrom[39;00m [38;5;21;01mcollections[39;00m [38;5;28;01mimport[39;00m defaultdict
-[0;32m---> 16[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[1;32m     17[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m
-[1;32m     18[0m [38;5;28;01mimport[39;00m [38;5;21;01mtorch[39;00m[38;5;21;01m.[39;00m[38;5;21;01mnn[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnn[39;00m
+File [0;32m~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/datasets/lmdb_dataset.py:50[0m, in [0;36mLmdbDataset.__init__[0;34m(self, config, transform)[0m
+[1;32m     48[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39mpath[38;5;241m.[39mis_file():
+[1;32m     49[0m     db_paths [38;5;241m=[39m [38;5;28msorted[39m([38;5;28mself[39m[38;5;241m.[39mpath[38;5;241m.[39mglob([38;5;124m"[39m[38;5;124m*.lmdb[39m[38;5;124m"[39m))
+[0;32m---> 50[0m     [38;5;28;01massert[39;00m [38;5;28mlen[39m(db_paths) [38;5;241m>[39m [38;5;241m0[39m, [38;5;124mf[39m[38;5;124m"[39m[38;5;124mNo LMDBs found in [39m[38;5;124m'[39m[38;5;132;01m{[39;00m[38;5;28mself[39m[38;5;241m.[39mpath[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m"[39m
+[1;32m     52[0m     [38;5;28mself[39m[38;5;241m.[39mmetadata_path [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mpath [38;5;241m/[39m [38;5;124m"[39m[38;5;124mmetadata.npz[39m[38;5;124m"[39m
+[1;32m     54[0m     [38;5;28mself[39m[38;5;241m.[39m_keys, [38;5;28mself[39m[38;5;241m.[39menvs [38;5;241m=[39m [], []
 
-[0;31mModuleNotFoundError[0m: No module named 'numpy'
-ModuleNotFoundError: No module named 'numpy'
+[0;31mAssertionError[0m: No LMDBs found in 'data/s2ef/train_100'
+AssertionError: No LMDBs found in 'data/s2ef/train_100'
 

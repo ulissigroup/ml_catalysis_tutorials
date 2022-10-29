@@ -575,39 +575,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">ocpmodels.trainers</span> <span class="kn">import</span> <span class="n">ForcesTrainer</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">ocpmodels.datasets</span> <span class="kn">import</span> <span class="n">TrajectoryLmdbDataset</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">ocpmodels</span> <span class="kn">import</span> <span class="n">models</span>
-
-<span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">ml_catalysis_tutorials</span><span class="o">/</span><span class="n">ml_catalysis_tutorials</span><span class="o">/</span><span class="n">ocp</span><span class="o">/</span><span class="n">ocpmodels</span><span class="o">/</span><span class="n">trainers</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">12</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Copyright (c) Facebook, Inc. and its affiliates.</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># This source code is licensed under the MIT license found in the</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># LICENSE file in the root directory of this source tree.</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="s2">&quot;BaseTrainer&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="s2">&quot;ForcesTrainer&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="s2">&quot;EnergyTrainer&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="p">]</span>
-<span class="ne">---&gt; </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">.base_trainer</span> <span class="kn">import</span> <span class="n">BaseTrainer</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">.energy_trainer</span> <span class="kn">import</span> <span class="n">EnergyTrainer</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span> <span class="nn">.forces_trainer</span> <span class="kn">import</span> <span class="n">ForcesTrainer</span>
-
-<span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">ml_catalysis_tutorials</span><span class="o">/</span><span class="n">ml_catalysis_tutorials</span><span class="o">/</span><span class="n">ocp</span><span class="o">/</span><span class="n">ocpmodels</span><span class="o">/</span><span class="n">trainers</span><span class="o">/</span><span class="n">base_trainer</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">16</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">import</span> <span class="nn">torch</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="dataset">
@@ -760,18 +727,18 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: true
 cmd:
-  checkpoint_dir: ./checkpoints/2022-10-28-20-09-36-is2rs-example
-  commit: 6e750b2
+  checkpoint_dir: ./checkpoints/2022-10-29-19-03-28-is2rs-example
+  commit: cba9fb6
   identifier: is2rs-example
-  logs_dir: ./logs/tensorboard/2022-10-28-20-09-36-is2rs-example
+  logs_dir: ./logs/tensorboard/2022-10-29-19-03-28-is2rs-example
   print_every: 5
-  results_dir: ./results/2022-10-28-20-09-36-is2rs-example
+  results_dir: ./results/2022-10-29-19-03-28-is2rs-example
   seed: 0
-  timestamp_id: 2022-10-28-20-09-36-is2rs-example
+  timestamp_id: 2022-10-29-19-03-28-is2rs-example
 dataset:
   normalize_labels: false
   src: data/s2ef/train_100
-gpus: 1
+gpus: 0
 logger: tensorboard
 model: gemnet_t
 model_attributes:
@@ -848,7 +815,94 @@ val_dataset:
   src: data/s2ef/val_20
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:root:Model gradient logging to tensorboard not yet supported.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py:115: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.
+  warnings.warn(&quot;torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.&quot;)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">trainer</span> <span class="o">=</span> <span class="n">ForcesTrainer</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;is2rs-example&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">run_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">,</span> <span class="c1"># directory to save results if is_debug=False. Prediction files are saved here so be careful not to override!</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">is_debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># if True, do not save checkpoint, logs, or results</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">print_every</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="c1"># random seed to use</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">logger</span><span class="o">=</span><span class="s2">&quot;tensorboard&quot;</span><span class="p">,</span> <span class="c1"># logger of choice (tensorboard and wandb supported)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">local_rank</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">amp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># use PyTorch Automatic Mixed Precision (faster training and less memory usage)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/forces_trainer.py:88,</span> in <span class="ni">ForcesTrainer.__init__</span><span class="nt">(self, task, model, dataset, optimizer, identifier, normalizer, timestamp_id, run_dir, is_debug, is_hpo, print_every, seed, logger, local_rank, amp, cpu, slurm, noddp)</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="bp">self</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="n">task</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span>     <span class="n">noddp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span> <span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">88</span>     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span>         <span class="n">task</span><span class="o">=</span><span class="n">task</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span>         <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span>         <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span>         <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span>         <span class="n">identifier</span><span class="o">=</span><span class="n">identifier</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span>         <span class="n">normalizer</span><span class="o">=</span><span class="n">normalizer</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>         <span class="n">timestamp_id</span><span class="o">=</span><span class="n">timestamp_id</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span>         <span class="n">run_dir</span><span class="o">=</span><span class="n">run_dir</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>         <span class="n">is_debug</span><span class="o">=</span><span class="n">is_debug</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>         <span class="n">is_hpo</span><span class="o">=</span><span class="n">is_hpo</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span>         <span class="n">print_every</span><span class="o">=</span><span class="n">print_every</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>         <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span>         <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span>         <span class="n">local_rank</span><span class="o">=</span><span class="n">local_rank</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span>         <span class="n">amp</span><span class="o">=</span><span class="n">amp</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span>         <span class="n">cpu</span><span class="o">=</span><span class="n">cpu</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span>         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;s2ef&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span>         <span class="n">slurm</span><span class="o">=</span><span class="n">slurm</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">107</span>         <span class="n">noddp</span><span class="o">=</span><span class="n">noddp</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span>     <span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:205,</span> in <span class="ni">BaseTrainer.__init__</span><span class="nt">(self, task, model, dataset, optimizer, identifier, normalizer, timestamp_id, run_dir, is_debug, is_hpo, print_every, seed, logger, local_rank, amp, cpu, name, slurm, noddp)</span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span> <span class="k">if</span> <span class="n">distutils</span><span class="o">.</span><span class="n">is_master</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">204</span>     <span class="nb">print</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="ne">--&gt; </span><span class="mi">205</span> <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">Evaluator</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:212,</span> in <span class="ni">BaseTrainer.load</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_seed_from_config</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">211</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_logger</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">212</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_datasets</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_task</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_model</span><span class="p">()</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/base_trainer.py:290,</span> in <span class="ni">BaseTrainer.load_datasets</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">287</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">val_loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_loader</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dataset&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">290</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">get_dataset_class</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">291</span>         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;task&quot;</span><span class="p">][</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">292</span>     <span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_sampler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sampler</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">294</span>         <span class="bp">self</span><span class="o">.</span><span class="n">train_dataset</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">295</span>         <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;optim&quot;</span><span class="p">][</span><span class="s2">&quot;batch_size&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">296</span>         <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">298</span>     <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dataloader</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span>         <span class="bp">self</span><span class="o">.</span><span class="n">train_dataset</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span>         <span class="bp">self</span><span class="o">.</span><span class="n">train_sampler</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span>     <span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/datasets/lmdb_dataset.py:50,</span> in <span class="ni">LmdbDataset.__init__</span><span class="nt">(self, config, transform)</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span>     <span class="n">db_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.lmdb&quot;</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">50</span>     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">db_paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;No LMDBs found in &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span>     <span class="bp">self</span><span class="o">.</span><span class="n">metadata_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;metadata.npz&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">envs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="ne">AssertionError</span>: No LMDBs found in &#39;data/s2ef/train_100&#39;
 </pre></div>
 </div>
 </div>
