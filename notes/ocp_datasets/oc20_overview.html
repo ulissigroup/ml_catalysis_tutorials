@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Background &#8212; ML for Catalysis Tutorials</title>
+    <title>Dataset Overview &#8212; ML for Catalysis Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,8 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Structural relaxations" href="relaxations.html" />
-    <link rel="prev" title="ML for catalysis tutorials" href="../../intro.html" />
+    <link rel="next" title="Interacting with the OC20 datasets" href="interacting_with_datasets.html" />
+    <link rel="prev" title="Additional Resources" href="../background/extra_resources.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -114,21 +114,21 @@ const thebe_selector_output = ".output, .cell_output"
   Background
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/background.html">
    Background
    <a name="background">
    </a>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="relaxations.html">
+  <a class="reference internal" href="../background/relaxations.html">
    Structural relaxations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="extra_resources.html">
+  <a class="reference internal" href="../background/extra_resources.html">
    Additional Resources
   </a>
  </li>
@@ -138,14 +138,14 @@ const thebe_selector_output = ".output, .cell_output"
   Using the OCP datasets
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../ocp_datasets/oc20_overview.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Dataset Overview
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../ocp_datasets/interacting_with_datasets.html">
+  <a class="reference internal" href="interacting_with_datasets.html">
    Interacting with the OC20 datasets
   </a>
  </li>
@@ -268,7 +268,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/ulissigroup/ml_catalysis_tutorials/main?urlpath=lab/tree/ml-catalysis-tutorials/notes/background/background.ipynb"
+        <a href="https://mybinder.org/v2/gh/ulissigroup/ml_catalysis_tutorials/main?urlpath=lab/tree/ml-catalysis-tutorials/notes/ocp_datasets/oc20_overview.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -286,7 +286,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/ulissigroup/ml_catalysis_tutorials/blob/main/ml-catalysis-tutorials/notes/background/background.ipynb"
+        <a href="https://colab.research.google.com/github/ulissigroup/ml_catalysis_tutorials/blob/main/ml-catalysis-tutorials/notes/ocp_datasets/oc20_overview.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -346,7 +346,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ulissigroup/ml_catalysis_tutorials/issues/new?title=Issue%20on%20page%20%2Fnotes/background/background.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ulissigroup/ml_catalysis_tutorials/issues/new?title=Issue%20on%20page%20%2Fnotes/ocp_datasets/oc20_overview.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -374,7 +374,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/notes/background/background.ipynb"
+        <a href="../../_sources/notes/ocp_datasets/oc20_overview.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -433,29 +433,12 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Background
-   <a name="background">
-   </a>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tutorial-use">
+   <strong>
+    Tutorial Use
+   </strong>
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#climate-impact">
-   Climate Impact
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background-prerequisites">
-   Background &amp; Prerequisites
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#background-references">
-     Background References
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -466,7 +449,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Background <a name="background"></a></h1>
+                <h1>Dataset Overview</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -476,29 +459,12 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Background
-   <a name="background">
-   </a>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tutorial-use">
+   <strong>
+    Tutorial Use
+   </strong>
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#climate-impact">
-   Climate Impact
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background-prerequisites">
-   Background &amp; Prerequisites
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#background-references">
-     Background References
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -510,44 +476,24 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="background-a-name-background-a">
-<h1>Background <a name="background"></a><a class="headerlink" href="#background-a-name-background-a" title="Permalink to this headline">#</a></h1>
-<p>The discovery of efficient and economic catalysts (materials) are needed to enable the widespread use of renewable energy technologies. A common approach in discovering high performance catalysts is using molecular simulations. Specifically, each simulation models the interaction of a catalyst surface with molecules that are commonly seen in electrochemical reactions. By predicting these interactions accurately, the catalyst’s impact on the overall rate of a chemical reaction may be estimated.</p>
-<p>An important quantity in screening catalysts is their adsorption energy for the molecules, referred to as `adsorbates’, involved in the reaction of interest. The adsorption energy may be found by simulating the interaction of the adsorbate molecule on the surface of the catalyst to find their resting or relaxed energy, i.e., how tightly the adsorbate binds to the catalyst’s surface (visualized below). The rate of the chemical reaction, a value of high practical importance, is then commonly approximated using simple functions of the adsorption energy. The goal of this tutorial specifically and the project overall is to encourage research and benchmark progress towards training ML models to approximate this relaxation.</p>
-<p>Specifically, during the course of a relaxation, given an initial set of atoms and their positions, the task is to iteratively estimate atomic forces and update atomic positions until a relaxed state is reached. The energy corresponding to the relaxed state is the structure’s ‘relaxed energy’.</p>
-<p>As part of the <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp">Open Catalyst Project</a> (OCP), we identify three key tasks ML models need to perform well on in
-order to effectively approximate DFT –</p>
-<ol class="simple">
-<li><p>Given an <strong>I</strong>nitial <strong>S</strong>tructure, predict the <strong>R</strong>elaxed <strong>E</strong>nergy of the relaxed strucutre (<strong>IS2RE</strong>),</p></li>
-<li><p>Given an <strong>I</strong>nitial <strong>S</strong>tructure, predict the <strong>R</strong>elaxed <strong>S</strong>tructure (<strong>IS2RS</strong>),</p></li>
-<li><p>Given any <strong>S</strong>tructure, predict the structure <strong>E</strong>nergy and per-atom <strong>F</strong>orces (<strong>S2EF</strong>).</p></li>
-</ol>
-<p><img alt="OC20 relaxations" src="../../_images/oc20_relaxations.png" /></p>
-<p><a name="climate-impact"></a></p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="climate-impact">
-<h1>Climate Impact<a class="headerlink" href="#climate-impact" title="Permalink to this headline">#</a></h1>
-<p><img alt="California energy demand" src="../../_images/california_demand.png" /></p>
-<p>Scalable and cost-effective solutions to renewable energy storage are essential to addressing the world’s rising energy needs while reducing climate change. As illustrated in the figure below, as we increase our reliance on renewable energy sources such as wind and solar, which produce intermittent power, storage is needed to transfer power from times of peak generation to peak demand. This may require the storage of power for hours, days, or months. One solution that offers the potential of scaling to nation-sized grids is the conversion of renewable energy to other fuels, such as hydrogen. To be widely adopted, this process requires cost-effective solutions to running chemical reactions.</p>
-<p>An open challenge is finding low-cost catalysts to drive these reactions at high rates. Through the use of quantum mechanical simulations (Density Functional Theory, DFT), new catalyst structures can be tested and evaluated. Unfortunately, the high computational cost of these simulations limits the number of structures that may be tested. The use of AI or machine learning may provide a method to efficiently approximate these calculations; reducing the time required from 24} hours to a second. This capability would transform the search for new catalysts from the present day practice of evaluating O(1,000) of handpicked candidates to the brute force search over millions or even billions of candidates.</p>
-<p>As part of OCP, we publicly released the world’s largest quantum mechanical simulation dataset – <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp/blob/master/DATASET.md">OC20</a> – in the Fall of 2020 along with a suite of baselines and evaluation metrics. The creation of the dataset required over 70 million hours of compute. This dataset enables the exploration of techniques that will generalize across different catalyst materials and adsorbates. If successful, models trained on the dataset could enable the computational testing of millions of catalyst materials for a wide variety of chemical reactions. However, techniques that achieve the accuracies required** for practical impact are still beyond reach and remain an open area for research, thus encouraging research in this important area to help in meeting the world’s energy needs in the decades ahead.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>The computational catalysis community often aims for an adsorption energy MAE of 0.1-0.2 eV for practical relevance.</p>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="background-prerequisites">
-<h1>Background &amp; Prerequisites<a class="headerlink" href="#background-prerequisites" title="Permalink to this headline">#</a></h1>
-<p>Basic experience training ML models. Familiarity with PyTorch. Familiarity with Pytorch-Geometric could be helpful for development, but not required.
-No background in chemistry is assumed.</p>
-<p>For those looking to apply our pretrained models on their datasets, familiarity with the [Atomic Simulation Environment](https://wiki.fysik.dtu.dk/ase/#:~:text=The%20Atomic%20Simulation%20Environment%20(ASE,under%20the%20GNU%20LGPL%20license.) is useful.</p>
-<section id="background-references">
-<h2>Background References<a class="headerlink" href="#background-references" title="Permalink to this headline">#</a></h2>
-<p>To gain an even better understanding of the Open Catalyst Project and the problems it seeks to address, we strongly recommend the following resources:</p>
+  <p><a name="data-description"></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="dataset-overview">
+<h1>Dataset Overview<a class="headerlink" href="#dataset-overview" title="Permalink to this headline">#</a></h1>
+<p>The Open Catalyst 2020 Dataset (OC20) will be used throughout this tutorial. More details can be found <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp/blob/master/DATASET.md">here</a> and the corresponding <a class="reference external" href="https://arxiv.org/abs/2010.09990">paper</a>. Data is stored in PyTorch Geometric <a class="reference external" href="https://pytorch-geometric.readthedocs.io/en/latest/modules/data.html">Data</a> objects and stored in LMDB files. For each task we include several sized training splits. Validation/Test splits are broken into several subsplits: In Domain (ID), Out of Domain Adsorbate (OOD-Ads), Out of Domain Catalyast (OOD-Cat) and Out of Domain Adsorbate and Catalyst (OOD-Both). Split sizes are summarized below:</p>
+<p>Train</p>
 <ul class="simple">
-<li><p>To learn more about electrocatalysis, see our <a class="reference external" href="https://arxiv.org/pdf/2010.09435.pdf">white paper</a>.</p></li>
-<li><p>To learn about the OC20 dataset and the associated tasks, please see the <a class="reference external" href="https://arxiv.org/pdf/2010.09990.pdf">OC20 dataset paper</a>.</p></li>
+<li><p>S2EF - 200k, 2M, 20M, 134M(All)</p></li>
+<li><p>IS2RE/IS2RS - 10k, 100k, 460k(All)</p></li>
 </ul>
+<p>Val/Test</p>
+<ul class="simple">
+<li><p>S2EF - ~1M across all subsplits</p></li>
+<li><p>IS2RE/IS2RS - ~25k across all splits</p></li>
+</ul>
+<section id="tutorial-use">
+<h2><strong>Tutorial Use</strong><a class="headerlink" href="#tutorial-use" title="Permalink to this headline">#</a></h2>
+<p>For the sake of this tutorial we provide much smaller splits (100 train, 20 val for all tasks) to allow users to easily store, train, and predict across the various tasks. Please refer <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp#download-data">here</a> for details on how to download the full datasets for general use.</p>
+<p><img alt="OC20 image" src="../../_images/oc20_image.png" /></p>
 </section>
 </section>
 
@@ -564,7 +510,7 @@ No background in chemistry is assumed.</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./notes/background"
+            path: "./notes/ocp_datasets"
         },
         predefinedOutput: true
     }
@@ -578,17 +524,17 @@ No background in chemistry is assumed.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../../intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../background/extra_resources.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">ML for catalysis tutorials</p>
+            <p class="prev-next-title">Additional Resources</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="relaxations.html" title="next page">
+    <a class='right-next' id="next-link" href="interacting_with_datasets.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Structural relaxations</p>
+        <p class="prev-next-title">Interacting with the OC20 datasets</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Background &#8212; ML for Catalysis Tutorials</title>
+    <title>Interacting with the OC20 datasets &#8212; ML for Catalysis Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -53,8 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Structural relaxations" href="relaxations.html" />
-    <link rel="prev" title="ML for catalysis tutorials" href="../../intro.html" />
+    <link rel="next" title="Tasks" href="../model_training/ocp_tasks.html" />
+    <link rel="prev" title="Dataset Overview" href="oc20_overview.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -114,21 +114,21 @@ const thebe_selector_output = ".output, .cell_output"
   Background
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/background.html">
    Background
    <a name="background">
    </a>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="relaxations.html">
+  <a class="reference internal" href="../background/relaxations.html">
    Structural relaxations
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="extra_resources.html">
+  <a class="reference internal" href="../background/extra_resources.html">
    Additional Resources
   </a>
  </li>
@@ -138,14 +138,14 @@ const thebe_selector_output = ".output, .cell_output"
   Using the OCP datasets
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../ocp_datasets/oc20_overview.html">
+  <a class="reference internal" href="oc20_overview.html">
    Dataset Overview
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ocp_datasets/interacting_with_datasets.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Interacting with the OC20 datasets
   </a>
  </li>
@@ -268,7 +268,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/ulissigroup/ml_catalysis_tutorials/main?urlpath=lab/tree/ml-catalysis-tutorials/notes/background/background.ipynb"
+        <a href="https://mybinder.org/v2/gh/ulissigroup/ml_catalysis_tutorials/main?urlpath=lab/tree/ml-catalysis-tutorials/notes/ocp_datasets/interacting_with_datasets.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -286,7 +286,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/ulissigroup/ml_catalysis_tutorials/blob/main/ml-catalysis-tutorials/notes/background/background.ipynb"
+        <a href="https://colab.research.google.com/github/ulissigroup/ml_catalysis_tutorials/blob/main/ml-catalysis-tutorials/notes/ocp_datasets/interacting_with_datasets.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -346,7 +346,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ulissigroup/ml_catalysis_tutorials/issues/new?title=Issue%20on%20page%20%2Fnotes/background/background.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ulissigroup/ml_catalysis_tutorials/issues/new?title=Issue%20on%20page%20%2Fnotes/ocp_datasets/interacting_with_datasets.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -374,7 +374,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/notes/background/background.ipynb"
+        <a href="../../_sources/notes/ocp_datasets/interacting_with_datasets.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -411,98 +411,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Background
-   <a name="background">
-   </a>
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#climate-impact">
-   Climate Impact
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background-prerequisites">
-   Background &amp; Prerequisites
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#background-references">
-     Background References
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Background <a name="background"></a></h1>
+                <h1>Interacting with the OC20 datasets</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Background
-   <a name="background">
-   </a>
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#climate-impact">
-   Climate Impact
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#background-prerequisites">
-   Background &amp; Prerequisites
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#background-references">
-     Background References
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -510,45 +435,137 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="background-a-name-background-a">
-<h1>Background <a name="background"></a><a class="headerlink" href="#background-a-name-background-a" title="Permalink to this headline">#</a></h1>
-<p>The discovery of efficient and economic catalysts (materials) are needed to enable the widespread use of renewable energy technologies. A common approach in discovering high performance catalysts is using molecular simulations. Specifically, each simulation models the interaction of a catalyst surface with molecules that are commonly seen in electrochemical reactions. By predicting these interactions accurately, the catalyst’s impact on the overall rate of a chemical reaction may be estimated.</p>
-<p>An important quantity in screening catalysts is their adsorption energy for the molecules, referred to as `adsorbates’, involved in the reaction of interest. The adsorption energy may be found by simulating the interaction of the adsorbate molecule on the surface of the catalyst to find their resting or relaxed energy, i.e., how tightly the adsorbate binds to the catalyst’s surface (visualized below). The rate of the chemical reaction, a value of high practical importance, is then commonly approximated using simple functions of the adsorption energy. The goal of this tutorial specifically and the project overall is to encourage research and benchmark progress towards training ML models to approximate this relaxation.</p>
-<p>Specifically, during the course of a relaxation, given an initial set of atoms and their positions, the task is to iteratively estimate atomic forces and update atomic positions until a relaxed state is reached. The energy corresponding to the relaxed state is the structure’s ‘relaxed energy’.</p>
-<p>As part of the <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp">Open Catalyst Project</a> (OCP), we identify three key tasks ML models need to perform well on in
-order to effectively approximate DFT –</p>
-<ol class="simple">
-<li><p>Given an <strong>I</strong>nitial <strong>S</strong>tructure, predict the <strong>R</strong>elaxed <strong>E</strong>nergy of the relaxed strucutre (<strong>IS2RE</strong>),</p></li>
-<li><p>Given an <strong>I</strong>nitial <strong>S</strong>tructure, predict the <strong>R</strong>elaxed <strong>S</strong>tructure (<strong>IS2RS</strong>),</p></li>
-<li><p>Given any <strong>S</strong>tructure, predict the structure <strong>E</strong>nergy and per-atom <strong>F</strong>orces (<strong>S2EF</strong>).</p></li>
-</ol>
-<p><img alt="OC20 relaxations" src="../../_images/oc20_relaxations.png" /></p>
-<p><a name="climate-impact"></a></p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="climate-impact">
-<h1>Climate Impact<a class="headerlink" href="#climate-impact" title="Permalink to this headline">#</a></h1>
-<p><img alt="California energy demand" src="../../_images/california_demand.png" /></p>
-<p>Scalable and cost-effective solutions to renewable energy storage are essential to addressing the world’s rising energy needs while reducing climate change. As illustrated in the figure below, as we increase our reliance on renewable energy sources such as wind and solar, which produce intermittent power, storage is needed to transfer power from times of peak generation to peak demand. This may require the storage of power for hours, days, or months. One solution that offers the potential of scaling to nation-sized grids is the conversion of renewable energy to other fuels, such as hydrogen. To be widely adopted, this process requires cost-effective solutions to running chemical reactions.</p>
-<p>An open challenge is finding low-cost catalysts to drive these reactions at high rates. Through the use of quantum mechanical simulations (Density Functional Theory, DFT), new catalyst structures can be tested and evaluated. Unfortunately, the high computational cost of these simulations limits the number of structures that may be tested. The use of AI or machine learning may provide a method to efficiently approximate these calculations; reducing the time required from 24} hours to a second. This capability would transform the search for new catalysts from the present day practice of evaluating O(1,000) of handpicked candidates to the brute force search over millions or even billions of candidates.</p>
-<p>As part of OCP, we publicly released the world’s largest quantum mechanical simulation dataset – <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp/blob/master/DATASET.md">OC20</a> – in the Fall of 2020 along with a suite of baselines and evaluation metrics. The creation of the dataset required over 70 million hours of compute. This dataset enables the exploration of techniques that will generalize across different catalyst materials and adsorbates. If successful, models trained on the dataset could enable the computational testing of millions of catalyst materials for a wide variety of chemical reactions. However, techniques that achieve the accuracies required** for practical impact are still beyond reach and remain an open area for research, thus encouraging research in this important area to help in meeting the world’s energy needs in the decades ahead.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>The computational catalysis community often aims for an adsorption energy MAE of 0.1-0.2 eV for practical relevance.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="interacting-with-the-oc20-datasets">
+<h1>Interacting with the OC20 datasets<a class="headerlink" href="#interacting-with-the-oc20-datasets" title="Permalink to this headline">#</a></h1>
+<p>The OC20 datasets are stored in LMDBs. Here we show how to interact with the datasets directly in order to better understand the data. We use two seperate classes to read in the approriate datasets:</p>
+<p><em>S2EF</em> - We use the <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp/blob/master/ocpmodels/datasets/trajectory_lmdb.py">TrajectoryLmdbDataset</a> object to read in a <strong>directory</strong> of LMDB files containing the dataset.</p>
+<p><em>IS2RE/IS2RS</em> - We use the <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp/blob/master/ocpmodels/datasets/single_point_lmdb.py">SinglePointLmdbDataset</a> class to read in a <strong>single LMDB file</strong> containing the dataset.</p>
+<p>First, let’s download the tutorial dataset [~1min].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">bash</span>
+mkdir data
+cd data
+wget -q http://dl.fbaipublicfiles.com/opencatalystproject/data/tutorial_data.tar.gz -O tutorial_data.tar.gz
+tar -xzvf tutorial_data.tar.gz
+rm tutorial_data.tar.gz
+</pre></div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="background-prerequisites">
-<h1>Background &amp; Prerequisites<a class="headerlink" href="#background-prerequisites" title="Permalink to this headline">#</a></h1>
-<p>Basic experience training ML models. Familiarity with PyTorch. Familiarity with Pytorch-Geometric could be helpful for development, but not required.
-No background in chemistry is assumed.</p>
-<p>For those looking to apply our pretrained models on their datasets, familiarity with the [Atomic Simulation Environment](https://wiki.fysik.dtu.dk/ase/#:~:text=The%20Atomic%20Simulation%20Environment%20(ASE,under%20the%20GNU%20LGPL%20license.) is useful.</p>
-<section id="background-references">
-<h2>Background References<a class="headerlink" href="#background-references" title="Permalink to this headline">#</a></h2>
-<p>To gain an even better understanding of the Open Catalyst Project and the problems it seeks to address, we strongly recommend the following resources:</p>
-<ul class="simple">
-<li><p>To learn more about electrocatalysis, see our <a class="reference external" href="https://arxiv.org/pdf/2010.09435.pdf">white paper</a>.</p></li>
-<li><p>To learn about the OC20 dataset and the associated tasks, please see the <a class="reference external" href="https://arxiv.org/pdf/2010.09990.pdf">OC20 dataset paper</a>.</p></li>
-</ul>
-</section>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/train_100/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/train_100/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/train_100/data.lmdb-lock
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/val_20/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/val_20/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./is2re/val_20/data.lmdb-lock
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/train_100/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/train_100/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/train_100/data.lmdb-lock
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/val_20/
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/val_20/data.lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>./s2ef/val_20/data.lmdb-lock
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s interact with the the lmdb files via the TrajectoryLmdbDataset interface!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ocpmodels.datasets</span> <span class="kn">import</span> <span class="n">TrajectoryLmdbDataset</span><span class="p">,</span> <span class="n">SinglePointLmdbDataset</span>
+
+<span class="c1"># TrajectoryLmdbDataset is our custom Dataset method to read the lmdbs as Data objects. Note that we need to give the path to the folder containing lmdbs for S2EF</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">TrajectoryLmdbDataset</span><span class="p">({</span><span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;data/s2ef/train_100/&quot;</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Size of the dataset created:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Size of the dataset created: 100
+Data(edge_index=[2, 2964], y=6.282500615000004, pos=[86, 3], cell=[1, 3, 3], atomic_numbers=[86], natoms=86, cell_offsets=[2964, 3], force=[86, 3], fixed=[86], tags=[86], sid=[1], fid=[1], total_frames=74, id=&#39;0_0&#39;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/IPython/core/interactiveshell.py:3378: UserWarning: TrajectoryLmdbDataset is deprecated and will be removed in the future.Please use &#39;LmdbDataset&#39; instead.
+  exec(code_obj, self.user_global_ns, self.user_ns)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data(edge_index=[2, 2964], y=6.282500615000004, pos=[86, 3], cell=[1, 3, 3], atomic_numbers=[86], natoms=86, cell_offsets=[2964, 3], force=[86, 3], fixed=[86], tags=[86], sid=[1], fid=[1], total_frames=74, id=&#39;0_0&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">energies</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">])</span>
+<span class="n">energies</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">energies</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">energies</span>
+
+<span class="ne">NameError</span>: name &#39;torch&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Energies&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -564,7 +581,7 @@ No background in chemistry is assumed.</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./notes/background"
+            path: "./notes/ocp_datasets"
         },
         predefinedOutput: true
     }
@@ -578,17 +595,17 @@ No background in chemistry is assumed.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../../intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="oc20_overview.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">ML for catalysis tutorials</p>
+            <p class="prev-next-title">Dataset Overview</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="relaxations.html" title="next page">
+    <a class='right-next' id="next-link" href="../model_training/ocp_tasks.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Structural relaxations</p>
+        <p class="prev-next-title">Tasks</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
