@@ -25,8 +25,8 @@ jobs:
       shell: bash -l {0}
       run: |
         wget https://raw.githubusercontent.com/Open-Catalyst-Project/ocp/main/env.common.yml
-        wget https://raw.githubusercontent.com/Open-Catalyst-Project/ocp/main/env.gpu.yml
-        conda-merge env.common.yml env.gpu.yml > env.yml
+        wget https://raw.githubusercontent.com/Open-Catalyst-Project/ocp/main/env.cpu.yml
+        conda-merge env.common.yml env.cpu.yml > env.yml
         mamba env update --file env.yml -n buildenv
 
     # Install OCP repo
