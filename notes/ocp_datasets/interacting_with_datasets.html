@@ -132,6 +132,11 @@ const thebe_selector_output = ".output, .cell_output"
    Additional Resources
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/install.html">
+   Installation and set-up of ocpmodels
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -503,7 +508,7 @@ rm tutorial_data.tar.gz
 <p>Now, let’s interact with the the lmdb files via the TrajectoryLmdbDataset interface!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ocpmodels.datasets</span> <span class="kn">import</span> <span class="n">TrajectoryLmdbDataset</span><span class="p">,</span> <span class="n">SinglePointLmdbDataset</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ocpmodels.datasets</span> <span class="kn">import</span> <span class="n">SinglePointLmdbDataset</span><span class="p">,</span> <span class="n">TrajectoryLmdbDataset</span>
 
 <span class="c1"># TrajectoryLmdbDataset is our custom Dataset method to read the lmdbs as Data objects. Note that we need to give the path to the folder containing lmdbs for S2EF</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">TrajectoryLmdbDataset</span><span class="p">({</span><span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;data/s2ef/train_100/&quot;</span><span class="p">})</span>
@@ -539,29 +544,56 @@ Data(edge_index=[2, 2964], y=6.282500615000004, pos=[86, 3], cell=[1, 3, 3], ato
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">energies</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">energies</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">])</span>
 <span class="n">energies</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">energies</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">data</span><span class="o">.</span><span class="n">y</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">energies</span>
-
-<span class="ne">NameError</span>: name &#39;torch&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([ 6.2825e+00,  4.1290e+00,  3.1451e+00,  3.0260e+00,  1.7921e+00,
+         1.6451e+00,  1.2257e+00,  1.2161e+00,  1.0712e+00,  7.4727e-01,
+         5.9575e-01,  5.7016e-01,  4.2819e-01,  3.1616e-01,  2.5283e-01,
+         2.2425e-01,  2.2346e-01,  2.0530e-01,  1.6090e-01,  1.1807e-01,
+         1.1691e-01,  9.1254e-02,  7.4997e-02,  6.3274e-02,  5.2782e-02,
+         4.8892e-02,  3.9609e-02,  3.1746e-02,  2.7179e-02,  2.7007e-02,
+         2.3709e-02,  1.8005e-02,  1.7676e-02,  1.4129e-02,  1.3162e-02,
+         1.1374e-02,  7.4124e-03,  7.7525e-03,  6.1224e-03,  5.2787e-03,
+         2.8587e-03,  1.1835e-04, -1.1200e-03, -1.3011e-03, -2.6812e-03,
+        -5.9202e-03, -6.1644e-03, -6.9261e-03, -9.1364e-03, -9.2114e-03,
+        -1.0665e-02, -1.3760e-02, -1.3588e-02, -1.4895e-02, -1.6190e-02,
+        -1.8660e-02, -1.4980e-02, -1.8880e-02, -2.0218e-02, -2.0559e-02,
+        -2.1013e-02, -2.2129e-02, -2.2748e-02, -2.3322e-02, -2.3382e-02,
+        -2.3865e-02, -2.3973e-02, -2.4196e-02, -2.4755e-02, -2.4951e-02,
+        -2.5078e-02, -2.5148e-02, -2.5257e-02, -2.5550e-02,  5.9721e+00,
+         9.5081e+00,  2.6373e+00,  4.0946e+00,  1.4385e+00,  1.2700e+00,
+         1.0081e+00,  5.3797e-01,  5.1462e-01,  2.8812e-01,  1.2429e-01,
+        -1.1352e-02, -2.2293e-01, -3.9102e-01, -4.3574e-01, -5.3142e-01,
+        -5.4777e-01, -6.3948e-01, -7.3816e-01, -8.2163e-01, -8.2526e-01,
+        -8.8313e-01, -8.8615e-01, -9.3446e-01, -9.5100e-01, -9.5168e-01])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Energies&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Energies&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;plt&#39; is not defined
 </pre></div>
 </div>
 </div>

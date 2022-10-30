@@ -17,16 +17,19 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-energies = torch.tensor([data.y for data in dataset])
-energies
+plt.hist(energies, bins=50)
+plt.yscale("log")
+plt.xlabel("Energies")
+plt.show()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn [4], line 1[0m
-[0;32m----> 1[0m energies [38;5;241m=[39m [43mtorch[49m[38;5;241m.[39mtensor([data[38;5;241m.[39my [38;5;28;01mfor[39;00m data [38;5;129;01min[39;00m dataset])
-[1;32m      2[0m energies
+Cell [0;32mIn [5], line 1[0m
+[0;32m----> 1[0m [43mplt[49m[38;5;241m.[39mhist(energies, bins[38;5;241m=[39m[38;5;241m50[39m)
+[1;32m      2[0m plt[38;5;241m.[39myscale([38;5;124m"[39m[38;5;124mlog[39m[38;5;124m"[39m)
+[1;32m      3[0m plt[38;5;241m.[39mxlabel([38;5;124m"[39m[38;5;124mEnergies[39m[38;5;124m"[39m)
 
-[0;31mNameError[0m: name 'torch' is not defined
-NameError: name 'torch' is not defined
+[0;31mNameError[0m: name 'plt' is not defined
+NameError: name 'plt' is not defined
 
