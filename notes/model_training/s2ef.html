@@ -699,7 +699,7 @@ tar -xzvf tutorial_data.tar.gz
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/IPython/core/interactiveshell.py:3378: UserWarning: TrajectoryLmdbDataset is deprecated and will be removed in the future.Please use &#39;LmdbDataset&#39; instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/IPython/core/interactiveshell.py:3433: UserWarning: TrajectoryLmdbDataset is deprecated and will be removed in the future.Please use &#39;LmdbDataset&#39; instead.
   exec(code_obj, self.user_global_ns, self.user_ns)
 </pre></div>
 </div>
@@ -814,14 +814,14 @@ tar -xzvf tutorial_data.tar.gz
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: true
 cmd:
-  checkpoint_dir: ./checkpoints/2022-10-29-20-39-28-S2EF-example
+  checkpoint_dir: ./checkpoints/2022-10-30-17-23-12-S2EF-example
   commit: cba9fb6
   identifier: S2EF-example
-  logs_dir: ./logs/tensorboard/2022-10-29-20-39-28-S2EF-example
+  logs_dir: ./logs/tensorboard/2022-10-30-17-23-12-S2EF-example
   print_every: 5
-  results_dir: ./results/2022-10-29-20-39-28-S2EF-example
+  results_dir: ./results/2022-10-30-17-23-12-S2EF-example
   seed: 0
-  timestamp_id: 2022-10-29-20-39-28-S2EF-example
+  timestamp_id: 2022-10-30-17-23-12-S2EF-example
 dataset:
   grad_target_mean: 0.0
   grad_target_std: !!python/object/apply:numpy.core.multiarray.scalar
@@ -918,16 +918,16 @@ trainer: forces
 val_dataset:
   src: data/s2ef/val_20
 
-2022-10-29 20:40:30 (INFO): Batch balancing is disabled for single GPU training.
+2022-10-30 17:23:15 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 20:40:30 (INFO): Batch balancing is disabled for single GPU training.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-30 17:23:15 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 20:40:30 (INFO): Loading dataset: trajectory_lmdb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-30 17:23:15 (INFO): Loading dataset: trajectory_lmdb
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-29 20:40:30 (INFO): Loading model: gemnet_t
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-30 17:23:15 (INFO): Loading model: gemnet_t
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py:115: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.
