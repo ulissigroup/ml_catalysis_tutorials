@@ -13,6 +13,7 @@ parts:
   chapters:
   - file: notes/pretrained_models/relaxations
   - file: notes/pretrained_models/ase_calculator_demo
+  - file: notes/pretrained_models/ase_calculator_demo_oc22
 - caption: Using the OCP datasets
   chapters:
   - file: notes/ocp_datasets/oc20_overview
