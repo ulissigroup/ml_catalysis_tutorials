@@ -7,12 +7,16 @@ parts:
 - caption: Background
   chapters:
   - file: notes/background/background
-  - file: notes/background/relaxations
   - file: notes/background/extra_resources
   - file: notes/background/install
+- caption: Quick-start using pre-trained models
+  chapters:
+  - file: notes/pretrained_models/relaxations
+  - file: notes/pretrained_models/ase_calculator_demo
 - caption: Using the OCP datasets
   chapters:
   - file: notes/ocp_datasets/oc20_overview
+  - file: notes/ocp_datasets/oc22_overview
   - file: notes/ocp_datasets/interacting_with_datasets
 - caption: Training ML models for OCP tasks
   chapters:
@@ -24,6 +28,4 @@ parts:
   chapters:
   - file: notes/custom_datasets/data_preprocessing
   - file: notes/custom_datasets/lmdb_dataset_creation
-- caption: Using pretrained models
-  chapters:
-  - file: notes/pretrained_models
+
