@@ -146,7 +146,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../pretrained_models/ase_calculator_demo.html">
-   Adsorption energy calculations using a pre-trained OCP calculator
+   Adsorption energy calculations using a pre-trained OCP calculator with OC20 referencing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained_models/ase_calculator_demo_oc22.html">
+   Adsorption energy calculations using a pre-trained OCP calculator with OC22 referencing
   </a>
  </li>
 </ul>
@@ -811,14 +816,14 @@ tar -xzvf tutorial_data.tar.gz
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: true
 cmd:
-  checkpoint_dir: ./checkpoints/2022-10-31-16-57-36-is2rs-example
+  checkpoint_dir: ./checkpoints/2022-10-31-17-38-08-is2rs-example
   commit: cba9fb6
   identifier: is2rs-example
-  logs_dir: ./logs/tensorboard/2022-10-31-16-57-36-is2rs-example
+  logs_dir: ./logs/tensorboard/2022-10-31-17-38-08-is2rs-example
   print_every: 5
-  results_dir: ./results/2022-10-31-16-57-36-is2rs-example
+  results_dir: ./results/2022-10-31-17-38-08-is2rs-example
   seed: 0
-  timestamp_id: 2022-10-31-16-57-36-is2rs-example
+  timestamp_id: 2022-10-31-17-38-08-is2rs-example
 dataset:
   normalize_labels: false
   src: data/s2ef/train_100
@@ -897,20 +902,21 @@ task:
 trainer: forces
 val_dataset:
   src: data/s2ef/val_20
-
-2022-10-31 16:56:59 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 16:56:59 (INFO): Batch balancing is disabled for single GPU training.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 17:37:27 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 16:56:59 (INFO): Loading dataset: trajectory_lmdb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 17:37:27 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 16:56:59 (INFO): Batch balancing is disabled for single GPU training.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 17:37:27 (INFO): Loading dataset: trajectory_lmdb
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 16:56:59 (INFO): Loading model: gemnet_t
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 17:37:27 (INFO): Batch balancing is disabled for single GPU training.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 17:37:27 (INFO): Loading model: gemnet_t
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py:115: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.

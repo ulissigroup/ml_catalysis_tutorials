@@ -17,73 +17,39 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import os
+identifier = "toy_c3h8_relax.extxyz"
 
-import ase.io
-import numpy as np
-from ase import Atoms
-from ase.build import fcc100
-from ase.calculators.emt import EMT
-from ase.constraints import FixAtoms
-from ase.io import extxyz
-from ase.io.trajectory import Trajectory
-from ase.optimize import LBFGS
-
-# This cell sets up and runs a structural relaxation
-# of a Cu(100) surface. It uses ASE scripts to make the surface.
-# The actual surfaces in OC20 were prepared slightly differently.
-
-# Make the bare slab using an ASE helper script
-adslab = fcc100("Cu", size=(3, 3, 3))
-
-# Now, let's add the adsorbate to the bare slab
-adsorbate = molecule("CH3O")
-add_adsorbate(adslab, adsorbate, 3, offset=(1, 1))  # adslab = adsorbate + slab
-
-# Tag all slab atoms below surface as 0, surface as 1, adsorbate as 2
-tags = np.zeros(len(adslab))
-tags[18:27] = 1
-tags[28:] = 2
-adslab.set_tags(tags)
-
-# Fixed atoms are prevented from moving during a structure relaxation.
-# We fix all slab atoms beneath the surface.
-cons = FixAtoms(indices=[atom.index for atom in slab if (atom.tag == 0)])
-adslab.set_constraint(cons)
-adslab.center(vacuum=13.0, axis=2)
-adslab.set_pbc(True)
-
-# Set the toy calculator (EMT) so ASE knows how to get energies/forces
-# at each step
-adslab.set_calculator(EMT())
-
-os.makedirs("data", exist_ok=True)
-
-# Define structure optimizer - LBFGS. Run for 100 steps,
-# or if the max force on all atoms (fmax) is below 0 ev/A.
-# fmax is typically set to 0.01-0.05 eV/A,
-# for this demo however we run for the full 100 steps.
-
-dyn = LBFGS(adslab, trajectory="data/Cu100+CH3O.traj")
-dyn.run(fmax=0.03, steps=100)
-
-adslab_traj = ase.io.read("data/Cu100+CH3O.traj", ":")
-
-# convert traj format to extxyz format (used by OC20 dataset)
-columns = ["symbols", "positions", "move_mask", "tags"]
-with open("data/Cu100+CH3O.extxyz", "w") as f:
-    extxyz.write_xyz(f, adslab_traj, columns=columns)
+# the `index` argument corresponds to what frame of the trajectory to read in, specifiying ":" reads in the full trajectory.
+traj = ase.io.read(f"data/{identifier}", index=":")
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn [4], line 21[0m
-[1;32m     18[0m adslab [38;5;241m=[39m fcc100([38;5;124m"[39m[38;5;124mCu[39m[38;5;124m"[39m, size[38;5;241m=[39m([38;5;241m3[39m, [38;5;241m3[39m, [38;5;241m3[39m))
-[1;32m     20[0m [38;5;66;03m# Now, let's add the adsorbate to the bare slab[39;00m
-[0;32m---> 21[0m adsorbate [38;5;241m=[39m [43mmolecule[49m([38;5;124m"[39m[38;5;124mCH3O[39m[38;5;124m"[39m)
-[1;32m     22[0m add_adsorbate(adslab, adsorbate, [38;5;241m3[39m, offset[38;5;241m=[39m([38;5;241m1[39m, [38;5;241m1[39m))  [38;5;66;03m# adslab = adsorbate + slab[39;00m
-[1;32m     24[0m [38;5;66;03m# Tag all slab atoms below surface as 0, surface as 1, adsorbate as 2[39;00m
+[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
+Cell [0;32mIn [6], line 4[0m
+[1;32m      1[0m identifier [38;5;241m=[39m [38;5;124m"[39m[38;5;124mtoy_c3h8_relax.extxyz[39m[38;5;124m"[39m
+[1;32m      3[0m [38;5;66;03m# the `index` argument corresponds to what frame of the trajectory to read in, specifiying ":" reads in the full trajectory.[39;00m
+[0;32m----> 4[0m traj [38;5;241m=[39m [43mase[49m[38;5;241;43m.[39;49m[43mio[49m[38;5;241;43m.[39;49m[43mread[49m[43m([49m[38;5;124;43mf[39;49m[38;5;124;43m"[39;49m[38;5;124;43mdata/[39;49m[38;5;132;43;01m{[39;49;00m[43midentifier[49m[38;5;132;43;01m}[39;49;00m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mindex[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43m:[39;49m[38;5;124;43m"[39;49m[43m)[49m
 
-[0;31mNameError[0m: name 'molecule' is not defined
-NameError: name 'molecule' is not defined
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ase/io/formats.py:675[0m, in [0;36mread[0;34m(filename, index, format, parallel, do_not_split_by_at_sign, **kwargs)[0m
+[1;32m    673[0m [38;5;28;01mif[39;00m index [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[1;32m    674[0m     index [38;5;241m=[39m [38;5;241m-[39m[38;5;241m1[39m
+[0;32m--> 675[0m [38;5;28mformat[39m [38;5;241m=[39m [38;5;28mformat[39m [38;5;129;01mor[39;00m [43mfiletype[49m[43m([49m[43mfilename[49m[43m,[49m[43m [49m[43mread[49m[38;5;241;43m=[39;49m[38;5;28;43misinstance[39;49m[43m([49m[43mfilename[49m[43m,[49m[43m [49m[38;5;28;43mstr[39;49m[43m)[49m[43m)[49m
+[1;32m    677[0m io [38;5;241m=[39m get_ioformat([38;5;28mformat[39m)
+[1;32m    678[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(index, ([38;5;28mslice[39m, [38;5;28mstr[39m)):
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ase/io/formats.py:858[0m, in [0;36mfiletype[0;34m(filename, read, guess)[0m
+[1;32m    855[0m     [38;5;28;01mreturn[39;00m ext
+[1;32m    857[0m [38;5;28;01mif[39;00m orig_filename [38;5;241m==[39m filename:
+[0;32m--> 858[0m     fd [38;5;241m=[39m [43mopen_with_compression[49m[43m([49m[43mfilename[49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mrb[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[1;32m    859[0m [38;5;28;01melse[39;00m:
+[1;32m    860[0m     fd [38;5;241m=[39m orig_filename [38;5;66;03m# type: ignore[39;00m
+
+File [0;32m~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ase/io/formats.py:497[0m, in [0;36mopen_with_compression[0;34m(filename, mode)[0m
+[1;32m    494[0m     [38;5;28;01mreturn[39;00m lzma[38;5;241m.[39mopen(filename, mode)
+[1;32m    495[0m [38;5;28;01melse[39;00m:
+[1;32m    496[0m     [38;5;66;03m# Either None or unknown string[39;00m
+[0;32m--> 497[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mopen[39;49m[43m([49m[43mfilename[49m[43m,[49m[43m [49m[43mmode[49m[43m)[49m
+
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: 'data/toy_c3h8_relax.extxyz'
+FileNotFoundError: [Errno 2] No such file or directory: 'data/toy_c3h8_relax.extxyz'
 
