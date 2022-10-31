@@ -1,0 +1,1130 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Adsorption energy calculations using a pre-trained OCP calculator &#8212; ML for Catalysis Tutorials</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Dataset Overview" href="../ocp_datasets/oc20_overview.html" />
+    <link rel="prev" title="Adsorption energy calculations using a toy calculator" href="relaxations.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">ML for Catalysis Tutorials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    ML for catalysis tutorials
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Background
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/background.html">
+   Background
+   <a name="background">
+   </a>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/extra_resources.html">
+   Additional Resources
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../background/install.html">
+   Installation and set-up of ocpmodels
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Quick-start using pre-trained models
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="relaxations.html">
+   Adsorption energy calculations using a toy calculator
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Adsorption energy calculations using a pre-trained OCP calculator
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Using the OCP datasets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ocp_datasets/oc20_overview.html">
+   Dataset Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ocp_datasets/interacting_with_datasets.html">
+   Interacting with the OC20 datasets
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Training ML models for OCP tasks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../model_training/ocp_tasks.html">
+   Tasks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../model_training/s2ef.html">
+   Structure to Energy and Forces (S2EF)
+   <a name="s2ef">
+   </a>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../model_training/is2rs.html">
+   Initial Structure to Relaxed Structure (IS2RS)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../model_training/is2re.html">
+   Initial Structure to Relaxed Energy (IS2RE)
+   <a name="is2re">
+   </a>
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Using OCP with your own datasets
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../custom_datasets/data_preprocessing.html">
+   Converting ASE objects to PyG Data objects
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../custom_datasets/lmdb_dataset_creation.html">
+   Making LMDBs from ASE traj files
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ulissigroup/ml_catalysis_tutorials/main?urlpath=lab/tree/ml-catalysis-tutorials/notes/pretrained_models/ase_calculator_demo.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ulissigroup/ml_catalysis_tutorials/blob/main/ml-catalysis-tutorials/notes/pretrained_models/ase_calculator_demo.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ulissigroup/ml_catalysis_tutorials"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ulissigroup/ml_catalysis_tutorials/issues/new?title=Issue%20on%20page%20%2Fnotes/pretrained_models/ase_calculator_demo.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notes/pretrained_models/ase_calculator_demo.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-pretrained-checkpoint">
+   Download pretrained checkpoint
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-ocp-calculator">
+   Using the OCP Calculator
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Adsorption energy calculations using a pre-trained OCP calculator</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-pretrained-checkpoint">
+   Download pretrained checkpoint
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-the-ocp-calculator">
+   Using the OCP Calculator
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="adsorption-energy-calculations-using-a-pre-trained-ocp-calculator">
+<h1>Adsorption energy calculations using a pre-trained OCP calculator<a class="headerlink" href="#adsorption-energy-calculations-using-a-pre-trained-ocp-calculator" title="Permalink to this headline">#</a></h1>
+<p>Now that we’ve seen how the toy EMT calculator works for the *OCH3 adsorbate (<a class="reference internal" href="relaxations.html"><span class="doc">Adsorption energy calculations using a toy calculator</span></a>), let’s see how a modern OCP calculator does for the same job.</p>
+<p>To make this easy, we provide an <a class="reference external" href="https://wiki.fysik.dtu.dk/ase/ase/calculators/calculators.html">ASE-compatible calculator</a> calculator to interface with ASE’s functionality. Note that ASE is GPL-licensed!</p>
+<p>For this tutorial we download one of the better current best model checkpoint (GemNet-T). This checkpoint has a few important caveats to keep in mind before using it blindly:</p>
+<ul class="simple">
+<li><p>This is trained as a force field to predict both energies and forces for specific configurations</p></li>
+<li><p>The energies predicted are referenced to the bare surface and the same linear combination of species in OC20 (see <a class="reference internal" href="relaxations.html"><span class="doc">Adsorption energy calculations using a toy calculator</span></a> for details on the reference scheme)</p></li>
+<li><p>The energies and forces are not internally consistent, since we’ve found that models that predict the energy and force separately tend to do better for OC20</p></li>
+</ul>
+<section id="download-pretrained-checkpoint">
+<h2>Download pretrained checkpoint<a class="headerlink" href="#download-pretrained-checkpoint" title="Permalink to this headline">#</a></h2>
+<p>We have released checkpoints of all the models on the leaderboard <a class="reference external" href="https://github.com/Open-Catalyst-Project/ocp/blob/master/MODELS.md">here</a>. These trained models can be used as an ASE calculator for various calculations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget -q -nc https://dl.fbaipublicfiles.com/opencatalystproject/models/2021_08/s2ef/gemnet_t_direct_h512_all.pt
+<span class="n">checkpoint_path</span> <span class="o">=</span> <span class="s2">&quot;gemnet_t_direct_h512_all.pt&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-ocp-calculator">
+<h2>Using the OCP Calculator<a class="headerlink" href="#using-the-ocp-calculator" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">ase.io</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">add_adsorbate</span><span class="p">,</span> <span class="n">fcc100</span><span class="p">,</span> <span class="n">molecule</span>
+<span class="kn">from</span> <span class="nn">ase.constraints</span> <span class="kn">import</span> <span class="n">FixAtoms</span>
+<span class="kn">from</span> <span class="nn">ase.optimize</span> <span class="kn">import</span> <span class="n">LBFGS</span>
+<span class="kn">from</span> <span class="nn">ocpmodels.common.relaxation.ase_utils</span> <span class="kn">import</span> <span class="n">OCPCalculator</span>
+
+<span class="c1"># Construct a sample structure, similar to the EMT relaxation example!</span>
+<span class="n">adslab</span> <span class="o">=</span> <span class="n">fcc100</span><span class="p">(</span><span class="s2">&quot;Cu&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">adsorbate</span> <span class="o">=</span> <span class="n">molecule</span><span class="p">(</span><span class="s2">&quot;CH3O&quot;</span><span class="p">)</span>
+<span class="n">add_adsorbate</span><span class="p">(</span><span class="n">adslab</span><span class="p">,</span> <span class="n">adsorbate</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">tags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">adslab</span><span class="p">))</span>
+<span class="n">tags</span><span class="p">[</span><span class="mi">18</span><span class="p">:</span><span class="mi">27</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">tags</span><span class="p">[</span><span class="mi">27</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">adslab</span><span class="o">.</span><span class="n">set_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+<span class="n">cons</span> <span class="o">=</span> <span class="n">FixAtoms</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">adslab</span> <span class="k">if</span> <span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)])</span>
+<span class="n">adslab</span><span class="o">.</span><span class="n">set_constraint</span><span class="p">(</span><span class="n">cons</span><span class="p">)</span>
+<span class="n">adslab</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">vacuum</span><span class="o">=</span><span class="mf">13.0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">adslab</span><span class="o">.</span><span class="n">set_pbc</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Define the calculator</span>
+<span class="n">calc</span> <span class="o">=</span> <span class="n">OCPCalculator</span><span class="p">(</span><span class="n">checkpoint</span><span class="o">=</span><span class="n">checkpoint_path</span><span class="p">)</span>
+
+<span class="c1"># Set up the calculator</span>
+<span class="n">adslab</span><span class="o">.</span><span class="n">set_calculator</span><span class="p">(</span><span class="n">calc</span><span class="p">)</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">LBFGS</span><span class="p">(</span><span class="n">adslab</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s2">&quot;data/ml_Cu100+CH3O.traj&quot;</span><span class="p">)</span>
+
+<span class="n">opt</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: false
+cmd:
+  checkpoint_dir: /home/runner/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ml-catalysis-tutorials/notes/pretrained_models/checkpoints/2022-10-31-16-57-36
+  commit: cba9fb6
+  identifier: &#39;&#39;
+  logs_dir: /home/runner/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ml-catalysis-tutorials/notes/pretrained_models/logs/tensorboard/2022-10-31-16-57-36
+  print_every: 100
+  results_dir: /home/runner/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ml-catalysis-tutorials/notes/pretrained_models/results/2022-10-31-16-57-36
+  seed: null
+  timestamp_id: 2022-10-31-16-57-36
+dataset: null
+gpus: 0
+logger: tensorboard
+model: gemnet_t
+model_attributes:
+  activation: silu
+  cbf:
+    name: spherical_harmonics
+  cutoff: 6.0
+  direct_forces: true
+  emb_size_atom: 512
+  emb_size_bil_trip: 64
+  emb_size_cbf: 16
+  emb_size_edge: 512
+  emb_size_rbf: 16
+  emb_size_trip: 64
+  envelope:
+    exponent: 5
+    name: polynomial
+  extensive: true
+  max_neighbors: 50
+  num_after_skip: 2
+  num_atom: 3
+  num_before_skip: 1
+  num_blocks: 3
+  num_concat: 1
+  num_radial: 128
+  num_spherical: 7
+  otf_graph: true
+  output_init: HeOrthogonal
+  rbf:
+    name: gaussian
+  regress_forces: true
+noddp: false
+optim:
+  batch_size: 32
+  clip_grad_norm: 10
+  ema_decay: 0.999
+  energy_coefficient: 1
+  eval_batch_size: 32
+  eval_every: 5000
+  factor: 0.8
+  force_coefficient: 100
+  loss_energy: mae
+  loss_force: l2mae
+  lr_initial: 0.0005
+  max_epochs: 80
+  mode: min
+  num_workers: 2
+  optimizer: AdamW
+  optimizer_params:
+    amsgrad: true
+  patience: 3
+  scheduler: ReduceLROnPlateau
+slurm: {}
+task:
+  dataset: trajectory_lmdb
+  description: Regressing to energies and forces for DFT trajectories from OCP
+  eval_on_free_atoms: true
+  grad_input: atomic forces
+  labels:
+  - potential energy
+  metric: mae
+  train_on_free_atoms: true
+  type: regression
+trainer: forces
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/preprocessing/atoms_to_graphs.py:139: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at  /opt/conda/conda-bld/pytorch_1639180507909/work/torch/csrc/utils/tensor_new.cpp:201.)
+  cell = torch.Tensor(atoms.get_cell()).view(1, 3, 3)
+/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/autocast_mode.py:141: UserWarning: User provided device_type of &#39;cuda&#39;, but CUDA is not available. Disabling
+  warnings.warn(&#39;User provided device_type of \&#39;cuda\&#39;, but CUDA is not available. Disabling&#39;)
+/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/functional.py:1069: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  /opt/conda/conda-bld/pytorch_1639180507909/work/aten/src/ATen/native/TensorShape.cpp:2157.)
+  return _VF.cartesian_prod(tensors)  # type: ignore[attr-defined]
+/home/runner/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/models/gemnet/gemnet.py:373: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the &#39;trunc&#39; function NOT &#39;floor&#39;). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode=&#39;trunc&#39;), or for actual floor division, use torch.div(a, b, rounding_mode=&#39;floor&#39;).
+  neighbors_new // 2,
+/home/runner/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/models/gemnet/gemnet.py:467: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the &#39;trunc&#39; function NOT &#39;floor&#39;). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode=&#39;trunc&#39;), or for actual floor division, use torch.div(a, b, rounding_mode=&#39;floor&#39;).
+  block_sizes = neighbors // 2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       Step     Time          Energy         fmax
+LBFGS:    0 16:57:30        0.702756        2.5280
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:    1 16:57:31        0.610855        0.9909
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:    2 16:57:31        0.573561        0.5541
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:    3 16:57:31        0.562686        0.3856
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:    4 16:57:32        0.547591        0.3904
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:    5 16:57:32        0.529304        0.4272
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:    6 16:57:33        0.507553        0.4552
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:    7 16:57:33        0.479591        0.4565
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:    8 16:57:33        0.440622        0.6339
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:    9 16:57:34        0.352820        1.0586
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   10 16:57:34        0.161986        1.6880
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   11 16:57:34        0.055566        2.5579
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   12 16:57:35        0.043263        1.5631
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   13 16:57:35       -0.021224        1.3076
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   14 16:57:35       -0.255827        1.2519
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   15 16:57:36       -0.284720        0.8289
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   16 16:57:36       -0.331042        0.7366
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   17 16:57:37       -0.422400        0.9306
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   18 16:57:37       -0.454963        0.6932
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   19 16:57:37       -0.486615        0.4053
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   20 16:57:38       -0.495915        0.3343
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   21 16:57:38       -0.517762        0.4154
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   22 16:57:38       -0.529808        0.4467
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   23 16:57:39       -0.546710        0.3477
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   24 16:57:39       -0.553586        0.3163
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   25 16:57:40       -0.558584        0.3828
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   26 16:57:40       -0.557754        0.4700
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   27 16:57:40       -0.550925        0.6269
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   28 16:57:41       -0.552629        0.5928
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   29 16:57:41       -0.569216        0.3315
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   30 16:57:41       -0.582791        0.2663
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   31 16:57:42       -0.591911        0.2639
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   32 16:57:42       -0.599708        0.2363
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   33 16:57:43       -0.604322        0.2343
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   34 16:57:43       -0.606322        0.2199
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   35 16:57:43       -0.608697        0.3313
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   36 16:57:44       -0.612839        0.4964
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   37 16:57:44       -0.626581        0.6773
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   38 16:57:44       -0.654602        1.0733
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   39 16:57:45       -0.732619        0.8797
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   40 16:57:45       -0.793629        1.0103
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   41 16:57:46       -0.821329        1.3485
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   42 16:57:46       -0.895005        0.7361
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   43 16:57:46       -0.931382        0.4471
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   44 16:57:47       -0.962967        0.4605
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   45 16:57:47       -1.002134        0.4616
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   46 16:57:48       -1.028943        0.4869
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   47 16:57:48       -1.072585        0.6643
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   48 16:57:48       -1.093312        0.6843
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   49 16:57:49       -1.130317        0.4795
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   50 16:57:49       -1.146077        0.3814
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   51 16:57:49       -1.175920        0.5125
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   52 16:57:50       -1.198479        0.4924
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   53 16:57:50       -1.217808        0.4121
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   54 16:57:51       -1.232873        0.2768
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   55 16:57:51       -1.237812        0.3241
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   56 16:57:51       -1.241352        0.2208
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   57 16:57:52       -1.251641        0.2282
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   58 16:57:52       -1.266796        0.2116
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   59 16:57:52       -1.273413        0.1641
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   60 16:57:53       -1.277564        0.1170
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   61 16:57:53       -1.279324        0.1176
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   62 16:57:54       -1.282491        0.1352
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   63 16:57:54       -1.287317        0.1897
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LBFGS:   64 16:57:54       -1.291918        0.2052
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">32</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">LBFGS</span><span class="p">(</span><span class="n">adslab</span><span class="p">,</span> <span class="n">trajectory</span><span class="o">=</span><span class="s2">&quot;data/ml_Cu100+CH3O.traj&quot;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">32</span> <span class="n">opt</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ase/optimize/optimize.py:294,</span> in <span class="ni">Optimizer.run</span><span class="nt">(self, fmax, steps)</span>
+<span class="g g-Whitespace">    </span><span class="mi">292</span> <span class="k">if</span> <span class="n">steps</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span>     <span class="bp">self</span><span class="o">.</span><span class="n">max_steps</span> <span class="o">=</span> <span class="n">steps</span>
+<span class="ne">--&gt; </span><span class="mi">294</span> <span class="k">return</span> <span class="n">Dynamics</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ase/optimize/optimize.py:181,</span> in <span class="ni">Dynamics.run</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span> <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span>     <span class="sd">&quot;&quot;&quot;Run dynamics algorithm.</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">177</span><span class="sd">     This method will return when the forces on all individual</span>
+<span class="g g-Whitespace">    </span><span class="mi">178</span><span class="sd">     atoms are less than *fmax* or when the number of steps exceeds</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span><span class="sd">     *steps*.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">181</span>     <span class="k">for</span> <span class="n">converged</span> <span class="ow">in</span> <span class="n">Dynamics</span><span class="o">.</span><span class="n">irun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">182</span>         <span class="k">pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">183</span>     <span class="k">return</span> <span class="n">converged</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ase/optimize/optimize.py:168,</span> in <span class="ni">Dynamics.irun</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span>     <span class="k">yield</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">167</span>     <span class="c1"># log the step</span>
+<span class="ne">--&gt; </span><span class="mi">168</span>     <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span>     <span class="bp">self</span><span class="o">.</span><span class="n">call_observers</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span> <span class="c1"># finally check if algorithm was converged</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ase/optimize/optimize.py:308,</span> in <span class="ni">Optimizer.log</span><span class="nt">(self, forces)</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span> <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">forces</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">307</span>     <span class="k">if</span> <span class="n">forces</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">308</span>         <span class="n">forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">get_forces</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>     <span class="n">fmax</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">forces</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>     <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">get_potential_energy</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">311</span>         <span class="n">force_consistent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">force_consistent</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span>     <span class="p">)</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ase/atoms.py:790,</span> in <span class="ni">Atoms.get_forces</span><span class="nt">(self, apply_constraint, md)</span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span>     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Atoms object has no calculator.&#39;</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">790</span> <span class="n">forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc</span><span class="o">.</span><span class="n">get_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span> <span class="k">if</span> <span class="n">apply_constraint</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">793</span>     <span class="c1"># We need a special md flag here because for MD we want</span>
+<span class="g g-Whitespace">    </span><span class="mi">794</span>     <span class="c1"># to skip real constraints but include special &quot;constraints&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">795</span>     <span class="c1"># Like Hookean.</span>
+<span class="g g-Whitespace">    </span><span class="mi">796</span>     <span class="k">for</span> <span class="n">constraint</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="p">:</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ase/calculators/abc.py:23,</span> in <span class="ni">GetPropertiesMixin.get_forces</span><span class="nt">(self, atoms)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="k">def</span> <span class="nf">get_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">23</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s1">&#39;forces&#39;</span><span class="p">,</span> <span class="n">atoms</span><span class="p">)</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/ase/calculators/calculator.py:736,</span> in <span class="ni">Calculator.get_property</span><span class="nt">(self, name, atoms, allow_calculation)</span>
+<span class="g g-Whitespace">    </span><span class="mi">734</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_calculation</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">735</span>         <span class="k">return</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">736</span>     <span class="bp">self</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">system_changes</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">738</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">739</span>     <span class="c1"># For some reason the calculator was not able to do what we want,</span>
+<span class="g g-Whitespace">    </span><span class="mi">740</span>     <span class="c1"># and that is OK.</span>
+<span class="g g-Whitespace">    </span><span class="mi">741</span>     <span class="k">raise</span> <span class="n">PropertyNotImplementedError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> not present in this &#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">742</span>                                       <span class="s1">&#39;calculation&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/common/relaxation/ase_utils.py:202,</span> in <span class="ni">OCPCalculator.calculate</span><span class="nt">(self, atoms, properties, system_changes)</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span> <span class="n">data_object</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">a2g</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span> <span class="n">batch</span> <span class="o">=</span> <span class="n">data_list_collater</span><span class="p">([</span><span class="n">data_object</span><span class="p">],</span> <span class="n">otf_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">202</span> <span class="n">predictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span>     <span class="n">batch</span><span class="p">,</span> <span class="n">per_image</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">disable_tqdm</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">204</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">205</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;s2ef&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span>     <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/autograd/grad_mode.py:28,</span> in <span class="ni">_DecoratorContextManager.__call__.&lt;locals&gt;.decorate_context</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">def</span> <span class="nf">decorate_context</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">():</span>
+<span class="ne">---&gt; </span><span class="mi">28</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/forces_trainer.py:194,</span> in <span class="ni">ForcesTrainer.predict</span><span class="nt">(self, data_loader, per_image, results_file, disable_tqdm)</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">batch_list</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">187</span>     <span class="nb">enumerate</span><span class="p">(</span><span class="n">data_loader</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span>     <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">data_loader</span><span class="p">),</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">191</span>     <span class="n">disable</span><span class="o">=</span><span class="n">disable_tqdm</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">192</span> <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">193</span>     <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">amp</span><span class="o">.</span><span class="n">autocast</span><span class="p">(</span><span class="n">enabled</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">scaler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">194</span>         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward</span><span class="p">(</span><span class="n">batch_list</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">196</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalizers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s2">&quot;target&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalizers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span>         <span class="n">out</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalizers</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">denorm</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span>             <span class="n">out</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span>         <span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/trainers/forces_trainer.py:433,</span> in <span class="ni">ForcesTrainer._forward</span><span class="nt">(self, batch_list)</span>
+<span class="g g-Whitespace">    </span><span class="mi">430</span> <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_list</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">431</span>     <span class="c1"># forward pass.</span>
+<span class="g g-Whitespace">    </span><span class="mi">432</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;model_attributes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;regress_forces&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">433</span>         <span class="n">out_energy</span><span class="p">,</span> <span class="n">out_forces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">batch_list</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">434</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">435</span>         <span class="n">out_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">batch_list</span><span class="p">)</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/nn/modules/module.py:1102,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1098</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
+<span class="g g-Whitespace">   </span><span class="mi">1099</span> <span class="c1"># this function, and just call forward.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1100</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1102</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1103</span> <span class="c1"># Do not call functions when jit is used</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span> <span class="n">full_backward_hooks</span><span class="p">,</span> <span class="n">non_full_backward_hooks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/common/data_parallel.py:58,</span> in <span class="ni">OCPDataParallel.forward</span><span class="nt">(self, batch_list, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_list</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span>     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">58</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">(</span><span class="n">batch_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device_ids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>             <span class="n">batch_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cuda:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">device_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span>         <span class="p">)</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/nn/modules/module.py:1102,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1098</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
+<span class="g g-Whitespace">   </span><span class="mi">1099</span> <span class="c1"># this function, and just call forward.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1100</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1102</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1103</span> <span class="c1"># Do not call functions when jit is used</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span> <span class="n">full_backward_hooks</span><span class="p">,</span> <span class="n">non_full_backward_hooks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/common/utils.py:132,</span> in <span class="ni">conditional_grad.&lt;locals&gt;.decorator.&lt;locals&gt;.cls_method</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regress_forces</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;direct_forces&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span>     <span class="n">f</span> <span class="o">=</span> <span class="n">dec</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">132</span> <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/models/gemnet/gemnet.py:549,</span> in <span class="ni">GemNetT.forward</span><span class="nt">(self, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">533</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_blocks</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">534</span>     <span class="c1"># Interaction block</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span>     <span class="n">h</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">int_blocks</span><span class="p">[</span><span class="n">i</span><span class="p">](</span>
+<span class="g g-Whitespace">    </span><span class="mi">536</span>         <span class="n">h</span><span class="o">=</span><span class="n">h</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">537</span>         <span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">546</span>         <span class="n">idx_t</span><span class="o">=</span><span class="n">idx_t</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">547</span>     <span class="p">)</span>  <span class="c1"># (nAtoms, emb_size_atom), (nEdges, emb_size_edge)</span>
+<span class="ne">--&gt; </span><span class="mi">549</span>     <span class="n">E</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_blocks</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">](</span><span class="n">h</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">rbf_out</span><span class="p">,</span> <span class="n">idx_t</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">550</span>     <span class="c1"># (nAtoms, num_targets), (nEdges, num_targets)</span>
+<span class="g g-Whitespace">    </span><span class="mi">551</span>     <span class="n">F_st</span> <span class="o">+=</span> <span class="n">F</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/nn/modules/module.py:1102,</span> in <span class="ni">Module._call_impl</span><span class="nt">(self, *input, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1098</span> <span class="c1"># If we don&#39;t have any hooks, we want to skip the rest of the logic in</span>
+<span class="g g-Whitespace">   </span><span class="mi">1099</span> <span class="c1"># this function, and just call forward.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1100</span> <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_backward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_hooks</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_pre_hooks</span> <span class="ow">or</span> <span class="n">_global_backward_hooks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span>         <span class="ow">or</span> <span class="n">_global_forward_hooks</span> <span class="ow">or</span> <span class="n">_global_forward_pre_hooks</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1102</span>     <span class="k">return</span> <span class="n">forward_call</span><span class="p">(</span><span class="o">*</span><span class="nb">input</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1103</span> <span class="c1"># Do not call functions when jit is used</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span> <span class="n">full_backward_hooks</span><span class="p">,</span> <span class="n">non_full_backward_hooks</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="nn">File ~/work/ml_catalysis_tutorials/ml_catalysis_tutorials/ocp/ocpmodels/models/gemnet/layers/atom_update_block.py:182,</span> in <span class="ni">OutputBlock.forward</span><span class="nt">(self, h, m, rbf, id_j)</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span> <span class="n">rbf_emb_E</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_rbf</span><span class="p">(</span><span class="n">rbf</span><span class="p">)</span>  <span class="c1"># (nEdges, emb_size_edge)</span>
+<span class="g g-Whitespace">    </span><span class="mi">180</span> <span class="n">x</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">rbf_emb_E</span>
+<span class="ne">--&gt; </span><span class="mi">182</span> <span class="n">x_E</span> <span class="o">=</span> <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">id_j</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim_size</span><span class="o">=</span><span class="n">nAtoms</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">183</span> <span class="c1"># (nAtoms, emb_size_edge)</span>
+<span class="g g-Whitespace">    </span><span class="mi">184</span> <span class="n">x_E</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_sum</span><span class="p">(</span><span class="n">x_E</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="n">m</span><span class="p">)</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_scatter/scatter.py:152,</span> in <span class="ni">scatter</span><span class="nt">(src, index, dim, out, dim_size, reduce)</span>
+<span class="g g-Whitespace">     </span><span class="mi">78</span> <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">79</span><span class="sd"> |</span>
+<span class="g g-Whitespace">     </span><span class="mi">80</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">149</span><span class="sd">     torch.Size([10, 3, 64])</span>
+<span class="g g-Whitespace">    </span><span class="mi">150</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">151</span> <span class="k">if</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;sum&#39;</span> <span class="ow">or</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;add&#39;</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">152</span>     <span class="k">return</span> <span class="n">scatter_sum</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">153</span> <span class="k">if</span> <span class="n">reduce</span> <span class="o">==</span> <span class="s1">&#39;mul&#39;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="k">return</span> <span class="n">scatter_mul</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">dim_size</span><span class="p">)</span>
+
+<span class="nn">File ~/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch_scatter/scatter.py:21,</span> in <span class="ni">scatter_sum</span><span class="nt">(src, index, dim, out, dim_size)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>         <span class="n">size</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">21</span>     <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">scatter_add_</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">scatter_add_</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s visualize the output!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">ase.visualize.plot</span> <span class="kn">import</span> <span class="n">animate</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span>
+
+<span class="c1"># the `index` argument corresponds to what frame of the trajectory to read in, specifiying &quot;:&quot; reads in the full trajectory.</span>
+<span class="n">traj</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;data/ml_Cu100+CH3O.traj&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">animate</span><span class="p">(</span><span class="n">traj</span><span class="p">,</span> <span class="n">radii</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;-75x, 45y, 10z&quot;</span><span class="p">))</span>
+
+<span class="n">rc</span><span class="p">(</span><span class="s2">&quot;animation&quot;</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="s2">&quot;jshtml&quot;</span><span class="p">)</span>
+<span class="n">anim</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Compare the results here with what EMT predicted in <a class="reference internal" href="relaxations.html"><span class="doc">Adsorption energy calculations using a toy calculator</span></a>. Note that the adsorbate rotates so that the O is pointing down on the surface and the adsorbate does not associate. This looks much more reasonable!</p>
+<p>We can plot the adsorption energy directly since this OCP calculator directly outputs referenced energies. We don’t need to repeat the gas-phase and bare slab calculations like we did in <a class="reference internal" href="relaxations.html"><span class="doc">Adsorption energy calculations using a toy calculator</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+
+<span class="n">energies</span> <span class="o">=</span> <span class="p">[</span><span class="n">image</span><span class="o">.</span><span class="n">get_potential_energy</span><span class="p">()</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">traj</span><span class="p">]</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;Relaxation Step&quot;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">energies</span><span class="p">)),</span>
+        <span class="s2">&quot;GemNet-T Adsorption Energy [eV]&quot;</span><span class="p">:</span> <span class="n">energies</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Relaxation Step&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;GemNet-T Adsorption Energy [eV]&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notes/pretrained_models"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="relaxations.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Adsorption energy calculations using a toy calculator</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../ocp_datasets/oc20_overview.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dataset Overview</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Zachary Ulissi<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -123,11 +123,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../background/relaxations.html">
-   Structural relaxations
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="../background/extra_resources.html">
    Additional Resources
   </a>
@@ -135,6 +130,23 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../background/install.html">
    Installation and set-up of ocpmodels
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Quick-start using pre-trained models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained_models/relaxations.html">
+   Adsorption energy calculations using a toy calculator
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pretrained_models/ase_calculator_demo.html">
+   Adsorption energy calculations using a pre-trained OCP calculator
   </a>
  </li>
 </ul>
@@ -200,18 +212,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../custom_datasets/lmdb_dataset_creation.html">
    Making LMDBs from ASE traj files
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Using pretrained models
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../pretrained_models.html">
-   Using pre-trained OCP models as ASE calculators
   </a>
  </li>
 </ul>
@@ -819,14 +819,14 @@ tar -xzvf tutorial_data.tar.gz
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>amp: true
 cmd:
-  checkpoint_dir: ./checkpoints/2022-10-30-18-20-48-S2EF-example
+  checkpoint_dir: ./checkpoints/2022-10-31-16-57-36-S2EF-example
   commit: cba9fb6
   identifier: S2EF-example
-  logs_dir: ./logs/tensorboard/2022-10-30-18-20-48-S2EF-example
+  logs_dir: ./logs/tensorboard/2022-10-31-16-57-36-S2EF-example
   print_every: 5
-  results_dir: ./results/2022-10-30-18-20-48-S2EF-example
+  results_dir: ./results/2022-10-31-16-57-36-S2EF-example
   seed: 0
-  timestamp_id: 2022-10-30-18-20-48-S2EF-example
+  timestamp_id: 2022-10-31-16-57-36-S2EF-example
 dataset:
   grad_target_mean: 0.0
   grad_target_std: !!python/object/apply:numpy.core.multiarray.scalar
@@ -922,17 +922,21 @@ task:
 trainer: forces
 val_dataset:
   src: data/s2ef/val_20
-
-2022-10-30 18:20:00 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-30 18:20:00 (INFO): Batch balancing is disabled for single GPU training.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-30 18:20:00 (INFO): Loading dataset: trajectory_lmdb
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 16:57:09 (INFO): Batch balancing is disabled for single GPU training.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-30 18:20:00 (INFO): Loading model: gemnet_t
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 16:57:09 (INFO): Batch balancing is disabled for single GPU training.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 16:57:09 (INFO): Loading dataset: trajectory_lmdb
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-10-31 16:57:09 (INFO): Loading model: gemnet_t
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/micromamba-root/envs/buildenv/lib/python3.9/site-packages/torch/cuda/amp/grad_scaler.py:115: UserWarning: torch.cuda.amp.GradScaler is enabled, but CUDA is not available.  Disabling.
